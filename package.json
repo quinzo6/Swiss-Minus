@@ -4,8 +4,8 @@
   "description": "An in-depth guide on deploying your Discord.js bot on Heroku",
   "main": "index.js",
   "engines": {
-      "node": "12.13.0",
-      "npm": "6.12.0"
+    "node": "12.13.0",
+    "npm": "6.12.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/carterdacat/Swiss-Plus"
   },
-  "homepage": "https://github.com/carterdacat/Swiss-Plus"
+  "homepage": "https://github.com/carterdacat/Swiss-Plus",
+  "dependencies": {
+    "discord.js": "^11.5.1"
+  }
 }
