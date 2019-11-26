@@ -9,7 +9,7 @@ client.on("message", (message) => {
   let args = message.content.split(' ')
     //array of words (with prefix)
   let command = message.content.slice(prefix.length).split(' ')[0]
-    //array of words (without prefix)
+    //array oaf words (without prefix)
   if (command === "ping") {}
   else if (command === "memes") {}
   else if (command === "fortune") {}
