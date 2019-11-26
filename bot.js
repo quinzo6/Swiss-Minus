@@ -6,7 +6,7 @@ let prefix ="!";
 client.on("message", (message) => {
   // Exit and stop if the prefix is not there or if user is a bot
   if (!message.content.startsWith(prefix) || message.author.bot) return;
-  let args = message.content.split(' ')
+  let args = message.content.split(/ +/)
     //array of words (with prefix)
   let command = message.content.slice(prefix.length).split(' ')[0]
     //array oaf words (without prefix)
