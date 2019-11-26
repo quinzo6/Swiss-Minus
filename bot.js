@@ -4,7 +4,7 @@ console.log("Loged In")
 //sets prefix
 let prefix ="!";
 client.on("message", (message) => {
-  // Exit and stop if the prefix is not there or if user is a bot
+if (!message.content.startsWith(prefix) || message.author.bot) return;
 let args = message.content.slice(prefix.length).trim().split(/ +/g);
     //array of words (with prefix)
 let command = args.shift().toLowerCase()
