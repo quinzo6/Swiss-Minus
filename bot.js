@@ -38,7 +38,7 @@ let command = args.shift().toLowerCase()
       .addField("Foo","Sends Bar Back")
       .addField("Topic", "Gives a Chat Topic")
       .addField("Help","Shows This Message")
-      .addField("Memes","Gives a epic gammer meme")
+      .addField("Memes","*deprecated")
       message.channel.send(help1)
     }else if(pageOrCommand === 2){    
       const help2 = new Discord.RichEmbed();
@@ -47,7 +47,7 @@ let command = args.shift().toLowerCase()
       .setAuthor(message.author.tag,message.author.avatarURL)
       .setColor("#FF00FF")
       .addField("whois","Gives info about a user")
-      .addField("botinfo","Gives info about the bot")
+      .addField("botinfo","*deprecated*")
   }}else if (command === "topic"){
     const embeded = new Discord.RichEmbed();
     var quotes = [
