@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+<<<<<<< HEAD
 const client = new Discord.Client();
 console.log("Loged In")
 //sets prefix
@@ -134,3 +135,33 @@ client.on("message", (message) => {
   message.channel.send(invalidCommandEmbed)
 }})
 client.login(process.env.BOT_TOKEN);
+=======
+
+const client = new Discord.Client();
+
+ 
+
+client.on('ready', () => {
+
+    console.log('I am ready!');
+
+});
+
+ 
+
+client.on('message', message => {
+
+    if (message.content === 'ping') {
+
+       message.reply('pong');
+
+       }
+
+});
+
+ 
+
+// THIS  MUST  BE  THIS  WAY
+
+client.login(process.env.BOT_TOKEN);//BOT_TOKEN is the Client Secret
+>>>>>>> 76f274ebcadb09bf53ad85faf551b120a656150d

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "swiss-plus",
   "version": "1.0.0",
   "description": "An in-depth guide on deploying your Discord.js bot on Heroku",
@@ -26,3 +27,19 @@
   },
   "homepage": "https://github.com/carterdacat/Swiss-Plus"
 }
+=======
+  "name": "swiss-extra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.1"
+  }
+}
+>>>>>>> 76f274ebcadb09bf53ad85faf551b120a656150d
