@@ -1,4 +1,4 @@
-
+onst Discord = require('discord.js');
 const client = new Discord.Client();
 console.log("Loged In")
 //sets prefix
