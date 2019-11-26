@@ -117,7 +117,7 @@ let command = args.shift().toLowerCase()
         permEmbed 
         .setTitle("Permisions")
         .setAuthor(message.author.tag,message.author.avatarURL)
-        .setColor('#FF00FF')
+        .setColor('#4DF8E8')
         .addField("Permisions:",permMentioned.permissions.toArray().join(' , '))
         message.channel.send(permEmbed)
           }
@@ -127,7 +127,7 @@ let command = args.shift().toLowerCase()
    invalidCommandEmbed
   .setTitle("Error: Invalid Command")
   .setAuthor(message.author.tag,message.author.avatarURL)
-  .setColor("#FF00FF")
+  .setColor("#F90B0B")
   .addField("Error:",`Hey, <@${messgaeAuthorPing}> , that dosent seem to be a command, please try again. If you are sure this is a command, or is listed in the help section, please message a moderator. Thanks!`)
   .setFooter("Made by mark")
   message.channel.send(invalidCommandEmbed)
