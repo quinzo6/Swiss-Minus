@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const auth = require('./auth.json')
 console.log("Loged In")
 //sets prefix
 let prefix ="!";
@@ -151,4 +150,4 @@ catch(err){
     message.channel.send(error)
    }
 })
-client.login(auth.token);
+client.login(process.env.BOT_TOKEN);
