@@ -1,5 +1,5 @@
 const { prefix } = require('../config.json');
-
+const Discord = require('discord.js');
 module.exports = {
 	name: 'help',
 	description: 'List all of my commands or info about a specific command.',
@@ -11,15 +11,15 @@ module.exports = {
 		const { commands } = message.client;
 
 		if (!args.length) {
-            let help = new Discord.RichEmbed
+			let help = new Discord.RichEmbed
+			let comds = commands.map(command => command.name).join(', ')
 			help
 			.setTitle("Help!")
 			.setColor('#4DF8E8')
 			.setAuthor(message.author.tag,message.author.avatarURL)
+			.addField('Commands:',`${comds}`)
 			.addField('Tip:',`You can send \`${prefix}help [command name]\` to get info on a specific command!`)
-			.addField('Commands:',`${commands}`)
-			message.author.send(help)
-
+			return message.author.send(help)
 				.then(() => {
 					if (message.channel.type === 'dm') return;
 					message.reply('I\'ve sent you a DM with all my commands!');
@@ -36,7 +36,7 @@ module.exports = {
 				});
 		}
 
-		const name = args[0].toLowerCase();
+		const name = args[0].toLowerCase()
 		const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 
 		if (!command) {
@@ -46,7 +46,7 @@ module.exports = {
 			.setAuthor(message.author.tag,message.author.avatarURL)
 			.setColor('#E80C0C')
 			.addField("Invalid Command!","The Command you put in is invalid!")
-			message.reply(nValidComm)
+			return message.reply(nValidComm)
 		}
 
 		let cmdName = `${command.name}`
@@ -58,18 +58,18 @@ module.exports = {
 
 		if (command.aliases){
 			let alli = `${command.aliases.join(', ')}`
-			cmd.addField(alli)
+			cmd.addField('Aliases:',alli)
 		}
 		if (command.description){
 			let description1 = `${command.description}`
-			cmd.addField(description1)
+			cmd.addField('Description',description1)
 		}	
 		if (command.usage) {
 			let usage = `${prefix}${command.name} ${command.usage}`
-			cmd.addField(usage)
+			cmd.addField('Usage:',usage)
 		}
 		let cmdCoolDown = `${command.cooldown || 3} second(s)`
-		cmd.addField(cmdCoolDown)
-		message.channel.send(cmd)
+		cmd.addField('Cooldown:',cmdCoolDown)
+		return message.channel.se1cnd(cmd)
 	},
 };

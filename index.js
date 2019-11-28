@@ -1,7 +1,8 @@
 
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const { token } = require('./config.json');
+const prefix = "!"
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -22,7 +23,8 @@ client.once('ready', () => {
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-	const args = message.content.slice(prefix.length).split(/ +/);
+	const args = message.content.slice(prefix.length).trim().split(/ +/g);
+
 	const commandName = args.shift().toLowerCase();
 
 	const command = client.commands.get(commandName)
@@ -70,10 +72,12 @@ client.on('message', message => {
 		if (now < expirationTime) {
 			const timeLeft = (expirationTime - now) / 1000;
 			let timeOut = new Discord.RichEmbed
+			timeOut
 			.setAuthor(message.author.tag,message.author.avatarURL)
 		    .setTitle("Cooldown has Not finnished")
 			.addField("Error",`Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
 			.setColor('#4DF8E8')
+			message.channel.send(timeOut)
 		}
 	}
 
@@ -89,9 +93,10 @@ client.on('message', message => {
 		err
 		.setAuthor(message.author.tag,message.author.avatarURL)
 		.setTitle("An Error Occered")
-		.setColor('##E80C0C')
-		.addField(`Hey, <@${userMen}>, a error occered. Error: ${error}`)
-		message.send(err)
+		.setColor('#E80C0C')
+		.addField('Attetion!',`Hey, <@${userMen}>`)
+		.addField('Error',`A error occered. Error: ${error}`)
+		message.channel.send(err)
 	}
 }); 
 
