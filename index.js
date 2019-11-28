@@ -3,6 +3,7 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+const auth = require('./config.json')
 const prefix = '!'
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
@@ -97,4 +98,4 @@ client.on('message', message => {
 	}
 }); 
 
-client.login(process.env.BOT_TOKEN);
+client.login(auth.token);
