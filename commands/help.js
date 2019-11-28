@@ -1,0 +1,75 @@
+const { prefix } = require('../config.json');
+
+module.exports = {
+	name: 'help',
+	description: 'List all of my commands or info about a specific command.',
+	aliases: ['commands'],
+	usage: '[command name]',
+	cooldown: 5,
+	execute(message, args) {
+		const data = [];
+		const { commands } = message.client;
+
+		if (!args.length) {
+            let help = new Discord.RichEmbed
+			help
+			.setTitle("Help!")
+			.setColor('#4DF8E8')
+			.setAuthor(message.author.tag,message.author.avatarURL)
+			.addField('Tip:',`You can send \`${prefix}help [command name]\` to get info on a specific command!`)
+			.addField('Commands:',`${commands}`)
+			message.author.send(help)
+
+				.then(() => {
+					if (message.channel.type === 'dm') return;
+					message.reply('I\'ve sent you a DM with all my commands!');
+				})
+				.catch(error => {
+					console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
+					let unAbleDm = Discord.RichEmbed
+					unAbleDm
+					.setTitle('Error!')
+					.setAuthor(message.author.tag,message.author.avatarURL)
+					.setColor('#F90B0B')
+					.setTitle('Error','Unable to send you a dmd with my commands! Please tyr again')
+					message.channel.send(unAbleDm)
+				});
+		}
+
+		const name = args[0].toLowerCase();
+		const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
+
+		if (!command) {
+			let nValidComm = new Discord.RichEmbed
+			nValidComm
+			.setTitle("Error!")
+			.setAuthor(message.author.tag,message.author.avatarURL)
+			.setColor('#E80C0C')
+			.addField("Invalid Command!","The Command you put in is invalid!")
+			message.reply(nValidComm)
+		}
+
+		let cmdName = `${command.name}`
+	    let cmd = new Discord.RichEmbed
+		cmd
+		.setTitle('Help')
+		.setAuthor(message.author.tag,message.author.avatarURL)
+		.addField(cmdName)
+
+		if (command.aliases){
+			let alli = `${command.aliases.join(', ')}`
+			cmd.addField(alli)
+		}
+		if (command.description){
+			let description1 = `${command.description}`
+			cmd.addField(description1)
+		}	
+		if (command.usage) {
+			let usage = `${prefix}${command.name} ${command.usage}`
+			cmd.addField(usage)
+		}
+		let cmdCoolDown = `${command.cooldown || 3} second(s)`
+		cmd.addField(cmdCoolDown)
+		message.channel.send(cmd)
+	},
+};
