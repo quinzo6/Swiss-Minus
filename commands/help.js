@@ -70,6 +70,6 @@ module.exports = {
 		}
 		let cmdCoolDown = `${command.cooldown || 3} second(s)`
 		cmd.addField('Cooldown:',cmdCoolDown)
-		return message.channel.se1cnd(cmd)
+		return message.channel.send(cmd)
 	},
 };
