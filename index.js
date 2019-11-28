@@ -27,7 +27,16 @@ client.on('message', message => {
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-	if (!command) return;
+	if (!command){
+		let invalCmd = new Discord.RichEmbed
+		let usr = message.author.id
+		invalCmd
+		.setTitle('Invalid Command!')
+		.setAuthor(message.author.tag,message.author.avatarURL)
+		.setColor('#4DF8E8')
+		.addField('Invalid Command!',`Hey <@${usr}>, That dosent seem to be a command!`)
+		return message.channel.send(invalCmd)
+	}
 
 	if (command.guildOnly && message.channel.type !== 'text') {
 		let noDm = new Discord.RichEmbed
