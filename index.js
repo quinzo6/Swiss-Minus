@@ -33,9 +33,8 @@ client.on('message', message => {
 		invalCmd
 		.setTitle('Invalid Command!')
 		.setAuthor(message.author.tag,message.author.avatarURL)
-		.setColor('#4DF8E8')
+		.setColor('#E80C0C')
 		.addField('Invalid Command!',`Hey <@${usr}>, That dosent seem to be a command!`)
-		return message.channel.send(invalCmd)
 	}
 
 	if (command.guildOnly && message.channel.type !== 'text') {
@@ -43,7 +42,7 @@ client.on('message', message => {
 		noDm
 		.setTitle("Error")
 		.setAuthor(message.author.tag,message.author.avatarURL)
-		.setColor('#4DF8E8')
+		.setColor('#E80C0C')
 		.addField("This command cant be used in direct messages!")
 		message.reply(noDm)
 	}
@@ -53,7 +52,7 @@ client.on('message', message => {
 		noArgs
 		.setTitle("Argument")
 		.setAuthor(message.author.tag,message.author.avatarURL)
-		.setColor('#4DF8E8')
+		.setColor('#E80C0C')
 		.addField("Error","You didnt provide any arguments!")
 		let reply = `You didn't provide any arguments, ${message.author}!`;
 
@@ -82,7 +81,7 @@ client.on('message', message => {
 			.setAuthor(message.author.tag,message.author.avatarURL)
 		    .setTitle("Cooldown has Not finnished")
 			.addField("Error",`Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
-			.setColor('#4DF8E8')
+			.setColor('#E80C0C')
 			message.channel.send(timeOut)
 		}
 	}
