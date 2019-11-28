@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -25,33 +24,42 @@ client.on('message', message => {
 
 	const commandName = args.shift().toLowerCase();
 
-	const command = client.commands.get(commandName)
-		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+	const command = client.commands.get(commandName) ||
+		client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-	if (!command) return;
+	if (!command) {
+		let invalCmd = new Discord.RichEmbed
+		let usr = message.author.id
+		invalCmd
+			.setTitle('Invalid Command!')
+			.setAuthor(message.author.tag, message.author.avatarURL)
+			.setColor('#E80C0C')
+			.addField('Invalid Command!', `Hey <@${usr}>, That dosent seem to be a command!`)
+		return message.channel.send(invalCmd)
+	}
 
 	if (command.guildOnly && message.channel.type !== 'text') {
 		let noDm = new Discord.RichEmbed
 		noDm
-		.setTitle("Error")
-		.setAuthor(message.author.tag,message.author.avatarURL)
-		.setColor('#4DF8E8')
-		.addField("This command cant be used in direct messages!")
+			.setTitle("Error")
+			.setAuthor(message.author.tag, message.author.avatarURL)
+			.setColor('#E80C0C')
+			.addField("This command cant be used in direct messages!")
 		message.reply(noDm)
 	}
 
 	if (command.args && !args.length) {
 		let noArgs = new Discord.RichEmbed
 		noArgs
-		.setTitle("Argument")
-		.setAuthor(message.author.tag,message.author.avatarURL)
-		.setColor('#4DF8E8')
-		.addField("Error","You didnt provide any arguments!")
+			.setTitle("Argument")
+			.setAuthor(message.author.tag, message.author.avatarURL)
+			.setColor('#E80C0C')
+			.addField("Error", "You didnt provide any arguments!")
 		let reply = `You didn't provide any arguments, ${message.author}!`;
 
 		if (command.usage) {
-		 let pUsage = `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
-		 noArgs.addField("Usage:",`The proper usage would be ${pUsage} `)
+			let pUsage = `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+			noArgs.addField("Usage:", `The proper usage would be ${pUsage} `)
 		}
 		message.channel.send(noArgs);
 	}
@@ -71,10 +79,10 @@ client.on('message', message => {
 			const timeLeft = (expirationTime - now) / 1000;
 			let timeOut = new Discord.RichEmbed
 			timeOut
-			.setAuthor(message.author.tag,message.author.avatarURL)
-		    .setTitle("Cooldown has Not finnished")
-			.addField("Error",`Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
-			.setColor('#4DF8E8')
+				.setAuthor(message.author.tag, message.author.avatarURL)
+				.setTitle("Cooldown has Not finnished")
+				.addField("Error", `Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
+				.setColor('#E80C0C')
 			message.channel.send(timeOut)
 		}
 	}
@@ -89,13 +97,13 @@ client.on('message', message => {
 		console.error(error);
 		let err = new Discord.RichEmbed
 		err
-		.setAuthor(message.author.tag,message.author.avatarURL)
-		.setTitle("An Error Occered")
-		.setColor('#E80C0C')
-		.addField('Attetion!',`Hey, <@${userMen}>`)
-		.addField('Error',`A error occered. Error: ${error}`)
+			.setAuthor(message.author.tag, message.author.avatarURL)
+			.setTitle("An Error Occered")
+			.setColor('#E80C0C')
+			.addField('Attetion!', `Hey, <@${userMen}>`)
+			.addField('Error', `A error occered. Error: ${error}`)
 		message.channel.send(err)
 	}
-}); 
+});
 
 client.login(auth.token);
