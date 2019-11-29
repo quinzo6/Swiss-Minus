@@ -44,7 +44,7 @@ client.on('message', message => {
 			.setAuthor(message.author.tag, message.author.avatarURL)
 			.setColor('#E80C0C')
 			.addField("This command cant be used in direct messages!")
-		message.reply(noDm)
+		return message.reply(noDm)
 	}
 
 	if (command.args && !args.length) {
@@ -54,8 +54,6 @@ client.on('message', message => {
 			.setAuthor(message.author.tag, message.author.avatarURL)
 			.setColor('#E80C0C')
 			.addField("Error", "You didnt provide any arguments!")
-		let reply = `You didn't provide any arguments, ${message.author}!`;
-
 		if (command.usage) {
 			let pUsage = `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
 			noArgs.addField("Usage:", `The proper usage would be ${pUsage} `)
