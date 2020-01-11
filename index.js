@@ -33,7 +33,7 @@ client.on('message', message => {
 			.setTitle('Invalid Command!')
 			.setAuthor(message.author.tag, message.author.avatarURL)
 			.setColor('#E80C0C')
-			.addField('Invalid Command!', `Hey <@${usr}>, That dosent seem to be a command!`)
+			.addField('Invalid Command!', `Hey <@${usr}>, That doesn't seem to be a command!`)
 		return message.channel.send(invalCmd)
 	}
 
@@ -43,7 +43,7 @@ client.on('message', message => {
 			.setTitle("Error")
 			.setAuthor(message.author.tag, message.author.avatarURL)
 			.setColor('#E80C0C')
-			.addField("This command cant be used in direct messages!")
+			.addField("This command can't  be used in direct messages!")
 		return message.reply(noDm)
 	}
 
@@ -53,7 +53,7 @@ client.on('message', message => {
 			.setTitle("Argument")
 			.setAuthor(message.author.tag, message.author.avatarURL)
 			.setColor('#E80C0C')
-			.addField("Error", "You didnt provide any arguments!")
+			.addField("Error", "You didn't provide any arguments!")
 		if (command.usage) {
 			let pUsage = `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
 			noArgs.addField("Usage:", `The proper usage would be ${pUsage} `)
