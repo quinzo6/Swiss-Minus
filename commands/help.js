@@ -22,7 +22,7 @@ module.exports = {
 				.setColor('#4DF8E8')
 				.setAuthor(message.author.tag, message.author.avatarURL)
 				.addField('Commands:', `${comds}`)
-				.addField('Tip:', `You can send \`${prefix}help [command name]\` to get info on a specific command!`)
+				.addField('Tip:', `You can send \`!help [command name]\` to get info on a specific command!`)
 			return message.author.send(help)
 				.then(() => {
 					if (message.channel.type === 'dm') return;
@@ -74,6 +74,6 @@ module.exports = {
 		}
 		let cmdCoolDown = `${command.cooldown || 3} second(s)`
 		cmd.addField('Cooldown:', cmdCoolDown)
-		return message.channel.se1cnd(cmd)
+		return message.channel.send(cmd)
 	},
 };
