@@ -58,7 +58,7 @@ module.exports = {
 		cmd
 			.setTitle('Help')
 			.setAuthor(message.author.tag, message.author.avatarURL)
-			.addField(cmdName)
+			.addField('Command:',cmdName)
 
 		if (command.aliases) {
 			let alli = `${command.aliases.join(', ')}`
@@ -69,7 +69,7 @@ module.exports = {
 			cmd.addField('Description', description1)
 		}
 		if (command.usage) {
-			let usage = `${prefix}${command.name} ${command.usage}`
+			let usage = `!${command.name} ${command.usage}`
 			cmd.addField('Usage:', usage)
 		}
 		let cmdCoolDown = `${command.cooldown || 3} second(s)`
