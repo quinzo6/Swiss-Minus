@@ -15,7 +15,7 @@ module.exports = {
                    .setTitle(message.author.tag)
                    .setAuthor(message.author.tag, message.author.avatarURL)
                    .setColor("#4DF8E8")
-                   .addField("Im Not On!",'This command it turned off! Please ask a mod or admin to turn it back on!)
+                   .addField("Im Not On!",'This command it turned off! Please ask a mod or admin to turn it back on!')
                    return message.channel.send(notOn)
             if (!whoisUser) {
                   let roles = message.member.roles.map(r => r).join(',')
