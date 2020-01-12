@@ -19,8 +19,7 @@ module.exports = {
             .setColor("RANDOM")
             .setImage(img)
             .setTitle(`From /r/${random}`)
-            .setURL(`https://reddit.com/r/${random}`);
-
+            .setURL(`https://reddit.com/r/${random}`)
         message.channel.send(embed);
     }
 }
