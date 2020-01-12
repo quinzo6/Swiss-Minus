@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const randomPuppy = require("random-puppy");
+const subReddits = require('./subreddits.json')
 
 module.exports = {
         name: 'Meme',
@@ -9,7 +10,6 @@ module.exports = {
         execute: async (client, message, args) => {
             // In this array, 
             // you can put the subreddits you want to grab memes from
-            let subReddits = ["dankmeme", "meme", "me_irl"];
             // Grab a random property from the array
             const random = subReddits[Math.floor(Math.random() * subReddits.length)];
 
@@ -41,7 +41,7 @@ module.exports = {
                     .setColor('$4DF8E8')
                     .addField('I got it!', `I got your subreddit of ${args[1]}!`)
                     message.channel.send(confirm)
-                    const file = fs.writeFileSync('test.json', subReddits + args[1] );
+                    const file = fs.writeFileSync('subreddits.json', subReddits.push(args[1]) );
                     }
                 else if (args[2]) {
                     let wohh = new Discord.RichEmbed
