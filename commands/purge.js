@@ -11,7 +11,7 @@ module.exports = {
      		} else {
        			var mod = false 
        		}
-         if (mod = false){
+         if (mod === false){
           let noPerms = new Discord.RichEmbed()
           noPerms
           .setAuthor(message.author.tag, message.author.avatarURL)
@@ -21,7 +21,7 @@ module.exports = {
           return message.channel.send(noPerms)
          }
          if (!args[1]){
-           if(typeof args[0] == 'number'){
+           if(args[0]>0 && args[0]<500){
              let messagesDelete = args[0]
              let sucsess = new Discord.RichEmbed()
              sucsess
