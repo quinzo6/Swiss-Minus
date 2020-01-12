@@ -32,7 +32,7 @@ module.exports = {
              message.channel.bulkDelete(messageDelete)
              .then(messages => message.channel.send(sucsess))
              .catch(error => {
-             let err = new Discord.RichEmbed()
+             let err = new Discord.RichEmbed
              .setTitle('Error')
              .setAuthor(message.author.tag,message.author.avatarURL)
              .setColor('#F90B0B')
