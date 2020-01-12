@@ -17,7 +17,7 @@ module.exports = {
             if (!args[0]) {
                 const img = await randomPuppy(random);
                 const embed = new Discord.RichEmbed()
-                    .setColor("RANDOM")
+                    .setColor("#4DF8E8")
                     .setImage(img)
                     .setTitle(`From /r/${random}`)
                     .setURL(`https://reddit.com/r/${random}`)
@@ -33,8 +33,15 @@ module.exports = {
                     .setAuthor(message.author.tag, message.author.avatarURL)
                     .addField('The SubReddit was suggested by:', `<@${message.author.id}>  ${message.author.tag}`)
                     .addField('The SubReddit they sugeested is:', args[1])
-                    client.channels.get('665825128415887370').send(whoAdded); 
-                    subReddits.push(`${args[1]}`)
+                    client.channels.get('665825128415887370').send(whoAdded);
+                    let confirm = new Discord.RichEmbed
+                    confirm
+                    .setAuthor(message.author.tag, message.author.avatarURL)
+                    .setTitle(message.author.tage)
+                    .setColor('$4DF8E8')
+                    .addField('I got it!', `I got your subreddit of ${args[1]}!`)
+                    message.channel.send(confirm)
+                    const file = fs.writeFileSync('test.json', subReddits + args[1] );
                     }
                 else if (args[2]) {
                     let wohh = new Discord.RichEmbed
