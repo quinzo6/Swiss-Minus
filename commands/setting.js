@@ -15,5 +15,6 @@ module.exports = {
     		console.log(mod) 
     		console.log(roles)
 		message.channel.send(mod)
+		message.channel.send(roles)
 	}
 }
