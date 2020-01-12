@@ -5,7 +5,7 @@ module.exports = {
       aliases: ['Permissions', 'perms', 'Perms', 'p', 'P'],
       usage: 'user',
       cooldown: 5,
-      execute(message, args) {
+      execute(client, message, args) {
             let permMentioned = message.mentions.members.first() || message.guild.members.get(args[0])
             if (!permMentioned) {
                   const permNoMentionedEmbed = new Discord.RichEmbed
