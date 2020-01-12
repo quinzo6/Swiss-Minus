@@ -39,23 +39,8 @@ module.exports = {
                 .setAuthor(message.author.tag, message.author.avatarURL)
                 .setTitle(message.author.tage)
                 .setColor('$4DF8E8')
-                .addField('I got it!', `I got your subreddit of ${args[1]}!`)
+                .addField('I got it!', `I got your subreddit of ${args[1]}! will be reviewed by the staff team`)
             message.channel.send(confirm)
-            subReddits.push(args[1])
-            console.log(subReddits)
-            try {
-                const file = fs.writeFileSync('commands/subreddits.json', subReddits);
-            } catch (error) {
-                console.error(error);
-                let err = new Discord.RichEmbed
-                err
-                    .setAuthor(message.author.tag, message.author.avatarURL)
-                    .setTitle("An Error Occered")
-                    .setColor('#E80C0C')
-                    .addField('Attetion!', `Hey, <@${userMen}>`)
-                    .addField('Error', `A error occered. Error: ${error}`)
-                message.channel.send(err)
-            }
         } else if (args[2]) {
             let wohh = new Discord.RichEmbed
             wohh
