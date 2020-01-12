@@ -14,6 +14,7 @@ module.exports = {
         const random = subReddits[Math.floor(Math.random() * subReddits.length)];
 
         // Get a random image from the subreddit page
+        if(!args[0]){ 
         const img = await randomPuppy(random);
         const embed = new Discord.RichEmbed()
             .setColor("RANDOM")
@@ -23,5 +24,15 @@ module.exports = {
             .setFooter("Requested By: {}")
             .setColor('#4DF8E8')
        message.channel.send(embed)
-      }
+       
+      } else if (args[0] === "add" && args[1] && !args[2]){
+            subReddits.push(`${args[0]}`)
+      } else if (args[2]){
+            let wohh = new Discord.RichEmbed
+            wohh
+            .setTitle(message.author.tag)
+            .setAuthor(message.author.tag, message.author.avatarURL)
+            .setColor("#4DF8E8")
+            .addField("To many items, ahhhh",'Hey buddy, either you put a extra space or your drunk. Use _ insted of spaces for SubReddit names, thanks')
 }
+      }
