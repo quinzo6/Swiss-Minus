@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const randomPuppy = require("random-puppy");
-const subreddits = require('./subreddits.json')
+const subreddits = require('./commands/subreddits.json')
 const fs = require('fs')
 module.exports = {
     name: 'Meme',
@@ -44,7 +44,7 @@ module.exports = {
             subReddits.push(args[1])
             console.log(subReddits)
             try {
-                const file = fs.writeFileSync('subreddits.json', subReddits);
+                const file = fs.writeFileSync('commands/subreddits.json', subReddits);
             } catch (error) {
                 console.error(error);
                 let err = new Discord.RichEmbed
