@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/carterdacat/Swiss-Plus",
   "dependencies": {
-    "discord.js": "^11.5.1"
+    "discord.js": "^11.5.1",
+    "random-puppy": "^1.0.0"
   }
 }
