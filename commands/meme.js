@@ -16,12 +16,11 @@ module.exports = {
         // Get a random image from the subreddit page
         const img = await randomPuppy(random);
         const embed = new Discord.RichEmbed()
-        let userIdMention = message.user.id
             .setColor("RANDOM")
             .setImage(img)
             .setTitle(`From /r/${random}`)
             .setURL(`https://reddit.com/r/${random}`)
-            .setFooter("Requested By: <@${usr}>")
+            .setFooter("Requested By: {}")
             .setColor('#4DF8E8')
        message.channel.send(embed)
       }
