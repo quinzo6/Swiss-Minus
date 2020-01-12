@@ -31,14 +31,15 @@ module.exports = {
              .addFeild('Purged Messages', `I purged ${messageDelete} messages!`)
              message.channel.bulkDelete(messageDelete)
              .then(messages => message.channel.send(sucsess))
-             setTimeout(() => { message.delete() }, 2000)
-             .catch( let err = new Discord.RichEmbed)
+             .catch(error => {
+             let err = new Discord.RichEmbed
              err
              .setTitle('Error')
              .setAuthor(message.author.tag, message.author.avatarURL
              .setColor('#F90B0B')
              .addField('Error!',`An error occored. ${error}`)
-             message.channel.send(err)
-             )
+             message.channel.send(err))
+             setTimeout(() => { message.delete() }, 2000)
+             }
           
            }}
