@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const randomPuppy = require("random-puppy");
 const subreddits = require('./subreddits.json')
-
+const fs = require('fs')
 module.exports = {
         name: 'Meme',
         description: 'Gives a meme from reddit!',
@@ -41,7 +41,19 @@ module.exports = {
                     .setColor('$4DF8E8')
                     .addField('I got it!', `I got your subreddit of ${args[1]}!`)
                     message.channel.send(confirm)
-                    const file = fs.writeFileSync('subreddits.json', subReddits.push(args[1]) );
+                    subReddits.push(args[1])
+                    try{
+                    const file = fs.writeFileSync('subreddits.json', subReddits );
+                    }catch(error){
+		console.error(error);
+		let err = new Discord.RichEmbed
+		err
+			.setAuthor(message.author.tag, message.author.avatarURL)
+			.setTitle("An Error Occered")
+			.setColor('#E80C0C')
+			.addField('Attetion!', `Hey, <@${userMen}>`)
+			.addField('Error', `A error occered. Error: ${error}`)
+		message.channel.send(err)
                     }
                 else if (args[2]) {
                     let wohh = new Discord.RichEmbed
