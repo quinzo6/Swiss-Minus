@@ -31,7 +31,7 @@ module.exports = {
              .addFeild('Purged Messages', `I purged ${messageDelete} messages!`)
              message.channel.bulkDelete(messageDelete)
              .then(messages => message.channel.send(sucsess))
-             setTimeout(() => { message.delete() }, 2000);
+             setTimeout(() => { message.delete() }, 2000)
              .catch(
              let err = new Discord.RichEmbed
              err
