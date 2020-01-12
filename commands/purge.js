@@ -28,7 +28,7 @@ module.exports = {
              .setAuthor(message.author.tag, message.author.avatarURL)
              .setTitle('Purge')
              .setColor('#4DF8E8')
-             .addFeild('Purged Messages', `I purged ${messageDelete} messages!`}
+             .addFeild('Purged Messages', `I purged ${messageDelete} messages!`)
              message.channel.bulkDelete(messageDelete)
              .then(messages => message.channel.send(sucsess)
              setTimeout(() => { message.delete() }, 2000);
