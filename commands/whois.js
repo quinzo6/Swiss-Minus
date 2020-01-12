@@ -1,4 +1,6 @@
 const Discord = require('discord.js');
+const settings = require('./settings.json')
+const on = settings.whois
 module.exports = {
       name: 'whois',
       description: 'Gets info about a user',
@@ -7,6 +9,14 @@ module.exports = {
       cooldown: 5,
       execute(client, message, args) {
             let whoisUser = message.mentions.members.first() || message.guild.members.get(args[0])
+            if (on !== "on") {
+                  let notOn = new Discord.RichEmbed
+                  notOn 
+                   .setTitle(message.author.tag)
+                   .setAuthor(message.author.tag, message.author.avatarURL)
+                   .setColor("#4DF8E8")
+                   .addField("Im Not On!",'This command it turned off! Please ask a mod or admin to turn it back on!)
+                   return message.channel.send(notOn)
             if (!whoisUser) {
                   let roles = message.member.roles.map(r => r).join(',')
                   let highestRole = message.member.highestRole
