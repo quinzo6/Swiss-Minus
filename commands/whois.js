@@ -5,7 +5,7 @@ module.exports = {
       aliases: ['Whois'],
       usage: '[user]',
       cooldown: 5,
-      execute(message, args) {
+      execute(client, message, args) {
             let whoisUser = message.mentions.members.first() || message.guild.members.get(args[0])
             if (!whoisUser) {
                   let roles = message.member.roles.map(r => r).join(',')
