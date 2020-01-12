@@ -1,8 +1,8 @@
 const Discord = require('discord.js')
 module.exports = {
-      name: "permisions",
-      description: "Check the permisions of a user",
-      aliases: ['Permisions', 'perms', 'Perms', 'p', 'P'],
+      name: "permissions",
+      description: "Check the permissions of a user",
+      aliases: ['Permissions', 'perms', 'Perms', 'p', 'P'],
       usage: 'user',
       cooldown: 5,
       execute(message, args) {
@@ -13,7 +13,7 @@ module.exports = {
                         .setTitle("Error")
                         .setAuthor(message.author.tag, message.author.avatarURL)
                         .setColor("#F90B0B")
-                        .addField("Error", "You didnt mention who you wanted to veiw permisions of!")
+                        .addField("Error", "You didnt mention who you wanted to view permissions of!")
                   message.channel.send(permNoMentionedEmbed)
             } else {
                   const permEmbed = new Discord.RichEmbed
