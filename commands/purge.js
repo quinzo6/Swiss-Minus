@@ -37,7 +37,7 @@ module.exports = {
              .setAuthor(message.author.tag,message.author.avatarURL)
              .setColor('#F90B0B')
              .addField('Error!',`An error occored. ${error}`)
-             message.channel.send(err)}
+             message.channel.send(err)})
              setTimeout(() => { message.delete() }, 2000)
              }
           
