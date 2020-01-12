@@ -20,6 +20,15 @@ module.exports = {
             .setImage(img)
             .setTitle(`From /r/${random}`)
             .setURL(`https://reddit.com/r/${random}`)
-        message.channel.send(embed);
+        try {
+        command.execute(message, args);
+    } catch (error) {
+          let err = new Discord.RichEmbed
+          err
+          .setTitle("Error!")
+	    .setAuthor(message.author.tag, message.author.avatarURL)
+	    .setColor('#E80C0C')
+	    .addField(`An Error Occored. The error was ${error} `)
+          message.channel.send(err)
     }
 }
