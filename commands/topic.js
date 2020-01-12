@@ -3,7 +3,7 @@ module.exports = {
       name: 'topic',
       discription: 'Gets a random chat topic, if the chat is dying!',
       aliases: ['Topic', 't', 'T'],
-      execute(message, args) {
+      execute(client, message, args) {
             const embeded = new Discord.RichEmbed();
             var quotes = [
                   "If you where any animal, what would you be and why?",
