@@ -42,6 +42,7 @@ module.exports = {
                 .addField('I got it!', `I got your subreddit of ${args[1]}!`)
             message.channel.send(confirm)
             subReddits.push(args[1])
+            console.log(subReddits)
             try {
                 const file = fs.writeFileSync('subreddits.json', subReddits);
             } catch (error) {
