@@ -20,7 +20,7 @@ module.exports = {
             if (!whoisUser) {
                   let roles = message.member.roles.map(r => r).join(',')
                   let highestRole = message.member.highestRole
-                  const whois = new Discord.RichEmbed
+                  const whois = new Discord.RichEmbed()
                   whois
                         .setThumbnail(message.author.avatarURL)
                         .setTitle(message.author.tag)
@@ -37,7 +37,7 @@ module.exports = {
             } else if (whoisUser) {
                   let roles1 = whoisUser.roles.map(r => r).join(',')
                   let highestRole1 = whoisUser.highestRole
-                  const whois1 = new Discord.RichEmbed
+                  const whois1 = new Discord.RichEmbed()
                   whois1
                         .setThumbnail(whoisUser.user.avatarURL)
                         .setTitle(whoisUser.user.tag)
