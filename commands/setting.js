@@ -6,7 +6,7 @@ module.exports = {
 	aliases: ['Settings','settings','Setting'],
 	usage: '[setting] [boolagan]',
 	execute(message, args) {
-    let roles = message.member.roles.map(r => r).join(',')
+    let roles = message.member.roles.map(r => r)
     if (roles.includes("Mod" || 'Moderator' || 'Admin')) {
      let mod = true
      } else {
