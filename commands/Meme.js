@@ -31,4 +31,4 @@ module.exports = {
 	    .addField(`An Error Occored. The error was ${error} `)
           message.channel.send(err)
     }
-}
+      }}
