@@ -14,9 +14,9 @@ module.exports = {
                   "Is the max safe?",
                   "Democrat or Republican",
                   "What have you been up to recently?",
-                  "Whats your faviourite plane?",
+                  "Whats your favourite plane?",
                   "SwissBot or SwissPlus?",
-                  "Windows or Appls?",
+                  "Windows or Apple?",
             ];
             var q = quotes[Math.floor(Math.random() * quotes.length)]
             embeded
