@@ -2,10 +2,11 @@ const { RichEmbed } = require("discord.js");
 const randomPuppy = require("random-puppy");
 
 module.exports = {
-    name: "meme",
-    category: "fun",
-    description: "Sends an epic meme",
-    run: async (client, message, args) => {
+      name: 'Meme',
+      description: 'Gives a meme from reddit!',
+      aliases: ['meme'],
+      cooldown: 10,
+      execute(message, args) {
         // In this array, 
         // you can put the subreddits you want to grab memes from
         const subReddits = ["dankmeme", "meme", "me_irl"];
