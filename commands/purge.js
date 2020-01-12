@@ -23,6 +23,7 @@ module.exports = {
          if (!args[1]){
            if(args[0]>0 && args[0]<500){
              let messagesDelete = args[0]
+             console.log(args)
              let sucsess = new Discord.RichEmbed()
              sucsess
              .setAuthor(message.author.tag, message.author.avatarURL)
