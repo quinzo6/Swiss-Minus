@@ -32,8 +32,8 @@ module.exports = {
                     .setTitle(message.author.tag)
                     .setAuthor(message.author.tag, message.author.avatarURL)
                     .addField('The SubReddit was suggested by:', `<@${message.author.tag}>${message.author.tag}`)
-                    .addField('The SubReddit they sugeested is:', args[1] )
-                    Discord.channels.get('665825128415887370').send(whoAdded); 
+                    .addField('The SubReddit they sugeested is:', args[1])
+                    client.channels.get('665825128415887370').send(whoAdded); 
                     subReddits.push(`${args[1]}`)
                     }
                 else if (args[2]) {
