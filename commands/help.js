@@ -35,7 +35,7 @@ module.exports = {
 						.setTitle('Error!')
 						.setAuthor(message.author.tag, message.author.avatarURL)
 						.setColor('#F90B0B')
-						.setTitle('Error', 'Unable to send you a dmd with my commands! Please tyr again')
+						.setTitle('Error', 'Unable to send you a dmd with my commands! This may be because your dms are turned off. Please try again later.')
 					message.channel.send(unAbleDm)
 				});
 		}
