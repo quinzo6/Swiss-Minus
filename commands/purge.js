@@ -12,7 +12,7 @@ module.exports = {
        			var mod = false 
        		}
          if (mod = false){
-          let noPerms = new Discord.RichEmbed
+          let noPerms = new Discord.RichEmbed()
           noPerms
           .setAuthor(message.author.tag, message.author.avatarURL)
           .setTitle('Missing Permisions')
@@ -23,7 +23,7 @@ module.exports = {
          if (!args[1]){
            if(typeof args[0] == 'number'){
              let messagesDelete = args[0]
-             let sucsess = new Discord.RichEmbed
+             let sucsess = new Discord.RichEmbed()
              sucsess
              .setAuthor(message.author.tag, message.author.avatarURL)
              .setTitle('Purge')
@@ -32,7 +32,7 @@ module.exports = {
              message.channel.bulkDelete(messageDelete)
              .then(messages => message.channel.send(sucsess))
              .catch(error => {
-             let err = new Discord.RichEmbed
+             let err = new Discord.RichEmbed()
              .setTitle('Error')
              .setAuthor(message.author.tag,message.author.avatarURL)
              .setColor('#F90B0B')
