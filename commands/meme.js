@@ -20,7 +20,7 @@ module.exports = {
             .setImage(img)
             .setTitle(`From /r/${random}`)
             .setURL(`https://reddit.com/r/${random}`)
-            .setFooter("Made by <@596751548877373440>")
+            .setFooter("Requested By: {}")
             .setColor('#4DF8E8')
        message.channel.send(embed)
       }
