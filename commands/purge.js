@@ -40,5 +40,5 @@ module.exports = {
              message.channel.send(err)})
              setTimeout(() => { message.delete() }, 2000)
              }
-          
+          }
            }}
