@@ -32,8 +32,7 @@ module.exports = {
              message.channel.bulkDelete(messageDelete)
              .then(messages => message.channel.send(sucsess))
              setTimeout(() => { message.delete() }, 2000)
-             .catch(
-             let err = new Discord.RichEmbed
+             .catch( let err = new Discord.RichEmbed)
              err
              .setTitle('Error')
              .setAuthor(message.author.tag, message.author.avatarURL
