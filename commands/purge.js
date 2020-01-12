@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 module.exports = {
     name: 'purge',
     description: 'Purges a selected amount of messages',
-    usage: 'message count'
+    usage: 'message count',
     aliases: ['Purge'],
     execute(client, message, args) => {
         let roles = message.member.roles.map(role => role.name)
