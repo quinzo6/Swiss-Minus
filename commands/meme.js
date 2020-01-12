@@ -34,7 +34,7 @@ module.exports = {
                     .addField('The SubReddit was suggested by:', `<@${message.author.tag}>${message.author.tag}`)
                     .addField('The SubReddit they sugeested is:', args[1] )
                     channels.get('665825128415887370').send(whoAdded); 
-                    subReddits.push(`${args[1]}`))
+                    subReddits.push(`${args[1]}`)
                     }
                 else if (args[2]) {
                     let wohh = new Discord.RichEmbed
