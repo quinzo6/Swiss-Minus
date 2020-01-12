@@ -6,7 +6,7 @@ module.exports = {
       description: 'Gives a meme from reddit!',
       aliases: ['meme'],
       cooldown: 10,
-      run: async (client, message, args) => {
+      execute: async (client, message, args) => {
         // In this array, 
         // you can put the subreddits you want to grab memes from
         const subReddits = ["dankmeme", "meme", "me_irl"];
