@@ -16,6 +16,7 @@ module.exports = {
         // Get a random image from the subreddit page
         const img = await randomPuppy(random);
         const embed = new Discord.RichEmbed()
+        let userIdMention = message.user.id
             .setColor("RANDOM")
             .setImage(img)
             .setTitle(`From /r/${random}`)
