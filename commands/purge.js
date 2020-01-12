@@ -35,7 +35,7 @@ module.exports = {
              let err = new Discord.RichEmbed
              err
              .setTitle('Error')
-             .setAuthor(message.author.tag, message.author.avatarURL
+             .setAuthor(message.author.tag, message.author.avatarURL)
              .setColor('#F90B0B')
              .addField('Error!',`An error occored. ${error}`)
              message.channel.send(err))
