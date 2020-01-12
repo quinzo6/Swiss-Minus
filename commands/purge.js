@@ -4,7 +4,7 @@ module.exports = {
     description: 'Purges a selected amount of messages',
     usage: 'message count',
     aliases: ['Purge'],
-    execute(client, message, args) => {
+    execute(client, message, args){
         let roles = message.member.roles.map(role => role.name)
     		if (roles.includes("Mod") || roles.includes('Moderator') || roles.include('Admin')) {
      			var mod = true
