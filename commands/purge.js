@@ -6,7 +6,7 @@ module.exports = {
     aliases: ['Purge'],
     execute(client, message, args){
         let roles = message.member.roles.map(role => role.name)
-    		if (roles.includes("Mod") || roles.includes('Moderator') || roles.include('Admin')) {
+    		if (roles.includes("Mod") || roles.includes('Moderator') || roles.includes('Admin')) {
      			var mod = true
      		} else {
        			var mod = false 
