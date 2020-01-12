@@ -8,9 +8,9 @@ module.exports = {
 	execute(client, message, args) {
     		let roles = message.member.roles.array()
     		if (roles.includes("Mod" || 'Moderator' || 'Admin')) {
-     			let mod = true
+     			var mod = true
      		} else {
-       			let mod = false 
+       			var mod = false 
        		}
     		console.log(mod) 
     		console.log(roles)
