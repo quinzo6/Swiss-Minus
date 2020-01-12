@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const randomPuppy = require("random-puppy");
-const subReddits = require('./subreddits.json')
+const subreddits = require('./subreddits.json')
 
 module.exports = {
         name: 'Meme',
@@ -11,8 +11,8 @@ module.exports = {
             // In this array, 
             // you can put the subreddits you want to grab memes from
             // Grab a random property from the array
+            let subReddits = subreddits.subReddits   
             const random = subReddits[Math.floor(Math.random() * subReddits.length)];
-
             // Get a random image from the subreddit page
             if (!args[0]) {
                 const img = await randomPuppy(random);
