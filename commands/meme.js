@@ -21,7 +21,7 @@ module.exports = {
             .setTitle(`From /r/${random}`)
             .setURL(`https://reddit.com/r/${random}`)
         try {
-        command.execute(client, message, args();
+        command.execute(client, message, args)();
     } catch (error) {
           let err = new Discord.RichEmbed
           err
