@@ -55,7 +55,7 @@ module.exports = {
 			.addField('Error', `A error occered. Error: ${error}`)
 		message.channel.send(err)
                     }
-                else if (args[2]) {
+	    }else if (args[2]) {
                     let wohh = new Discord.RichEmbed
                     wohh
                         .setTitle(message.author.tag)
