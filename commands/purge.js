@@ -28,7 +28,6 @@ module.exports = {
              .setAuthor(message.author.tag, message.author.avatarURL)
              .setTitle('Purge')
              .setColor('#4DF8E8')
-             ```js
              .addField('Purged Messages', `I purged ${messageDelete} messages!`)
              message.channel.bulkDelete(messageDelete)
              .then(messages => message.channel.send(sucsess))
@@ -41,6 +40,5 @@ module.exports = {
              message.channel.send(err))}
              setTimeout(() => { message.delete() }, 2000)
              }
-```
           
            }}
