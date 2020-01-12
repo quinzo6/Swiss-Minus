@@ -39,7 +39,7 @@ module.exports = {
              .setColor('#F90B0B')
              .addField('Error!',`An error occored. ${error}`)
              message.channel.send(err)})
-             setTimeout(() => { message.delete() }, 2000)
+             setTimeout(() => { messages.delete() }, 2000)
              }
           }
            }}
