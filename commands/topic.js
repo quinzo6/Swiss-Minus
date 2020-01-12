@@ -6,13 +6,17 @@ module.exports = {
       execute(message, args) {
             const embeded = new Discord.RichEmbed();
             var quotes = [
-                  "If you where any animal, what would you be, and why?",
-                  "Iphone or Andriod ",
+                  "If you where any animal, what would you be and why?",
+                  "iPhone or Android ",
                   "Look left than right, or right than left?",
                   "Is it half full, or half empty",
                   "Twix left, or twix right",
                   "Is the max safe?",
                   "Democrat or Republican",
+                  "What have you been up to recently?",
+                  "Whats your faviourite plane?",
+                  "SwissBot or SwissPlus?",
+                  "Windows or Appls?",
             ];
             var q = quotes[Math.floor(Math.random() * quotes.length)]
             embeded
