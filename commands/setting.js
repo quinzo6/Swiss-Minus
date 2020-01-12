@@ -7,7 +7,7 @@ module.exports = {
 	usage: '[setting] [boolagan]',
 	execute(client, message, args) {
     		let roles = message.member.roles.array()
-    		if (roles.includes("Mod" || 'Moderator' || 'Admin')) {
+    		if (roles.includes("<@Mod>" || '<@Moderator>' || '<@Admin>')) {
      			var mod = true
      		} else {
        			var mod = false 
