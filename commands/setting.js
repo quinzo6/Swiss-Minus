@@ -3,11 +3,11 @@ const Discord = require('discord.js');
 module.exports = {
 	name: 'setting',
 	description: 'Changes my setting',
-	aliases: ['Settings'],
+	aliases: ['Settings','settings','Setting'],
 	usage: '[setting] [boolagan]',
 	execute(message, args) {
-   let messageSenderRoles = message.member.roles.map(r => r)
-   if (messageSenderRoles.includes("Mod" || 'Moderator' || 'Admin')) {
+    let roles = message.member.roles.map(r => r).join(',')
+    if (roles.includes("Mod" || 'Moderator' || 'Admin')) {
      let mod = true
      } else {
        let mod = false 
