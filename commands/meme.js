@@ -9,7 +9,7 @@ module.exports = {
         execute: async (client, message, args) => {
             // In this array, 
             // you can put the subreddits you want to grab memes from
-            const subReddits = ["dankmeme", "meme", "me_irl"];
+            let subReddits = ["dankmeme", "meme", "me_irl"];
             // Grab a random property from the array
             const random = subReddits[Math.floor(Math.random() * subReddits.length)];
 
