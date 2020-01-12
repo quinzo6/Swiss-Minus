@@ -29,7 +29,7 @@ module.exports = {
              .setAuthor(message.author.tag, message.author.avatarURL)
              .setTitle('Purge')
              .setColor('#4DF8E8')
-             .addField('Purged Messages', `I purged ${messageDelete} messages!`)
+             .addField('Purged Messages', `I purged ${messagesDelete} messages!`)
              message.channel.bulkDelete(messagesDelete)
              .then(messages => message.channel.send(sucsess))
              .catch(error => {
@@ -39,7 +39,7 @@ module.exports = {
              .setColor('#F90B0B')
              .addField('Error!',`An error occored. ${error}`)
              message.channel.send(err)})
-             setTimeout(() => { messages.delete() }, 2000)
+             setTimeout(() => { message.delete() }, 2000)
              }
           }
            }}
