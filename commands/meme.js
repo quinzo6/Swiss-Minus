@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const randomPuppy = require("random-puppy");
-const subreddits = require('./commands/subreddits.json')
+const subreddits = require('./subreddits.json')
 const fs = require('fs')
 module.exports = {
     name: 'Meme',
