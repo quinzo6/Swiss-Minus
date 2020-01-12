@@ -5,7 +5,7 @@ module.exports = {
 	description: 'Changes my setting',
 	aliases: ['Settings','settings','Setting'],
 	usage: '[setting] [boolagan]',
-	execute(message, args) {
+	execute(,message, args) {
     let roles = message
     if (roles.includes("Mod" || 'Moderator' || 'Admin')) {
      let mod = true
@@ -14,4 +14,3 @@ module.exports = {
        }
     console.log(mod) 
     console.log(roles)
-  }}
