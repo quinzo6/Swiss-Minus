@@ -18,7 +18,6 @@ client.once('ready', () => {
 
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
-client.on('message', message=> {
     if (message.isMentioned(client.user.id)) {
     return message.reply('Hi, my prefix is !');
     // Make a embed
