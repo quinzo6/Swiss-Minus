@@ -1,5 +1,5 @@
 const Discord = require("discord.js")
-const mentionedChannel = message.mentions.channels.first();
+
 module.exports = {
     name: 'purge',
     description: 'Purges a selected amount of messages',
@@ -7,6 +7,7 @@ module.exports = {
     aliases: ['Purge'],
     execute(client, message, args){
         let roles = message.member.roles.map(role => role.name)
+        const mentionedChannel = message.mentions.channels.first();
     		if (roles.includes("Mod") || roles.includes('Moderator') || roles.includes('Admin')) {
      			var mod = true
      		} else {
