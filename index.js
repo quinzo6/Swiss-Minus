@@ -17,11 +17,10 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
     if (message.isMentioned(client.user.id)) {
     return message.reply('Hi, my prefix is !');
     // Make a embed
-}
+} if (!message.content.startsWith(prefix) || message.author.bot) return;
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
 
 	const commandName = args.shift().toLowerCase();
