@@ -56,14 +56,15 @@ module.exports = {
                 return message.channel.send(oops)
             }
         } else if (args[1] && !args[2]) {
-            if (!mentionedChannel)
+            if (!mentionedChannel) {
                 let yikes = new Discord.RichEmbed
-            yikes
-                .setAuthor(message.author.tag, message.author.avatarURL)
-                .setTitle('What?')
-                .setColor('#F90B0B')
-                .addField('What is that?', 'Thats not a channel? Try again with mentioning a channel')
-            return message.channel.send(yikes)
+                yikes
+                    .setAuthor(message.author.tag, message.author.avatarURL)
+                    .setTitle('What?')
+                    .setColor('#F90B0B')
+                    .addField('What is that?', 'Thats not a channel? Try again with mentioning a channel')
+                return message.channel.send(yikes)
+            }
         } else {
             let sucsess = new Discord.RichEmbed()
             sucsess
