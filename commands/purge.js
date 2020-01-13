@@ -13,7 +13,6 @@ module.exports = {
         } else {
             var mod = false
         }
-        console.log(mentionedChannel)
         if (mod === false) {
             let noPerms = new Discord.RichEmbed()
             noPerms
