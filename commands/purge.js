@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const mentionedChannel = message.mentions.channels.first();
 module.exports = {
     name: 'purge',
     description: 'Purges a selected amount of messages',
@@ -11,7 +12,8 @@ module.exports = {
      		} else {
        			var mod = false 
        		}
-         if (mod === false){
+        console.log(mentionedChannel) 
+        if (mod === false){
           let noPerms = new Discord.RichEmbed()
           noPerms
           .setAuthor(message.author.tag, message.author.avatarURL)
@@ -21,7 +23,7 @@ module.exports = {
           return message.channel.send(noPerms)
          }
          if (!args[1]){
-           if(args[0]>0 && args[0]<500){
+           if(args[0]>0 && args[0]<100){
              let messagesDelete = args[0]
              console.log(args)
              let sucsess = new Discord.RichEmbed()
@@ -40,6 +42,14 @@ module.exports = {
              .addField('Error!',`An error occored. ${error}`)
              message.channel.send(err)})
              setTimeout(() => { message.delete() }, 2000)
-             }
-          }
+           }else{
+               let oops = new Discord.RichEmbed
+               oops
+               .setAuthor(message.author.tag, message.author.avatarURL)
+               .setTitle('Invalid Arguments')
+               .setColor(`#F90B0B`)
+               .addField('Arguments!','Either you provided a number below 0, a number above 100, or it wasn\'t a number at all!
+               return message.channel.send(oops)
+           }}else if (args[1] && !args[2]){
+               
            }}
