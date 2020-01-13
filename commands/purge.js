@@ -68,7 +68,6 @@ module.exports = {
         } else {
             let messagesDelete = args[0]
             let sucsess = new Discord.RichEmbed()
-            console.log(mentionedChannel)
             console.log(messagesDelete)
             sucsess
                 .setAuthor(message.author.tag, message.author.avatarURL)
