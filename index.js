@@ -18,7 +18,12 @@ client.once('ready', () => {
 
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
-
+client.on('message', message=> {
+    if (message.isMentioned(client.user)) {
+    return message.reply('Hi, my prefix is !');
+    // Make a embed
+}
+});
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
 
 	const commandName = args.shift().toLowerCase();
