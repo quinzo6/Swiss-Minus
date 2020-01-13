@@ -19,6 +19,7 @@ client.once('ready', () => {
 client.on('message', message => {
     if (message.isMentioned(client.user.id)) {
     let noPerms = new Discord.RichEmbed()
+    let pingBot = new Discord.RichEmbed()
             pingBot
                 .setAuthor(message.author.tag, message.author.avatarURL)
                 .setTitle('Prefix')
