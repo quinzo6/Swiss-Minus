@@ -22,7 +22,6 @@ client.on('message', message => {
     return message.reply('Hi, my prefix is !');
     // Make a embed
 }
-});
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
 
 	const commandName = args.shift().toLowerCase();
