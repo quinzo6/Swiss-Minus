@@ -72,7 +72,7 @@ module.exports = {
                         .setTitle('Purge')
                         .setColor('#4DF8E8')
                         .addField('Purged Messages', `I purged ${messagesDelete} messages!`)
-                    client.channels.get(mentionedChannel).bulkDelete(messagesDelete)
+                         message.mentions.channels.first().bulkDelete(messagesDelete)
                         .then(messages => message.channel.send(sucsess))
                         .catch(error => {
                             let err = new Discord.RichEmbed()
