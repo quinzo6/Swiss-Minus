@@ -55,7 +55,7 @@ module.exports = {
                     .addField('Arguments!', 'Either you provided a number below 0, a number above 100, or it wasn\'t a number at all!')
                 return message.channel.send(oops)
             }
-        } else if (args[1] && !args[2]) {
+        } else if (args[1]) {
             if (!mentionedChannel) {
                 let yikes = new Discord.RichEmbed
                 yikes
