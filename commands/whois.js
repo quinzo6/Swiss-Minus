@@ -17,7 +17,7 @@ module.exports = {
                    .setColor("#4DF8E8")
                    .addField("I'm Not On!",'This command it turned off! Please ask a mod or admin to turn it back on!')
                    return message.channel.send(notOn)
-            if (!whoisUser) {
+           } if (!whoisUser) {
                   let roles = message.member.roles.map(r => r).join(',')
                   let highestRole = message.member.highestRole
                   const whois = new Discord.RichEmbed()
