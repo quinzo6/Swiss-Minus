@@ -63,7 +63,6 @@ module.exports = {
                     .setColor('#F90B0B')
                     .addField('What is that?', 'Thats not a channel? Try again with mentioning a channel')
                 return message.channel.send(yikes)
-            }
         } else {
             let messagesDelete = args[0]
             let sucsess = new Discord.RichEmbed()
