@@ -3,7 +3,7 @@ const randomPuppy = require("random-puppy");
 const subreddits = require('./subreddits.json')
 const fs = require('fs')
 module.exports = {
-    name: 'Meme',
+    name: 'meme',
     description: 'Gives a meme from reddit!',
     aliases: ['meme'],
     cooldown: 10,
@@ -21,7 +21,7 @@ module.exports = {
                 .setImage(img)
                 .setTitle(`From /r/${random}`)
                 .setURL(`https://reddit.com/r/${random}`)
-                .setFooter("Requested By: {}")
+                .setFooter("Requested By: {}", `<@${message.author.id}>`)
                 .setColor('#4DF8E8')
             message.channel.send(embed)
 
