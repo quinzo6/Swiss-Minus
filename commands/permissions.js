@@ -13,15 +13,15 @@ module.exports = {
                         .setTitle("Error")
                         .setAuthor(message.author.tag, message.author.avatarURL)
                         .setColor("#F90B0B")
-                        .addField("Error", "You didnt mention who you wanted to view permissions of!")
+                        .addField("Error", "You didn/'t mention who you wanted to view permissions of!")
                   message.channel.send(permNoMentionedEmbed)
             } else {
                   const permEmbed = new Discord.RichEmbed
                   permEmbed
-                        .setTitle("Permisions")
+                        .setTitle("Permissions")
                         .setAuthor(message.author.tag, message.author.avatarURL)
                         .setColor('#4DF8E8')
-                        .addField(`@$<message.author.tag> permisions:`, permMentioned.permissions.toArray().join(' , '))
+                        .addField(`Permissions:", permMentioned.permissions.toArray().join(' , '))
                   message.channel.send(permEmbed)
             }
       }
