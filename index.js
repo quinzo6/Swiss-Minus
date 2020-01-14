@@ -14,6 +14,8 @@ const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
 	console.log('Ready!');
+         client.user.setActivity(`Serving ${client.guilds.size} servers`);
+
 });
 
 client.on('message', message => {
