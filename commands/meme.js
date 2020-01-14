@@ -19,9 +19,10 @@ module.exports = {
             const embed = new Discord.RichEmbed()
                 .setColor("#4DF8E8")
                 .setImage(img)
+                .setAuthor(message.author.tag, message.author.avatarURL)
                 .setTitle(`From /r/${random}`)
                 .setURL(`https://reddit.com/r/${random}`)
-                .setFooter(`Requested By: <@${message.author.id}>`)
+                .setFooter(`Requested By: ${message.author.tag}`)
                 .setColor('#4DF8E8')
             message.channel.send(embed)
 
