@@ -21,7 +21,7 @@ module.exports = {
                 .setImage(img)
                 .setTitle(`From /r/${random}`)
                 .setURL(`https://reddit.com/r/${random}`)
-                .setFooter(`Requested By: @${message.author.tag}`)
+                .setFooter(`Requested By: <@${message.author.id}>`)
                 .setColor('#4DF8E8')
             message.channel.send(embed)
 
@@ -32,7 +32,7 @@ module.exports = {
                 .setTitle(message.author.tag)
                 .setAuthor(message.author.tag, message.author.avatarURL)
                 .addField('The SubReddit was suggested by:', `<@${message.author.id}>  ${message.author.tag}`)
-                .addField('The SubReddit they sugeested is:', args[1])
+                .addField('The SubReddit they suggeted is:', args[1])
             client.channels.get('665825128415887370').send(whoAdded);
             let confirm = new Discord.RichEmbed
             confirm
