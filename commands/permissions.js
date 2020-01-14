@@ -21,7 +21,7 @@ module.exports = {
                         .setTitle("Permissions")
                         .setAuthor(message.author.tag, message.author.avatarURL)
                         .setColor('#4DF8E8')
-                        .addField(`Permissions:", permMentioned.permissions.toArray().join(' , '))
+                        .addField("Permissions:", permMentioned.permissions.toArray().join(' , '))
                   message.channel.send(permEmbed)
             }
       }
