@@ -19,7 +19,7 @@ module.exports = {
                     .setAuthor(message.author.tag, message.author.avatarURL)
                     .setTitle('Missing Permisions')
                     .setColor('#F90B0B')
-                    .addField('Missing Perms!', `Hey <@${message.author.id}>, you don't have the permisions to use this command.`)
+                    .addField('Missing Perms!', `Hey <@${message.author.id}>, you are missing permissions of using this command.`)
                 return message.channel.send(noPerms)
             }
             if (!args[1]) {
