@@ -5,19 +5,20 @@ module.exports = {
       cooldown: 5,
       execute(client, message, args) { 
 const q1 = new Discord.RichEmbed()
+  q1
   .setTitle('Quiz for SwissPlus')
   .setDescription('Reply with Numbers instead of text to detect the answer.')
   .addField('Question 1', 'Why are there spirals in the Turbines?')
   .addField('Option 1.', 'Ground Safety')
   .addField('Option 2.', 'Killing Birds')
   .setFooter('Developed by WoozyDragon4018#8134')
-    message.channel.send(q1);
-    const correct = new discord.RichEmbed()
+    message.channel.send(q1)
+    const correct = new Discord.RichEmbed()
       .setColor('#00ff00')
       .setTitle('Correct Answer!')
       .setDescription('The answer you said was completely correct!')
 
-    const incorrect = new discord.RichEmbed()
+    const incorrect = new Discord.RichEmbed()
       .setColor('#ff0000')
       .setTitle('Incorrect Answer!')
       .setDesctiption('Sorry but the answer you sent was incorrect. Better luck next time mate!')
@@ -43,4 +44,4 @@ const q1 = new Discord.RichEmbed()
     })
 }
 }
-}
+
