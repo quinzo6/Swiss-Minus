@@ -11,7 +11,6 @@ const q1 = new Discord.RichEmbed()
   .addField('Option 1.', 'Ground Safety')
   .addField('Option 2.', 'Killing Birds')
   .setFooter('Developed by WoozyDragon4018#8134')
-if (command === 'quiz'){
     message.channel.send(q1);
     const correct = new discord.RichEmbed()
       .setColor('#00ff00')
@@ -42,5 +41,6 @@ if (command === 'quiz'){
           message.channel.send
         }
     })
+}
 }
 }
