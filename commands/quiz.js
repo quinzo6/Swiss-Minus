@@ -14,16 +14,19 @@ const q1 = new Discord.RichEmbed()
   .setFooter('Developed by WoozyDragon4018#8134')
     message.channel.send(q1)
     const correct = new Discord.RichEmbed()
+      correct
       .setColor('#00ff00')
       .setTitle('Correct Answer!')
       .setDescription('The answer you said was completely correct!')
 
     const incorrect = new Discord.RichEmbed()
+      incorrect
       .setColor('#ff0000')
       .setTitle('Incorrect Answer!')
       .setDesctiption('Sorry but the answer you sent was incorrect. Better luck next time mate!')
 
     const noexist = new discord.RichEmbed()
+      noexist
       .setColor('#ff0000')
       .setTitle('Bad Argument.')
       .setDescription('This option number doesn\'t exist. Please try again by entering numbers.')
