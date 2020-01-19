@@ -41,5 +41,6 @@ if (command === 'quiz'){
         else {
           message.channel.send
         }
-    });
+    })
+}
 }
