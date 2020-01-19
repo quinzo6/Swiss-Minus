@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 var q1 = "Why are there Spirals in the turbines?"
 var o1 = "Options: \n1.Ground Safety \n2.Cooling the Pilot \nKilling Birds"
 var q2 = "Can a Passenger land a plane?"
