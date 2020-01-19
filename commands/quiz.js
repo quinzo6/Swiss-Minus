@@ -25,7 +25,7 @@ const q1 = new Discord.RichEmbed()
       .setTitle('Incorrect Answer!')
       .setDescription('Sorry but the answer you sent was incorrect. Better luck next time mate!')
 
-    const noexist = new discord.RichEmbed()
+    const noexist = new Discord.RichEmbed()
       noexist
       .setColor('#ff0000')
       .setTitle('Bad Argument.')
