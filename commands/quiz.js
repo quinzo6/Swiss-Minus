@@ -23,7 +23,7 @@ const q1 = new Discord.RichEmbed()
       incorrect
       .setColor('#ff0000')
       .setTitle('Incorrect Answer!')
-      .setDesctiption('Sorry but the answer you sent was incorrect. Better luck next time mate!')
+      .setDescription('Sorry but the answer you sent was incorrect. Better luck next time mate!')
 
     const noexist = new discord.RichEmbed()
       noexist
@@ -42,7 +42,7 @@ const q1 = new Discord.RichEmbed()
           message.channel.send(incorrect)
         }
         else {
-          message.channel.send
+          message.channel.send(noexist)
         }
     })
 }
