@@ -23,7 +23,7 @@ module.exports = {
             return message.channel.send(noPerms)
         }
         if (!args[1]) {
-            if (args[0] > 0 && args[0] < 100) {
+            if (args[0] > 0 && args[0] < 99) {
                 let messagesDelete = args[0]
                 console.log(args)
                 let sucsess = new Discord.RichEmbed()
