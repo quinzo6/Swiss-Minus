@@ -40,7 +40,7 @@ client.on('message', message => {
 
 	const command = client.commands.get(commandName) ||
 		client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-	if (!args[0]) return;
+	if (!args[0] && !commandName) return;
 	if (!command) {
 		let invalCmd = new Discord.RichEmbed
 		let usr = message.author.id
