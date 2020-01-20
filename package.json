@@ -28,7 +28,6 @@
   "dependencies": {
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
-    "jshint": "^2.11.0",
     "random-puppy": "^1.1.0",
     "urban-dictionary": "^2.2.1"
   }

@@ -1,6 +1,5 @@
-  
-{
-  "mod" : false,
-  "prefix" : "!",
-  "whois": "on"
-}
+  {
+    "mod": false,
+    "prefix": "!",
+    "whois": "on"
+  }

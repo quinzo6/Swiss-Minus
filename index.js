@@ -15,22 +15,25 @@ const cooldowns = new Discord.Collection();
 
 client.once('ready', () => {
 	console.log('Ready!');
-         client.user.setActivity(`Serving ${client.guilds.size} servers`);
+	client.user.setActivity(`Serving ${client.guilds.size} servers`);
 
 });
 
 client.on('message', message => {
-	if (process.env.betaTkn){prefix = '?'}
-    if (message.isMentioned(client.user.id)) {
-    let noPerms = new Discord.RichEmbed()
-    let pingBot = new Discord.RichEmbed()
-            pingBot
-                .setAuthor(message.author.tag, message.author.avatarURL)
-                .setTitle('Prefix')
-                .setColor('#4DF8E8')
-                .addField('Prefix' , ` <@${message.author.id}>, Looks like you forgot my prefix. **My Prefix is: !**.`)
-                return message.channel.send(pingBot)
-} if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if (process.env.betaTkn) {
+		prefix = '?'
+	}
+	if (message.isMentioned(client.user.id)) {
+		let noPerms = new Discord.RichEmbed()
+		let pingBot = new Discord.RichEmbed()
+		pingBot
+			.setAuthor(message.author.tag, message.author.avatarURL)
+			.setTitle('Prefix')
+			.setColor('#4DF8E8')
+			.addField('Prefix', ` <@${message.author.id}>, Looks like you forgot my prefix. **My Prefix is: !**.`)
+		return message.channel.send(pingBot)
+	}
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
 	const args = message.content.slice(prefix.length).trim().split(/ +/g);
 
 	const commandName = args.shift().toLowerCase();
@@ -92,7 +95,7 @@ client.on('message', message => {
 				.setTitle("Cooldown has Not finnished")
 				.addField("Error", `Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
 				.setColor('#E80C0C')
-			message.channel.send(timeOut)
+			return message.channel.send(timeOut)
 		}
 	}
 
