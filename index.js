@@ -1,8 +1,9 @@
 const fs = require('fs');
+require('dotenv').config()
 const Discord = require('discord.js');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
-const prefix = '!'
+let prefix = '!'
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
@@ -19,6 +20,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
+	if (procces.env.betaTkn){prefix = '?'}
     if (message.isMentioned(client.user.id)) {
     let noPerms = new Discord.RichEmbed()
     let pingBot = new Discord.RichEmbed()
@@ -112,4 +114,4 @@ client.on('message', message => {
 		message.channel.send(err)
 	}
 });
-client.login(process.env.token);
+client.login(process.env.betaTkn || process.env.token);
