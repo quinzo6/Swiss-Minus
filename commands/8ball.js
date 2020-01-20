@@ -18,7 +18,7 @@ module.exports = {
       .setAuthor(message.author.tag, message.author.avatarURL)
       .setTitle('8Ball')
       .setColor('4DF8E8')
-      .addField('Fourten:', randomOption)
+      .addField('Fortune:', randomOption)
     message.channel.send(randomembed)
   }
 }
