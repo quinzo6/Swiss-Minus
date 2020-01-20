@@ -30,7 +30,7 @@ client.on('message', message => {
 			.setAuthor(message.author.tag, message.author.avatarURL)
 			.setTitle('Prefix')
 			.setColor('#4DF8E8')
-			.addField('Prefix', ` <@${message.author.id}>, Looks like you forgot my prefix. **My Prefix is: !**.`)
+			.addField('Prefix', ` <@${message.author.id}>, Looks like you forgot my prefix. **My Prefix is: ${prefix}**.`)
 		return message.channel.send(pingBot)
 	}
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
