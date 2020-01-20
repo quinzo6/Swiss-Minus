@@ -20,7 +20,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-	if (procces.env.betaTkn){prefix = '?'}
+	if (process.env.betaTkn){prefix = '?'}
     if (message.isMentioned(client.user.id)) {
     let noPerms = new Discord.RichEmbed()
     let pingBot = new Discord.RichEmbed()
