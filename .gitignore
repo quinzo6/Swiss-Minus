@@ -105,3 +105,4 @@ dist
 
 .eslintrc.json
 .env
+.DS_Store

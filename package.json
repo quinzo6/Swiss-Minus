@@ -29,6 +29,7 @@
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
     "random-puppy": "^1.1.0",
+    "translate": "^1.1.1",
     "urban-dictionary": "^2.2.1"
   }
 }
