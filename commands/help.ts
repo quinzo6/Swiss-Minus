@@ -1,4 +1,5 @@
 import Discord, {Client, Message} from "discord.js";
+import {getSetting} from "../index";
 
 export let name = 'help';
 export let description = 'List all of my commands or info about a specific command.';
@@ -19,7 +20,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .setColor('#4DF8E8')
             .setAuthor(message.author.tag, message.author.avatarURL)
             .addField('Commands:', `${cmds}`)
-            .addField('Tip:', 'You can send `!help [command name]` to get info on a specific command!');
+            .addField('Tip:', `You can send \`${await getSetting('prefix')}help [command name]\` to get info on a specific command!`);
         return message.author.send(helpEmbed)
             .then(() => {
                 if (message.channel.type === 'dm') return;

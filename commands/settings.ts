@@ -26,7 +26,7 @@ export async function execute(client: Client, message: Message, args: string[], 
         const setting = args[0];
         const value = args.slice(1).join(" ");
 
-        const result = await db.query('UPDATE settings SET value=$1 WHERE name=$2', [setting, value]);
+        const result = await db.query('UPDATE settings SET value = $2 WHERE name = $1', [setting, value]);
         if(result.rowCount === 0) return await message.channel.send(`Hmm, I don't see a setting called ${setting}.`);
         await message.channel.send(`Yay! Successfully set \`${setting}\` to \`${value}\`.`);
     } else {

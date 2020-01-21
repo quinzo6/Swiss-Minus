@@ -9,8 +9,10 @@ dotenv_config();
 
 const dev = process.env.NODE_ENV === "dev";
 
+
+
 const db = new PgClient({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: dev ? process.env.dev_db_url : process.env.DATABASE_URL,
   ssl: true
 });
 db.connect().then(_ => {
