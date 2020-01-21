@@ -20,7 +20,6 @@ db.connect().then(_ => {
 const client = new Discord.Client();
 //@ts-ignore
 client.commands = new Discord.Collection();
-const prefix = dev ? '?' : '!';
 const commandFiles = fs.readdirSync('./commands').filter((file) => file.endsWith(dev ? '.ts' : '.js'));
 
 for (const file of commandFiles) {
@@ -35,6 +34,7 @@ for (const file of commandFiles) {
 const cooldowns: Collection<string, Collection<string, number>> = new Discord.Collection();
 
 client.on('message', async (message) => {
+  const prefix = dev ? '?' : await getSetting('prefix');
   if (message.isMentioned(client.user.id)) {
     const embed = new Discord.RichEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL)
@@ -131,6 +131,5 @@ client.login(process.env.token).then(async _token => {
 
 export async function getSetting(name: string) {
   const res = await db.query("SELECT value FROM settings WHERE name = $1", [name]);
-  console.log(res.rows[0]);
-  return res.rows[0];
+  return res.rows[0].value;
 }

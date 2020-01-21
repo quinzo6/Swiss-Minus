@@ -16,7 +16,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .setAuthor(message.author.tag, message.author.avatarURL)
             .setColor('#4DF8E8')
             .addField("I'm Not On!", 'This command it turned off! Please ask a mod or admin to turn it back on!');
-        await message.channel.send(notOn);
+        return await message.channel.send(notOn);
     }
 
     const whoisUser = message.mentions.members.first() || message.guild.members.get(args[0]);
