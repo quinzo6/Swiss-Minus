@@ -2,11 +2,20 @@
 /* eslint-disable global-require */
 import fs from "fs";
 import Discord, {Collection} from "discord.js";
+import {Client as PgClient} from "pg";
 import { config as dotenv_config } from "dotenv";
 
 dotenv_config();
 
 const dev = process.env.NODE_ENV === "dev";
+
+const db = new PgClient({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
+db.connect().then(_ => {
+  console.log("Connected to database.")
+});
 
 const client = new Discord.Client();
 //@ts-ignore
@@ -100,7 +109,7 @@ client.on('message', async (message) => {
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
   try {
-    command.execute(client, message, args);
+    command.execute(client, message, args, db);
   } catch (error) {
     const userMen = message.author.id;
     // eslint-disable-next-line no-console
