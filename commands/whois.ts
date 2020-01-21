@@ -1,8 +1,6 @@
 import Discord, {Client, Message} from "discord.js";
+import {getSetting} from "../index";
 
-const settings = require('./settings.json');
-
-const on = settings.whois;
 export let name = 'whois';
 export let description = 'Gets info about a user';
 export let aliases = ['Whois'];
@@ -10,8 +8,8 @@ export let usage = '[user]';
 export let cooldown = 5;
 
 export async function execute(client: Client, message: Message, args: string[]) {
-    const whoisUser = message.mentions.members.first() || message.guild.members.get(args[0]);
-    if (on !== 'on') {
+    const on = await getSetting("whois") === "on";
+    if(!on) {
         const notOn = new Discord.RichEmbed();
         notOn
             .setTitle(message.author.tag)
@@ -20,6 +18,8 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .addField("I'm Not On!", 'This command it turned off! Please ask a mod or admin to turn it back on!');
         await message.channel.send(notOn);
     }
+
+    const whoisUser = message.mentions.members.first() || message.guild.members.get(args[0]);
     if (!whoisUser) {
         const roles = message.member.roles.map((r) => r).join(',');
         const {highestRole} = message.member;
