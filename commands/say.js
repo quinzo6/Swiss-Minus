@@ -35,7 +35,25 @@ module.exports = {
         .addField('Whats that?', 'Thats not a channel!');
       return message.channel.send(none);
     }
+    if (mentionedChannel && !args[1]) {
+      const oof = new Discord.RichEmbed();
+      oof
+        .setAuthor(message.author.tag, message.author.avatarURL)
+        .setTitle('Error!')
+        .setColor('#F90B0B')
+        .addField('I think you forgot something', 'Your frogot what you wanted to say! Think deeper');
+      return message.channel.send(oof);
+    }
     const messages1 = args.slice(1, messageCount).join(' ');
+    const log = new Discord.RichEmbed();
+    log
+      .setAuthor(message.author.tag, message.author.avatarURL)
+      .setTitle('Say Cmd Log')
+      .setColor('#F5AA42')
+      .addField('This person used the command!:', `<@${message.author.id}>`)
+      .addField('The message was:', messages1);
+    const chl = client.channels.get('668987003517534259');
+    chl.send(log);
     return mentionedChannel.send(messages1);
   },
 };
