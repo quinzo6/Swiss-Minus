@@ -1,15 +1,15 @@
 {
   "name": "swiss-plus",
   "version": "1.0.0",
-  "description": "An in-depth guide on deploying your Discord.js bot on Heroku",
-  "main": "index.js",
+  "main": "index.ts",
   "engines": {
     "node": "12.13.0",
     "npm": "6.12.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node bot.js"
+    "start": "node .",
+    "build": "tsc",
+    "dev": "cross-env NODE_ENV=dev ts-node ."
   },
   "repository": {
     "type": "git",
@@ -33,9 +33,13 @@
     "urban-dictionary": "^2.2.1"
   },
   "devDependencies": {
+    "@types/node": "^13.1.8",
+    "cross-env": "^6.0.3",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.0",
-    "eslint-plugin-node": "^11.0.0"
+    "eslint-plugin-node": "^11.0.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
   }
 }
