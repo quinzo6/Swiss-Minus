@@ -8,8 +8,11 @@ export let usage = '[setting] [boolean]';
 
 export async function execute(client: Client, message: Message, args: string[], db: PgClient) {
     const mod = message.member.hasPermission("MUTE_MEMBERS");
+    let result: {[key: string]: string} = {};
+    const rows = (await db.query("SELECT * FROM settings")).rows;
+    for(let row of rows) {
+        result[row.name] = row.value
+    }
 
-    const result = await db.query("SELECT * FROM settings");
-
-    await message.channel.send(`Current settings:\n${JSON.stringify(result.rows)}`);
+    await message.channel.send(`Current settings:\n${JSON.stringify(rows)}`);
 }
