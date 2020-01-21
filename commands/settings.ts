@@ -1,10 +1,10 @@
 import {Client, Message} from "discord.js";
 import {Client as PgClient} from "pg";
 
-export let name = 'setting';
-export let description = 'Changes my setting';
-export let aliases = ['Settings', 'settings', 'Setting'];
-export let usage = '[setting] [boolean]';
+export let name = 'settings';
+export let description = 'Shows or changes settings';
+export let aliases = ['Settings', 'setting', 'Setting'];
+export let usage = '[settings] <name> <value>';
 
 export async function execute(client: Client, message: Message, args: string[], db: PgClient) {
     const mod = message.member.hasPermission("MUTE_MEMBERS");
@@ -14,5 +14,5 @@ export async function execute(client: Client, message: Message, args: string[], 
         result[row.name] = row.value
     }
 
-    await message.channel.send(`Current settings:\n${JSON.stringify(rows)}`);
+    await message.channel.send(`Current settings:\n${JSON.stringify(result)}`);
 }
