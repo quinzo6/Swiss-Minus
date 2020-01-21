@@ -2,16 +2,17 @@
 /* eslint-disable no-var */
 /* eslint-disable vars-on-top */
 const Discord = require('discord.js');
+const users = require('./sayusers.json');
 
 module.exports = {
   name: 'say',
   description: 'Says a message!',
   usage: '[channel] [message]',
   execute(client, message, args) {
-    const roles = message.member.roles.map((role) => role.name);
+    const userids = users.usersID;
     const messageCount = args.length;
     const mentionedChannel = message.mentions.channels.first() || client.channels.get(args[0]);
-    if (roles.includes('Mod') || roles.includes('Moderator') || roles.includes('Admin')) {
+    if (userids.includes(message.author.id)) {
       var mod = true;
     } else {
       mod = false;
