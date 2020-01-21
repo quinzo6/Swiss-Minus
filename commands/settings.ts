@@ -22,7 +22,13 @@ export async function execute(client: Client, message: Message, args: string[], 
         }
         await message.channel.send(embed);
     } else if(args[1]) {
-        await message.reply("Sorry, changing settings hasn't been implemented on it. We're working hard!")
+        if(!mod) return await message.channel.send("Sorry, but you don't have permissions to change settings!");
+        const setting = args[0];
+        const value = args.slice(1).join(" ");
+
+        const result = await db.query('UPDATE settings SET value=$1 WHERE name=$2', [setting, value]);
+        if(result.rowCount === 0) return await message.channel.send(`Hmm, I don't see a setting called ${setting}.`);
+        await message.channel.send(`Yay! Successfully set \`${setting}\` to \`${value}\`.`);
     } else {
         await message.channel.send("Oops, this isn't how you use the command!");
     }
