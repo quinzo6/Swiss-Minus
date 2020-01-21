@@ -8,9 +8,7 @@ module.exports = {
   aliases: ['meme'],
   cooldown: 10,
   execute: async (client, message, args) => {
-    // In this array,
-    // you can put the subreddits you want to grab memes from
-    // Grab a random property from the array
+    if (message.channel.id === '592463507124125706') return;
     const { subReddits } = subreddits;
     const random = subReddits[Math.floor(Math.random() * subReddits.length)];
     // Get a random image from the subreddit page
