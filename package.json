@@ -11,6 +11,7 @@
     "build": "tsc",
     "dev": "cross-env NODE_ENV=dev ts-node ."
   },
+  "heroku-run-build-script": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/carterdacat/Swiss-Plus.git"
