@@ -1,4 +1,4 @@
-import {Client, Message} from "discord.js";
+import {Client, Message, RichEmbed} from "discord.js";
 import {Client as PgClient} from "pg";
 
 export let name = 'settings';
@@ -8,11 +8,22 @@ export let usage = '[settings] <name> <value>';
 
 export async function execute(client: Client, message: Message, args: string[], db: PgClient) {
     const mod = message.member.hasPermission("MUTE_MEMBERS");
-    let result: {[key: string]: string} = {};
-    const rows = (await db.query("SELECT * FROM settings")).rows;
-    for(let row of rows) {
-        result[row.name] = row.value
-    }
+    if(!args[0]) {
+        let result: { [key: string]: string } = {};
+        const rows = (await db.query("SELECT * FROM settings")).rows;
 
-    await message.channel.send(`Current settings:\n${JSON.stringify(result)}`);
+        const embed = new RichEmbed()
+            .setTitle("Settings")
+            .setColor(0x4DF8E8)
+            .setAuthor(client.user.tag, client.user.displayAvatarURL)
+            .setTimestamp();
+        for (let row of rows) {
+            embed.addField(row.name, row.value);
+        }
+        await message.channel.send(embed);
+    } else if(args[1]) {
+        await message.reply("Sorry, changing settings hasn't been implemented on it. We're working hard!")
+    } else {
+        await message.channel.send("Oops, this isn't how you use the command!");
+    }
 }
