@@ -11,5 +11,5 @@ export async function execute(client: Client, message: Message, args: string[], 
 
     const result = await db.query("SELECT * FROM settings");
 
-    await message.channel.send(result.rows);
+    await message.channel.send(`Current settings:\n${JSON.stringify(result.rows)}`);
 }
