@@ -36,7 +36,7 @@ for (const file of commandFiles) {
 const cooldowns: Collection<string, Collection<string, number>> = new Discord.Collection();
 
 client.on('message', async (message) => {
-  if(message.channel.parent === "606557115758411807") return
+  if(message.channel.parentID === "606557115758411807") return
   const prefix = dev ? '?' : await getSetting('prefix');
   if (message.isMentioned(client.user.id)) {
     const embed = new Discord.RichEmbed()
