@@ -14,7 +14,7 @@ export async function execute(client: Client, message: Message, args: string[], 
 
         const embed = new RichEmbed()
             .setTitle("Settings")
-            .setColor(0x4DF8E8)
+            .setColor('#4DF8E8')
             .setAuthor(client.user.tag, client.user.displayAvatarURL)
             .setTimestamp();
         for (let row of rows) {

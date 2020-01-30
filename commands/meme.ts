@@ -1,12 +1,24 @@
 import Discord, {Client, Message, TextChannel} from "discord.js";
 import randomPuppy from "random-puppy";
 const subreddits = require('./subreddits.json');
+import {getSetting} from "../index";
+
 
 export let name = "meme";
 export let description = "Gives a meme from reddit!";
 export let aliases = ["meme"];
 export let cooldown = 10;
 export async function execute(client: Client, message: Message, args: string[]) {
+  const on = await getSetting("meme") === "on";
+    if(!on) {
+        const notOn = new Discord.RichEmbed();
+        notOn
+            .setTitle(message.author.tag)
+            .setAuthor(message.author.tag, message.author.avatarURL)
+            .setColor('#4DF8E8')
+            .addField("I'm Not On!", 'This command it turned off! Please ask a mod or admin to turn it back on!');
+        return await message.channel.send(notOn);
+    }
     if (message.channel.id === '592463507124125706') return;
     const { subReddits } = subreddits;
     const random = subReddits[Math.floor(Math.random() * subReddits.length)];

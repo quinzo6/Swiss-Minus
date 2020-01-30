@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable global-require */
 import fs from "fs";
-import Discord, {Collection} from "discord.js";
+import Discord, {Collection, TextChannel} from "discord.js";
 import {Client as PgClient} from "pg";
 import { config as dotenv_config } from "dotenv";
 
@@ -36,7 +36,7 @@ for (const file of commandFiles) {
 const cooldowns: Collection<string, Collection<string, number>> = new Discord.Collection();
 
 client.on('message', async (message) => {
-  if(message.channel.parentID === "606557115758411807") return
+  if((message.channel as TextChannel).parentID=== "606557115758411807") return
   const prefix = dev ? '?' : await getSetting('prefix');
   if (message.isMentioned(client.user.id)) {
     const embed = new Discord.RichEmbed()

@@ -1,10 +1,21 @@
 import Discord, {Client, Message} from "discord.js";
+import {getSetting} from "../index";
 
 export let name = 'topic';
 export let description = 'Gets a random chat topic, if the chat is dying!';
 export let aliases = ['Topic', 't', 'T'];
 
 export async function execute(client: Client, message: Message, args: string[]) {
+    const on = await getSetting("topic") === "on";
+    if(!on) {
+        const notOn = new Discord.RichEmbed();
+        notOn
+            .setTitle(message.author.tag)
+            .setAuthor(message.author.tag, message.author.avatarURL)
+            .setColor('#4DF8E8')
+            .addField("I'm Not On!", 'This command it turned off! Please ask a mod or admin to turn it back on!');
+        return await message.channel.send(notOn);
+    }
     const quotes = [
         'If you where any animal, what would you be and why?',
         'iPhone or Android ',

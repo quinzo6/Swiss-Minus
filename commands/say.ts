@@ -1,10 +1,21 @@
 import Discord, {Client, Message, TextChannel} from "discord.js";
+import {getSetting} from "../index";
 
 export let name = 'say';
 export let description = 'Says a message!';
 export let usage = '[channel] [message]';
 
 export async function execute(client: Client, message: Message, args: string[]) {
+    const on = await getSetting("say") === "on";
+    if(!on) {
+        const notOn = new Discord.RichEmbed();
+        notOn
+            .setTitle(message.author.tag)
+            .setAuthor(message.author.tag, message.author.avatarURL)
+            .setColor('#4DF8E8')
+            .addField("I'm Not On!", 'This command it turned off! Please ask a mod or admin to turn it back on!');
+        return await message.channel.send(notOn);
+    }
     const mentionedChannel = message.mentions.channels.first() || client.channels.get(args[0]) as TextChannel;
     const mod = message.member.hasPermission("MANAGE_ROLES") || (message.author.id === "660238973943152707")
     if (!mod) {
