@@ -1,5 +1,9 @@
   {
-    "mod": false,
+    "mod": "off",
     "prefix": "!",
-    "whois": "on"
+    "whois": "on",
+    "topic": "on",
+    "say": "on",
+    "meme": "on",
+    "bot": "on"
   }

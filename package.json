@@ -44,5 +44,6 @@
     "eslint-plugin-node": "^11.0.0",
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5"
-  }
+  },
+  "description": ""
 }
