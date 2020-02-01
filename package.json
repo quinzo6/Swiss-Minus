@@ -7,7 +7,7 @@
     "npm": "6.12.0"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.ts",
     "build": "tsc",
     "dev": "cross-env NODE_ENV=dev ts-node ."
   },
@@ -29,13 +29,13 @@
   "dependencies": {
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
-    "pg": "^7.17.1",
+    "pg": "^7.18.1",
     "random-puppy": "^1.1.0",
     "translate": "^1.1.1",
     "urban-dictionary": "^2.2.1"
   },
   "devDependencies": {
-    "@types/node": "^13.1.8",
+    "@types/node": "^13.7.0",
     "@types/pg": "^7.14.1",
     "cross-env": "^6.0.3",
     "eslint": "^6.8.0",
