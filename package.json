@@ -1,6 +1,6 @@
 {
   "name": "swiss-plus",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "main": "index.ts",
   "engines": {
     "node": "12.13.0",
@@ -45,5 +45,9 @@
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5"
   },
-  "description": ""
+  "description": "",
+  "private": true,
+  "license": "UNLICENSED",
+  "ejectUnauthorized": false
+
 }
