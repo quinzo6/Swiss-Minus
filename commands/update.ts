@@ -24,5 +24,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
         .setTimestamp()
         .setColor('#4DF8E8')
     let betaChannel = client.channels.get('665372860885499939') as TextChannel;
-    return betaChannel.send(embed)
+    betaChannel.send(embed)
+    let mainChanel = client.channels.get('665520384044695563') as TextChannel;
+    return mainChanel.send(embed)
 }
