@@ -1,4 +1,7 @@
 import Discord, {Client, Message} from "discord.js";
+import {swiss_blue} from "../config";
+import {error_red} from "../config"
+
 
 export let name = "8ball";
 export let description = "Fortune Teller.";
@@ -18,7 +21,7 @@ export async function execute(client: Client, message: Message, _args: string[])
     const embed = new Discord.RichEmbed()
         .setAuthor(message.author.tag, message.author.avatarURL)
         .setTitle('8Ball')
-        .setColor('4DF8E8')
+        .setColor(swiss_blue)
         .addField('Fortune:', randomOption);
     await message.channel.send(embed);
 }

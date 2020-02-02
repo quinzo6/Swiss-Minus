@@ -1,5 +1,7 @@
 import Discord, {Client, Message} from "discord.js";
 import {getSetting} from "../index";
+import {swiss_blue} from "../config";
+import {error_red} from "../config"
 
 export let name = 'help';
 export let description = 'List all of my commands or info about a specific command.';
@@ -17,7 +19,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
         const cmds = commands.map((command) => command.name).join(', ');
         const helpEmbed = new Discord.RichEmbed()
             .setTitle('Help!')
-            .setColor('#4DF8E8')
+            .setColor(swiss_blue)
             .setAuthor(message.author.tag, message.author.avatarURL)
             .addField('Commands:', `${cmds}`)
             .addField('Tip:', `You can send \`${await getSetting('prefix')}help [command name]\` to get info on a specific command!`);
@@ -30,7 +32,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
                 const embed = new Discord.RichEmbed()
                     .setTitle('Error!')
                     .setAuthor(message.author.tag, message.author.avatarURL)
-                    .setColor('#F90B0B')
+                    .setColor(error_red)
                     .setTitle('Error')
                     .setDescription('Unable to send you a dmd with my commands! This may be because your dms are turned off. Please try again later.')
                     .addField('Error:', error);
@@ -47,7 +49,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
         nValidComm
             .setTitle('Error!')
             .setAuthor(message.author.tag, message.author.avatarURL)
-            .setColor('#E80C0C')
+            .setColor(error_red)
             .addField('Invalid Command!', 'The Command you put in is invalid!');
         return message.reply(nValidComm);
     }

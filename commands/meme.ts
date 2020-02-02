@@ -2,6 +2,10 @@ import Discord, {Client, Message, TextChannel} from "discord.js";
 import randomPuppy from "random-puppy";
 const subreddits = require('./subreddits.json');
 import {getSetting} from "../index";
+import {swiss_blue} from "../config";
+import {error_red} from "../config"
+import {log_yellow} from "../config"
+
 
 
 export let name = "meme";
@@ -15,7 +19,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
         notOn
             .setTitle(message.author.tag)
             .setAuthor(message.author.tag, message.author.avatarURL)
-            .setColor('#4DF8E8')
+            .setColor(error_red)
             .addField("I'm Not On!", 'This command it turned off! Please ask a mod or admin to turn it back on!');
         return await message.channel.send(notOn);
     }
@@ -26,17 +30,17 @@ export async function execute(client: Client, message: Message, args: string[]) 
     if (!args[0]) {
       const img = await randomPuppy(random);
       const embed = new Discord.RichEmbed()
-        .setColor('#4DF8E8')
+        .setColor(swiss_blue)
         .setImage(img)
         .setAuthor(message.author.tag, message.author.avatarURL)
         .setTitle(`From /r/${random}`)
         .setURL(`https://reddit.com/r/${random}`)
-        .setColor('#4DF8E8');
+        .setColor(swiss_blue);
       await message.channel.send(embed);
     } else if (args[0] === 'add' && args[1] && !args[2]) {
       const whoAdded = new Discord.RichEmbed();
       whoAdded
-        .setColor('#4DF8E8')
+        .setColor(log_yellow)
         .setTitle(message.author.tag)
         .setAuthor(message.author.tag, message.author.avatarURL)
         .addField('The SubReddit was suggested by:', `<@${message.author.id}>  ${message.author.tag}`)
@@ -46,7 +50,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
       confirm
         .setAuthor(message.author.tag, message.author.avatarURL)
         .setTitle(message.author.tag)
-        .setColor('$4DF8E8')
+        .setColor(swiss_blue)
         .addField('I got it!', `I got your subreddit of ${args[1]}! will be reviewed by the staff team`);
       message.channel.send(confirm);
     } else if (args[2]) {
@@ -54,7 +58,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
       wohh
         .setTitle(message.author.tag)
         .setAuthor(message.author.tag, message.author.avatarURL)
-        .setColor('#4DF8E8')
+        .setColor(swiss_blue)
         .addField('To many items, ahhhh', 'Hey buddy, either you put a extra space or your drunk. Use _ instead of spaces for SubReddit names, thanks');
     }
 }

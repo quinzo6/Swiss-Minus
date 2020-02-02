@@ -6,7 +6,7 @@ import Discord, {
 import {
     version
 } from '../package.json'
-
+import {swiss_blue} from "../config";
 
 export let name = 'update';
 export let description = 'Provides a changelog message for the test server';
@@ -22,7 +22,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
         .setDescription(description)
         .setFooter(version)
         .setTimestamp()
-        .setColor('#4DF8E8')
+        .setColor(swiss_blue)
     let betaChannel = client.channels.get('665372860885499939') as TextChannel;
     betaChannel.send(embed)
     let mainChanel = client.channels.get('665520384044695563') as TextChannel;

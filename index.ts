@@ -71,7 +71,6 @@ client.on('message', async (message) => {
       .setDescription("This command can't be used in direct messages!");
     return await message.channel.send(embed);
   }
-
   if (command.args && !args.length) {
     const embed = new Discord.RichEmbed()
       .setTitle('Argument')
@@ -134,5 +133,9 @@ client.login(process.env.token).then(async _token => {
 
 export async function getSetting(name: string) {
   const res = await db.query("SELECT value FROM settings WHERE name = $1", [name]);
+  return res.rows[0].value;
+}
+export async function getColor(colorname: string) {
+  const res = await db.query("SELECT colorhex FROM color WHERE colorname = $1", [colorname]);
   return res.rows[0].value;
 }

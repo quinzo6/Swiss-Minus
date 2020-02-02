@@ -108,3 +108,5 @@ dist
 .eslintrc.json
 .env
 .DS_Store
+launch.json
+.vscode

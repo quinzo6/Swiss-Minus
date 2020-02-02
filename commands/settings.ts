@@ -1,5 +1,6 @@
 import {Client, Message, RichEmbed} from "discord.js";
 import {Client as PgClient} from "pg";
+import {swiss_blue} from "../config";
 
 export let name = 'settings';
 export let description = 'Shows or changes settings';
@@ -14,7 +15,7 @@ export async function execute(client: Client, message: Message, args: string[], 
 
         const embed = new RichEmbed()
             .setTitle("Settings")
-            .setColor('#4DF8E8')
+            .setColor(swiss_blue)
             .setAuthor(client.user.tag, client.user.displayAvatarURL)
             .setTimestamp();
         for (let row of rows) {

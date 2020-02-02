@@ -1,5 +1,7 @@
 import Discord, {Client, Message} from "discord.js";
 import {getSetting} from "../index";
+import {swiss_blue} from "../config";
+import {error_red} from "../config"
 
 export let name = 'whois';
 export let description = 'Gets info about a user';
@@ -14,7 +16,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
         notOn
             .setTitle(message.author.tag)
             .setAuthor(message.author.tag, message.author.avatarURL)
-            .setColor('#4DF8E8')
+            .setColor(error_red)
             .addField("I'm Not On!", 'This command it turned off! Please ask a mod or admin to turn it back on!');
         return await message.channel.send(notOn);
     }
@@ -28,7 +30,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .setThumbnail(message.author.avatarURL)
             .setTitle(message.author.tag)
             .setAuthor(message.author.tag, message.author.avatarURL)
-            .setColor('#4DF8E8')
+            .setColor(swiss_blue)
             .addField('ID:', message.author.id)
             .addField('Username:', message.author.tag)
             .addField('Roles:', roles)
@@ -46,7 +48,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .setThumbnail(whoisUser.user.avatarURL)
             .setTitle(whoisUser.user.tag)
             .setAuthor(message.author.tag, message.author.avatarURL)
-            .setColor('#4DF8E8')
+            .setColor(swiss_blue)
             .addField('ID:', whoisUser.id)
             .addField('Username:', whoisUser.user.username)
             .addField('Roles:', roles1) // Says undefined

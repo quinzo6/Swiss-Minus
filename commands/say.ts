@@ -1,5 +1,7 @@
 import Discord, {Client, Message, TextChannel} from "discord.js";
 import {getSetting} from "../index";
+import {error_red} from "../config"
+import {log_yellow} from "../config"
 
 export let name = 'say';
 export let description = 'Says a message!';
@@ -12,7 +14,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
         notOn
             .setTitle(message.author.tag)
             .setAuthor(message.author.tag, message.author.avatarURL)
-            .setColor('#4DF8E8')
+            .setColor(error_red)
             .addField("I'm Not On!", 'This command it turned off! Please ask a mod or admin to turn it back on!');
         return await message.channel.send(notOn);
     }
@@ -22,7 +24,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
         const embed = new Discord.RichEmbed()
             .setAuthor(message.author.tag, message.author.avatarURL)
             .setTitle('Missing Permissions')
-            .setColor('#F90B0B')
+            .setColor(error_red)
             .addField('Missing Perms!', `Hey ${message.author}, you are missing permissions to use this command.`);
         return message.channel.send(embed);
     }
@@ -38,7 +40,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
         const embed = new Discord.RichEmbed()
             .setAuthor(message.author.tag, message.author.avatarURL)
             .setTitle('Error!')
-            .setColor('#F90B0B')
+            .setColor(error_red)
             .addField('I think you forgot something', 'Your forgot what you wanted to say! Think deeper');
         return message.channel.send(embed);
     }
@@ -46,7 +48,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
     const embed = new Discord.RichEmbed()
         .setAuthor(message.author.tag, message.author.avatarURL)
         .setTitle('Say Cmd Log')
-        .setColor('#F5AA42')
+        .setColor(log_yellow)
         .addField('This person used the command!:', `<@${message.author.id}>`)
         .addField('The message was:', messages1);
     const chl = client.channels.get('668987003517534259') as TextChannel;
