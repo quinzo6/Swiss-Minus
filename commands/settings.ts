@@ -6,6 +6,7 @@ export let name = 'settings';
 export let description = 'Shows or changes settings';
 export let aliases = ['Settings', 'setting', 'Setting'];
 export let usage = '[settings] <name> <value>';
+export let guildOnly = true
 
 export async function execute(client: Client, message: Message, args: string[], db: PgClient) {
     const mod = message.member.hasPermission("MUTE_MEMBERS");

@@ -6,6 +6,7 @@ import {log_yellow} from "../config"
 export let name = 'say';
 export let description = 'Says a message!';
 export let usage = '[channel] [message]';
+export let guildOnly = true
 
 export async function execute(client: Client, message: Message, args: string[]) {
     const on = await getSetting("say") === "on";

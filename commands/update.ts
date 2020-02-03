@@ -11,6 +11,7 @@ import {swiss_blue} from "../config";
 export let name = 'update';
 export let description = 'Provides a changelog message for the test server';
 export let usage = '[Version Name] [Description]';
+export let guildOnly = true
 
 export async function execute(client: Client, message: Message, args: string[]) {
     if (message.author.id !== '660238973943152707') return

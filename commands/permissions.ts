@@ -8,6 +8,7 @@ export let description = 'Check the permissions of a user';
 export let aliases = ['Permissions', 'perms', 'Perms', 'p', 'P'];
 export let usage = 'user';
 export let cooldown = 5;
+export let guildOnly = true
 
 export async function execute(client: Client, message: Message, args: string[]) {
     const permMentioned = message.mentions.members.first() || message.guild.members.get(args[0]);
