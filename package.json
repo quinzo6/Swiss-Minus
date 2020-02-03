@@ -1,6 +1,6 @@
 {
   "name": "swiss-plus",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "main": "index.ts",
   "engines": {
     "node": "12.13.0",
@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node index.ts",
     "build": "tsc",
-    "dev": "cross-env NODE_ENV=dev ts-node ."
+    "dev": "cross-env NODE_ENV=dev ts-node-dev ."
   },
   "heroku-run-build-script": true,
   "repository": {
@@ -39,14 +39,14 @@
     "cross-env": "^6.0.3",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^11.0.0",
     "ts-node": "^8.6.2",
+    "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.7.5"
   },
   "description": "",
   "private": true,
   "license": "UNLICENSED",
   "ejectUnauthorized": false
-
 }
