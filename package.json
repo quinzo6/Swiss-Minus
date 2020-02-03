@@ -1,6 +1,6 @@
 {
   "name": "swiss-plus",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "main": "index.ts",
   "engines": {
     "node": "12.13.0",
@@ -9,7 +9,9 @@
   "scripts": {
     "start": "node index.ts",
     "build": "tsc",
-    "dev": "cross-env NODE_ENV=dev ts-node-dev ."
+    "dev": "cross-env NODE_ENV=dev ts-node-dev .",
+    "debug": "cross-env NODE_ENV=dev ts-node-dev ."
+
   },
   "heroku-run-build-script": true,
   "repository": {
@@ -26,6 +28,7 @@
   },
   "homepage": "https://github.com/carterdacat/Swiss-Plus",
   "dependencies": {
+    "better-sqlite3": "^5.4.3",
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
     "pg": "^7.18.1",
@@ -47,6 +50,5 @@
   },
   "description": "",
   "private": true,
-  "license": "UNLICENSED",
-  "rejectUnauthorized": false
+  "license": "UNLICENSED"
 }

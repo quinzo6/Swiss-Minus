@@ -36,6 +36,13 @@ for (const file of commandFiles) {
 const cooldowns: Collection<string, Collection<string, number>> = new Discord.Collection();
 
 client.on('message', async (message) => {
+  if((Math.floor(Math.random() * 10)) === 3 && message.channel.type === 'text') {var plusMoney = 1} else{var plusMoney = 0}
+  if(plusMoney === 1){ 
+    let randomMoney = Math.floor(Math.random() * 25)
+    const idCheck = await db.query('UPDATE money SET balance = balance + $2 WHERE id = $1', [message.author.id, randomMoney]);
+    if(idCheck.rowCount === 0) await db.query("INSERT INTO money VALUES ($1,$2)", [message.author.id, randomMoney])
+    let paycheck = new Discord.RichEmbed()
+  }
   if((message.channel as TextChannel).parentID=== "606557115758411807") return
   const prefix = dev ? '?' : await getSetting('prefix');
   if (message.isMentioned(client.user.id)) {
