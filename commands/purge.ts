@@ -16,7 +16,7 @@ export let cooldown = 5;
 export async function execute(client: Client, message: Message, args: string[]) {
   const mentionedChannel = message.mentions.channels.first() || client.channels.get(args[0]) as TextChannel;
   const messagesDelete = parseInt(args[0])
-  const mod = message.member.hasPermission("MANAGE_ROLES")
+  const mod = message.member.hasPermission("MANAGE_MESSAGES")
   if (!mod) {
     const noPerms = new Discord.RichEmbed();
     noPerms
