@@ -1,7 +1,20 @@
-import Discord, {Client, Message} from "discord.js";
-import {getSetting} from "../index";
-import {swiss_blue} from "../config";
-import {error_red} from "../config"
+import Discord, {
+    Client,
+    Message
+} from "discord.js";
+import {
+    getSetting
+} from "../index";
+import {
+    swiss_blue
+} from "../config";
+import {
+    error_red
+} from "../config"
+import {
+    version
+} from '../package.json'
+
 
 export let name = 'topic';
 export let description = 'Gets a random chat topic, if the chat is dying!';
@@ -9,7 +22,7 @@ export let aliases = ['Topic', 't', 'T'];
 
 export async function execute(client: Client, message: Message, args: string[]) {
     const on = await getSetting("topic") === "on";
-    if(!on) {
+    if (!on) {
         const notOn = new Discord.RichEmbed();
         notOn
             .setTitle(message.author.tag)
@@ -36,6 +49,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
         .setTitle('')
         .setAuthor(message.author.tag, message.author.avatarURL)
         .setColor(swiss_blue)
-        .addField('**Topic:**', q);
+        .addField('**Topic:**', q).setFooter(version)
+        .setTimestamp()
     await message.channel.send(embed);
 }

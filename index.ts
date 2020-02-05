@@ -2,10 +2,10 @@
 /* eslint-disable global-require */
 import fs from "fs";
 import Discord, {Collection, TextChannel, Emoji, Message, RichEmbed} from "discord.js";
-import {Client as PgClient} from "pg";
+QOLimport {Client as PgClient} from "pg";
 import { config as dotenv_config } from "dotenv";
 import { version } from './package.json'
-import { swiss_blue, log_yellow } from "./config";
+import { swiss_blue, log_yellow, error_red } from "./config";
 
 dotenv_config();
 
@@ -73,7 +73,7 @@ client.on('message', async (message) => {
     const embed = new Discord.RichEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL)
       .setTitle('Prefix')
-      .setColor('#4DF8E8')
+      .setColor(swiss_blue)
       .addField('Prefix', ` <@${message.author.id}>, Looks like you forgot my prefix. **My Prefix is: ${prefix}**.`);
     return await message.channel.send(embed);
   }
@@ -89,7 +89,7 @@ client.on('message', async (message) => {
     const embed = new Discord.RichEmbed()
       .setTitle('Invalid Command!')
       .setAuthor(message.author.tag, message.author.avatarURL)
-      .setColor('#E80C0C')
+      .setColor(error_red)
       .addField('Invalid Command!', `Hey ${message.author}, That doesn't seem to be a command!`);
     return await message.channel.send(embed);
   }
@@ -98,7 +98,7 @@ client.on('message', async (message) => {
     const embed = new Discord.RichEmbed()
       .setTitle('Error')
       .setAuthor(message.author.tag, message.author.avatarURL)
-      .setColor('#E80C0C')
+      .setColor(error_red)
       .setDescription("This command can't be used in direct messages!");
     return await message.channel.send(embed);
   }
@@ -106,7 +106,7 @@ client.on('message', async (message) => {
     const embed = new Discord.RichEmbed()
       .setTitle('Argument')
       .setAuthor(message.author.tag, message.author.avatarURL)
-      .setColor('#E80C0C')
+      .setColor(error_red)
       .addField('Error', "You didn't provide any arguments!");
     if (command.usage) {
       const pUsage = `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
@@ -133,7 +133,7 @@ client.on('message', async (message) => {
         .setAuthor(message.author.tag, message.author.avatarURL)
         .setTitle('Cooldown has Not finished')
         .addField('Error', `Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`)
-        .setColor('#E80C0C');
+        .setColor(error_red);
       return message.channel.send(timeOut);
     }
   }
@@ -151,7 +151,7 @@ client.on('message', async (message) => {
     err
       .setAuthor(message.author.tag, message.author.avatarURL)
       .setTitle('An Error Occurred')
-      .setColor('#E80C0C')
+      .setColor(error_red)
       .addField('Attention!', `Hey, <@${userMen}>`)
       .addField('Error', `A error occurred. Error: ${error}`);
     return await message.channel.send(err);

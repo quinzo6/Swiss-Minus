@@ -1,17 +1,30 @@
-import Discord, {Client, Message} from "discord.js";
-import {getSetting} from "../index";
-import {swiss_blue} from "../config";
-import {error_red} from "../config"
+import Discord, {
+    Client,
+    Message
+} from "discord.js";
+import {
+    getSetting
+} from "../index";
+import {
+    swiss_blue
+} from "../config";
+import {
+    error_red
+} from "../config"
 
 export let name = 'whois';
 export let description = 'Gets info about a user';
 export let aliases = ['Whois'];
 export let usage = '[user]';
 export let cooldown = 5;
+import {
+    version
+} from '../package.json'
+
 
 export async function execute(client: Client, message: Message, args: string[]) {
     const on = await getSetting("whois") === "on";
-    if(!on) {
+    if (!on) {
         const notOn = new Discord.RichEmbed();
         notOn
             .setTitle(message.author.tag)
@@ -24,7 +37,9 @@ export async function execute(client: Client, message: Message, args: string[]) 
     const whoisUser = message.mentions.members.first() || message.guild.members.get(args[0]);
     if (!whoisUser) {
         const roles = message.member.roles.map((r) => r).join(',');
-        const {highestRole} = message.member;
+        const {
+            highestRole
+        } = message.member;
         const whois = new Discord.RichEmbed();
         whois
             .setThumbnail(message.author.avatarURL)
@@ -37,7 +52,9 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .addField('Highest Role:', highestRole)
             .addField('Account Created on:', message.author.createdAt)
             .addField('Joined on:', message.member.joinedAt)
-            .addField('Presence:', message.author.presence.status);
+            .addField('Presence:', message.author.presence.status)
+            .setFooter(version)
+            .setTimestamp()
         await message.channel.send(whois);
     }
     if (whoisUser) {
@@ -55,7 +72,9 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .addField('Highest Role:', highestRole1) // says undefined
             .addField('Account Created On:', whoisUser.user.createdAt)
             .addField('Joined The Server on:', whoisUser.joinedAt) // says undefined
-            .addField('Pressence:', whoisUser.user.presence.status); // says [object Object]
+            .addField('Pressence:', whoisUser.user.presence.status) // says [object Object]
+            .setFooter(version)
+            .setTimestamp()
         await message.channel.send(whois1);
     }
 }

@@ -1,7 +1,16 @@
-import Discord, {Client, Message} from "discord.js";
-import {swiss_blue} from "../config";
-import {error_red} from "../config"
-
+import Discord, {
+    Client,
+    Message
+} from "discord.js";
+import {
+    swiss_blue
+} from "../config";
+import {
+    error_red
+} from "../config"
+import {
+    version
+} from '../package.json'
 
 export let name = "8ball";
 export let description = "Fortune Teller.";
@@ -22,6 +31,8 @@ export async function execute(client: Client, message: Message, _args: string[])
         .setAuthor(message.author.tag, message.author.avatarURL)
         .setTitle('8Ball')
         .setColor(swiss_blue)
-        .addField('Fortune:', randomOption);
+        .addField('Fortune:', randomOption)
+        .setFooter(version)
+        .setTimestamp()
     await message.channel.send(embed);
 }

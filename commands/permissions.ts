@@ -1,6 +1,8 @@
 import Discord, {Client, Message} from "discord.js";
 import {swiss_blue} from "../config";
 import {error_red} from "../config"
+import { version } from '../package.json'
+
 
 
 export let name = 'permissions';
@@ -18,7 +20,9 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .setTitle('Error')
             .setAuthor(message.author.tag, message.author.avatarURL)
             .setColor(error_red)
-            .addField('Error', 'You didnt mention who you wanted to view permissions of!');
+            .addField('Error', 'You didnt mention who you wanted to view permissions of!')
+            .setFooter(version)
+            .setTimestamp()
         await message.channel.send(permNoMentionedEmbed);
     } else {
         const permEmbed = new Discord.RichEmbed();
@@ -26,7 +30,9 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .setTitle('Permissions')
             .setAuthor(message.author.tag, message.author.avatarURL)
             .setColor(swiss_blue)
-            .addField('Permissions:', permMentioned.permissions.toArray().join(' , '));
+            .addField('Permissions:', permMentioned.permissions.toArray().join(' , '))
+            .setFooter(version)
+            .setTimestamp()
         await message.channel.send(permEmbed);
     }
 }

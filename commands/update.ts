@@ -6,7 +6,10 @@ import Discord, {
 import {
     version
 } from '../package.json'
-import {swiss_blue} from "../config";
+import {
+    swiss_blue
+} from "../config";
+
 
 export let name = 'update';
 export let description = 'Provides a changelog message for the test server';

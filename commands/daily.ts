@@ -4,6 +4,10 @@ import Discord, {
     RichEmbed,
     DiscordAPIError
 } from "discord.js";
+
+import {
+    version
+} from '../package.json'
 import {
     Client as PgClient
 } from "pg";
@@ -24,42 +28,43 @@ export async function execute(client: Client, message: Message, args: string[], 
     const Time = (await db.query('SELECT daily FROM cards WHERE id = $1', [message.author.id])).rows[0].daily
     const subtractedTime: Number = (await db.query('SELECT (EXTRACT(EPOCH FROM current_timestamp - $1)/3600)::Integer AS sub', [Time])).rows[0].sub
     if (subtractedTime === undefined || subtractedTime >= 24 || subtractedTime === null) {
-    
-    let ranChest: Number = Math.random()
-    if (ranChest < 0.5 || ranChest >= 0.96875) {
-        await db.query('UPDATE cards SET common = common + 1 WHERE id = $1', [message.author.id])
-        await db.query('UPDATE cards SET daily = current_timestamp WHERE id = $1', [message.author.id])
-        return message.author.send('You recived a common crate for your daily reward!')
+
+        let ranChest: Number = Math.random()
+        if (ranChest < 0.5 || ranChest >= 0.96875) {
+            await db.query('UPDATE cards SET common = common + 1 WHERE id = $1', [message.author.id])
+            await db.query('UPDATE cards SET daily = current_timestamp WHERE id = $1', [message.author.id])
+            return message.author.send('You recived a common crate for your daily reward!')
+        }
+        if (ranChest >= 0.5 && ranChest < 0.75) {
+            await db.query('UPDATE cards SET rare = rare + 1 WHERE id = $1', [message.author.id])
+            await db.query('UPDATE cards SET daily = current_timestamp WHERE id = $1', [message.author.id])
+            return message.author.send('You recived a rare crate for your daily reward!')
+        }
+        if (ranChest >= .75 && ranChest < 0.875) {
+            await db.query('UPDATE cards SET jumbo = jumbo + 1 WHERE id = $1', [message.author.id])
+            await db.query('UPDATE cards SET daily = current_timestamp WHERE id = $1', [message.author.id])
+            return message.author.send('You recived a jumbo crate for your daily reward!')
+        }
+        if (ranChest >= 0.875 && ranChest < 0.9375) {
+            await db.query('UPDATE cards SET ultra = ultra + 1 WHERE id = $1', [message.author.id])
+            await db.query('UPDATE cards SET daily = current_timestamp WHERE id = $1', [message.author.id])
+            return message.author.send('You recived a common ultra for your daily reward!')
+        }
+        if (ranChest >= 0.9375 && ranChest < 0.96875) {
+            await db.query('UPDATE cards SET legendary = legdendary + 1 WHERE id = $1', [message.author.id])
+            await db.query('UPDATE cards SET daily = current_timestamp WHERE id = $1', [message.author.id])
+            return message.author.send('You recived a ledgendary crate for your daily reward!')
+        }
     }
-    if (ranChest >= 0.5 && ranChest < 0.75) {
-        await db.query('UPDATE cards SET rare = rare + 1 WHERE id = $1', [message.author.id])
-        await db.query('UPDATE cards SET daily = current_timestamp WHERE id = $1', [message.author.id])
-        return message.author.send('You recived a rare crate for your daily reward!')
-    }
-    if (ranChest >= .75 && ranChest < 0.875) {
-        await db.query('UPDATE cards SET jumbo = jumbo + 1 WHERE id = $1', [message.author.id])
-        await db.query('UPDATE cards SET daily = current_timestamp WHERE id = $1', [message.author.id])
-        return message.author.send('You recived a jumbo crate for your daily reward!')
-    }
-    if (ranChest >= 0.875 && ranChest < 0.9375) {
-        await db.query('UPDATE cards SET ultra = ultra + 1 WHERE id = $1', [message.author.id])
-        await db.query('UPDATE cards SET daily = current_timestamp WHERE id = $1', [message.author.id])
-        return message.author.send('You recived a common ultra for your daily reward!')
-    }
-    if (ranChest >= 0.9375 && ranChest < 0.96875) {
-        await db.query('UPDATE cards SET legendary = legdendary + 1 WHERE id = $1', [message.author.id])
-        await db.query('UPDATE cards SET daily = current_timestamp WHERE id = $1', [message.author.id])
-        return message.author.send('You recived a ledgendary crate for your daily reward!')
-    }
-}
-const waitTill = (await db.query('SELECT daily + interval \'24 hours\' AS time FROM cards WHERE id = $1', [message.author.id])).rows[0].time
-const timeTill: Number = (await db.query('SELECT (EXTRACT(EPOCH FROM $1 - current_timestamp)/3600)::Integer AS sub', [waitTill])).rows[0].sub
-let coolDown: RichEmbed = new Discord.RichEmbed()
-coolDown
-    .setTitle('Cooldown')
-    .setColor(error_red)
-    .setDescription(`Hey, your crate can't be delivered, try again in ${timeTill} hours!`)
-    .setTimestamp()
-return message.channel.send(coolDown)
+    const waitTill = (await db.query('SELECT daily + interval \'24 hours\' AS time FROM cards WHERE id = $1', [message.author.id])).rows[0].time
+    const timeTill: Number = (await db.query('SELECT (EXTRACT(EPOCH FROM $1 - current_timestamp)/3600)::Integer AS sub', [waitTill])).rows[0].sub
+    let coolDown: RichEmbed = new Discord.RichEmbed()
+    coolDown
+        .setTitle('Cooldown')
+        .setColor(error_red)
+        .setDescription(`Hey, your crate can't be delivered, try again in ${timeTill} hours!`)
+        .setFooter(version)
+        .setTimestamp()
+    return message.channel.send(coolDown)
 
 }

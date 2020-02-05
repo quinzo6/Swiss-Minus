@@ -1,7 +1,20 @@
-import Discord, {Client, Message} from "discord.js";
-import {getSetting} from "../index";
-import {swiss_blue} from "../config";
-import {error_red} from "../config"
+import Discord, {
+    Client,
+    Message
+} from "discord.js";
+import {
+    getSetting
+} from "../index";
+import {
+    swiss_blue
+} from "../config";
+import {
+    error_red
+} from "../config"
+import {
+    version
+} from '../package.json'
+
 
 export let name = 'help';
 export let description = 'List all of my commands or info about a specific command.';
@@ -11,7 +24,7 @@ export let cooldown = 5;
 
 export async function execute(client: Client, message: Message, args: string[]) {
     const {
-    // @ts-ignore
+        // @ts-ignore
         commands,
     } = message.client;
 
@@ -22,7 +35,9 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .setColor(swiss_blue)
             .setAuthor(message.author.tag, message.author.avatarURL)
             .addField('Commands:', `${cmds}`)
-            .addField('Tip:', `You can send \`${await getSetting('prefix')}help [command name]\` to get info on a specific command!`);
+            .addField('Tip:', `You can send \`${await getSetting('prefix')}help [command name]\` to get info on a specific command!`)
+            .setFooter(version)
+            .setTimestamp()
         return message.author.send(helpEmbed)
             .then(() => {
                 if (message.channel.type === 'dm') return;
@@ -35,7 +50,9 @@ export async function execute(client: Client, message: Message, args: string[]) 
                     .setColor(error_red)
                     .setTitle('Error')
                     .setDescription('Unable to send you a dmd with my commands! This may be because your dms are turned off. Please try again later.')
-                    .addField('Error:', error);
+                    .addField('Error:', error)
+                    .setFooter(version)
+                    .setTimestamp()
                 message.channel.send(embed);
             });
     }
@@ -50,7 +67,9 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .setTitle('Error!')
             .setAuthor(message.author.tag, message.author.avatarURL)
             .setColor(error_red)
-            .addField('Invalid Command!', 'The Command you put in is invalid!');
+            .addField('Invalid Command!', 'The Command you put in is invalid!')
+            .setFooter(version)
+            .setTimestamp()
         return message.reply(nValidComm);
     }
 
@@ -75,5 +94,8 @@ export async function execute(client: Client, message: Message, args: string[]) 
     }
     const cmdCoolDown = `${command.cooldown || 3} second(s)`;
     cmd.addField('Cooldown:', cmdCoolDown);
+    cmd
+        .setFooter(version)
+        .setTimestamp()
     return message.channel.send(cmd);
 }
