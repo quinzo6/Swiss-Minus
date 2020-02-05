@@ -2,7 +2,7 @@
 /* eslint-disable global-require */
 import fs from "fs";
 import Discord, {Collection, TextChannel, Emoji, Message, RichEmbed} from "discord.js";
-QOLimport {Client as PgClient} from "pg";
+import {Client as PgClient} from "pg";
 import { config as dotenv_config } from "dotenv";
 import { version } from './package.json'
 import { swiss_blue, log_yellow, error_red } from "./config";
