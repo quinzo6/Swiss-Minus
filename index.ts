@@ -1,11 +1,27 @@
 /* eslint-disable consistent-return */
 /* eslint-disable global-require */
 import fs from "fs";
-import Discord, {Collection, TextChannel, Emoji, Message, RichEmbed} from "discord.js";
-import {Client as PgClient} from "pg";
-import { config as dotenv_config } from "dotenv";
-import { version } from './package.json'
-import { swiss_blue, log_yellow, error_red } from "./config";
+import Discord, {
+  Collection,
+  TextChannel,
+  Emoji,
+  Message,
+  RichEmbed
+} from "discord.js";
+import {
+  Client as PgClient
+} from "pg";
+import {
+  config as dotenv_config
+} from "dotenv";
+import {
+  version
+} from './package.json'
+import {
+  swiss_blue,
+  log_yellow,
+  error_red
+} from "./config";
 
 dotenv_config();
 
@@ -28,58 +44,66 @@ const commandFiles = fs.readdirSync('./commands').filter((file) => file.endsWith
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
-  if(dev) {
+  if (dev) {
     console.log(`Loading in ${command.name}`);
   }
   //@ts-ignore
   client.commands.set(command.name, command);
 }
 
-const cooldowns: Collection<string, Collection<string, number>> = new Discord.Collection();
+const cooldowns: Collection < string, Collection < string, number >> = new Discord.Collection();
 client.on('emojiCreate', async (emoji: Emoji) => {
-    //let swissGeneral = client.channels.get('592463507124125706') as TextChannel
-    //let swissLogs = client.channels.get('592805129003073570') as TextChannel
-    let testlogs = client.channels.get('674624372170031145') as TextChannel
-    let emojigeneral = new Discord.RichEmbed() as RichEmbed
-    let emojilog = new Discord.RichEmbed() as RichEmbed
-    emojigeneral
+  let swissGeneral = client.channels.get('592463507124125706') as TextChannel
+  let swissLogs = client.channels.get('592805129003073570') as TextChannel
+  let testlogs = client.channels.get('674624372170031145') as TextChannel
+  let emojigeneral = new Discord.RichEmbed() as RichEmbed
+  let emojilog = new Discord.RichEmbed() as RichEmbed
+  emojigeneral
     .setImage(emoji.url)
     .setDescription('Ooo, a new emoji!')
     .setTimestamp()
     .setFooter(version)
     .setColor(swiss_blue)
-    //swissGeneral.send(emojigeneral)
-    emojilog
+  swissGeneral.send(emojigeneral)
+  emojilog
     .setDescription(`A emoji was added by <@${(await emoji.fetchAuthor()).id}>. Emoji ID: ${emoji.id}`)
     .setColor(log_yellow)
     .setFooter(version)
     .setTimestamp()
-    //swissLogs.send(emojilog)
-    return testlogs.send(emojilog) 
+  swissLogs.send(emojilog)
+  return testlogs.send(emojilog)
 })
 client.on('emojiDelete', async (emoji: Emoji) => {
-  // let swissLogs = client.channels.get('592805129003073570') as TextChannel
+  let swissLogs = client.channels.get('592805129003073570') as TextChannel
   let testlogs = client.channels.get('674624372170031145') as TextChannel
   let emojilog = new Discord.RichEmbed() as RichEmbed
+  const log = (await emoji.guild.fetchAuditLogs({
+    limit: 1,
+    type: 62
+  })).entries.first().executor.id
   emojilog
-  .setDescription(`A emoji was deleted.`)
-  .setColor(log_yellow)
-  .setFooter(version)
-  .setTimestamp()
-  // swissLogs.send(emojilog)
-  return testlogs.send(emojilog) 
+    .setDescription(`A emoji was deleted by <@${log}>.`)
+    .setColor(log_yellow)
+    .setFooter(version)
+    .setTimestamp()
+  swissLogs.send(emojilog)
+  return testlogs.send(emojilog)
 })
 
 
 client.on('message', async (message) => {
-  if((Math.floor(Math.random() * 10)) === 3 && message.channel.type === 'text') {var plusMoney = 1} else{var plusMoney = 0}
-  if(plusMoney === 1){ 
+  if ((Math.floor(Math.random() * 10)) === 3 && message.channel.type === 'text') {
+    var plusMoney = 1
+  } else {
+    var plusMoney = 0
+  }
+  if (plusMoney === 1) {
     let randomMoney = Math.floor(Math.random() * 25)
     const idCheck = await db.query('UPDATE money SET balance = balance + $2 WHERE id = $1', [message.author.id, randomMoney]);
-    if(idCheck.rowCount === 0) await db.query("INSERT INTO money VALUES ($1,$2)", [message.author.id, randomMoney])
+    if (idCheck.rowCount === 0) await db.query("INSERT INTO money VALUES ($1,$2)", [message.author.id, randomMoney])
     let paycheck = new Discord.RichEmbed()
   }
-  if((message.channel as TextChannel).parentID=== "606557115758411807") return
+  if ((message.channel as TextChannel).parentID === "606557115758411807") return
   const prefix = dev ? '?' : await getSetting('prefix');
   if (message.isMentioned(client.user.id)) {
     const embed = new Discord.RichEmbed()
