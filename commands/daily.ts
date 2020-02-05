@@ -22,13 +22,10 @@ export async function execute(client: Client, message: Message, args: string[], 
     const id = await db.query('SELECT id FROM cards WHERE id = $1', [message.author.id])
     if (id.rowCount === 0) await db.query('INSERT INTO cards (id, common, rare, jumbo, ultra, ledgendary) VALUES($1, 0, 0, 0, 0, 0)', [message.author.id])
     const Time = (await db.query('SELECT daily FROM cards WHERE id = $1', [message.author.id])).rows[0].daily
-    console.log(Time)
     const subtractedTime: Number = (await db.query('SELECT (EXTRACT(EPOCH FROM current_timestamp - $1)/3600)::Integer AS sub', [Time])).rows[0].sub
-    console.log(typeof subtractedTime)
     if (subtractedTime === undefined || subtractedTime >= 24 || subtractedTime === null) {
     
     let ranChest: Number = Math.random()
-    console.log(ranChest)
     if (ranChest < 0.5 || ranChest >= 0.96875) {
         await db.query('UPDATE cards SET common = common + 1 WHERE id = $1', [message.author.id])
         await db.query('UPDATE cards SET daily = current_timestamp WHERE id = $1', [message.author.id])
@@ -57,7 +54,6 @@ export async function execute(client: Client, message: Message, args: string[], 
 }
 const waitTill = (await db.query('SELECT daily + interval \'24 hours\' AS time FROM cards WHERE id = $1', [message.author.id])).rows[0].time
 const timeTill: Number = (await db.query('SELECT (EXTRACT(EPOCH FROM $1 - current_timestamp)/3600)::Integer AS sub', [waitTill])).rows[0].sub
-console.log(timeTill)
 let coolDown: RichEmbed = new Discord.RichEmbed()
 coolDown
     .setTitle('Cooldown')
