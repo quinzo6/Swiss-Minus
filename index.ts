@@ -50,7 +50,7 @@ client.on('emojiCreate', async (emoji: Emoji) => {
     .setColor(swiss_blue)
     swissGeneral.send(emojigeneral)
     emojilog
-    .setDescription(`A emoji was added by <@${(await emoji.fetchAuthor()).id}>. Emoji ID`)
+    .setDescription(`A emoji was added by <@${(await emoji.fetchAuthor()).id}>. Emoji ID: ${emoji.id}`)
     .setColor(log_yellow)
     .setFooter(version)
     .setTimestamp()
