@@ -195,8 +195,9 @@ client.on('message', async (message) => {
 });
 client.login(process.env.token).then(async _token => {
   console.log(`Ready as ${client.user.tag}`);
-  await client.user.setActivity(`Serving ${client.guilds.size} servers`);
-});
+  client.user.setActivity(`the ${version} update` , { type: 'WATCHING' })
+  .then()
+  .catch(console.error);});
 
 export async function getSetting(name: string) {
   const res = await db.query("SELECT value FROM settings WHERE name = $1", [name]);
