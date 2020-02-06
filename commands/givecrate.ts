@@ -87,6 +87,6 @@ export async function execute(client: Client, message: Message, args: string[], 
         .setTimestamp()
     const log1 = client.channels.get('674624372170031145') as TextChannel
     const log2 = client.channels.get('592805129003073570') as TextChannel
-    return log1.send(log)
+    log1.send(log)
     return log2.send(log)
 }
