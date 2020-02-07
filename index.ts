@@ -60,17 +60,11 @@ client.on('emojiCreate', async (emoji: Emoji) => {
   let emojilog = new Discord.RichEmbed() as RichEmbed
   emojigeneral
     .setImage(emoji.url)
-    .setDescription('Ooo, a new emoji!')
-    .setTimestamp()
-    .setFooter(version)
-    .setColor(swiss_blue)
-  swissGeneral.send(emojigeneral)
+    .setDescription('Ooo')
   emojilog
     .setDescription(`A emoji was added by <@${(await emoji.fetchAuthor()).id}>. Emoji ID: ${emoji.id}`)
     .setColor(log_yellow)
     .setFooter(version)
-    .setTimestamp()
-  swissLogs.send(emojilog)
   return testlogs.send(emojilog)
 })
 client.on('emojiDelete', async (emoji: Emoji) => {
@@ -85,8 +79,6 @@ client.on('emojiDelete', async (emoji: Emoji) => {
     .setDescription(`A emoji was deleted by <@${log}>.`)
     .setColor(log_yellow)
     .setFooter(version)
-    .setTimestamp()
-  swissLogs.send(emojilog)
   return testlogs.send(emojilog)
 })
 
