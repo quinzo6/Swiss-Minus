@@ -110,3 +110,4 @@ dist
 .DS_Store
 launch.json
 .vscode
+commands/test.ts
