@@ -26,9 +26,8 @@ import {
 dotenv_config();
 
 const dev = process.env.NODE_ENV === "dev";
-
-
-
+import planes from "./planes"
+const aplanes = Object.values(planes)
 const db = new PgClient({
   connectionString: dev ? process.env.dev_db_url : process.env.DATABASE_URL,
   ssl: true
@@ -36,7 +35,8 @@ const db = new PgClient({
 db.connect().then(_ => {
   console.log("Connected to database.")
 });
-
+let ok = 1
+console.log(aplanes[ok].name)
 const client = new Discord.Client();
 //@ts-ignore
 client.commands = new Discord.Collection();
@@ -50,7 +50,21 @@ for (const file of commandFiles) {
   //@ts-ignore
   client.commands.set(command.name, command);
 }
-
+let count: number
+let lengthe = aplanes.length
+console.log(lengthe)
+let i
+const forloop = async _ => {
+  for (count = 1; lengthe * 2 > (((await db.query("SELECT count(*) FROM information_schema.columns WHERE table_name = 'cards'")).rows[0].count - 8) as number); count ++){
+    let levels = planes[count].name + 'levels'
+    let counts = planes[count].name + 'count'
+    let textl = `ALTER TABLE cards ADD COLUMN IF NOT EXISTS ${levels} int`
+    let textc = `ALTER TABLE cards ADD COLUMN IF NOT EXISTS ${counts} int`
+    await db.query(textl)
+    await db.query(textc)
+  } 
+}
+forloop('_')
 const cooldowns: Collection < string, Collection < string, number >> = new Discord.Collection();
 client.on('emojiCreate', async (emoji: Emoji) => {
   let swissGeneral = client.channels.get('592463507124125706') as TextChannel
@@ -60,11 +74,17 @@ client.on('emojiCreate', async (emoji: Emoji) => {
   let emojilog = new Discord.RichEmbed() as RichEmbed
   emojigeneral
     .setImage(emoji.url)
-    .setDescription('Ooo')
+    .setDescription('Ooo, a new emoji!')
+    .setTimestamp()
+    .setFooter(version)
+    .setColor(swiss_blue)
+  swissGeneral.send(emojigeneral)
   emojilog
     .setDescription(`A emoji was added by <@${(await emoji.fetchAuthor()).id}>. Emoji ID: ${emoji.id}`)
     .setColor(log_yellow)
     .setFooter(version)
+    .setTimestamp()
+  swissLogs.send(emojilog)
   return testlogs.send(emojilog)
 })
 client.on('emojiDelete', async (emoji: Emoji) => {
@@ -79,22 +99,13 @@ client.on('emojiDelete', async (emoji: Emoji) => {
     .setDescription(`A emoji was deleted by <@${log}>.`)
     .setColor(log_yellow)
     .setFooter(version)
+    .setTimestamp()
+  swissLogs.send(emojilog)
   return testlogs.send(emojilog)
 })
 
 
 client.on('message', async (message) => {
-  if ((Math.floor(Math.random() * 10)) === 3 && message.channel.type === 'text') {
-    var plusMoney = 1
-  } else {
-    var plusMoney = 0
-  }
-  if (plusMoney === 1) {
-    let randomMoney = Math.floor(Math.random() * 25)
-    const idCheck = await db.query('UPDATE money SET balance = balance + $2 WHERE id = $1', [message.author.id, randomMoney]);
-    if (idCheck.rowCount === 0) await db.query("INSERT INTO money VALUES ($1,$2)", [message.author.id, randomMoney])
-    let paycheck = new Discord.RichEmbed()
-  }
   if ((message.channel as TextChannel).parentID === "606557115758411807") return
   const prefix = dev ? '?' : await getSetting('prefix');
   if (message.isMentioned(client.user.id)) {
@@ -171,6 +182,14 @@ client.on('message', async (message) => {
 
   try {
     command.execute(client, message, args, db);
+    let embed = new Discord.RichEmbed as RichEmbed
+    embed
+    .setColor(log_yellow)
+    .setDescription(`The command ${commandName} was used by <@${message.author.id}>. The whole message was ${message}`)
+    .setTimestamp()
+    .setFooter(version)
+    let channel = client.channels.get('677356042723524608') as TextChannel
+    channel.send(embed)
   } catch (error) {
     const userMen = message.author.id;
     // eslint-disable-next-line no-console
