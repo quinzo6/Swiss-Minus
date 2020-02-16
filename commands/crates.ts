@@ -22,6 +22,7 @@ import {
 
 export let name = 'crates'
 export let description = 'Collect your daily crate!';
+export let usage = '<open> <crate type>'
 
 export async function execute(client: Client, message: Message, args: string[], db: PgClient) {
     const aplanes = Object.values(planes)
@@ -58,6 +59,9 @@ export async function execute(client: Client, message: Message, args: string[], 
         message.author.send(cards)
     }
     if (args[0] === "open" || args[1] === "Open") {
+        if(!args[1]){
+            message.channel.send('You need to open something')
+        }
         let commonss = aplanes.filter(planes => planes.rarity === 'common').map(m => m.name)
         let raress = aplanes.filter(planes => planes.rarity === 'rare').map(m => m.name)
         let epicss = aplanes.filter(planes => planes.rarity === 'epic').map(m => m.name)
