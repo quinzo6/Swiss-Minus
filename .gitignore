@@ -111,3 +111,4 @@ dist
 launch.json
 .vscode
 commands/test.ts
+commands/test.js.tg

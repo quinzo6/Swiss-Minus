@@ -58,7 +58,6 @@ export async function execute(client: Client, message: Message, args: string[], 
             .setTimestamp()
         return message.channel.send(embed)
     }
-    console.log(typeof type)
     if (type === 'common') await db.query('UPDATE cards SET common = common + 1 WHERE id = $1', [message.author.id])
     if (type === 'rare') await db.query('UPDATE cards SET rare = rare + 1 WHERE id = $1', [message.author.id])
     if (type === 'jumbo') await db.query('UPDATE cards SET jumbo = jumbo + 1 WHERE id = $1', [message.author.id])

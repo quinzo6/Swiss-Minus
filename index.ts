@@ -53,7 +53,6 @@ for (const file of commandFiles) {
 let count: number
 let lengthe = aplanes.length
 console.log(lengthe)
-let i
 const forloop = async _ => {
   for (count = 1; lengthe * 2 > (((await db.query("SELECT count(*) FROM information_schema.columns WHERE table_name = 'cards'")).rows[0].count - 8) as number); count ++){
     let levels = planes[count].name + 'levels'

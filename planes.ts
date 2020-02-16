@@ -125,13 +125,14 @@ export = {
     url: ""
   },
   26: {
-    name: "Boeing_747-8",
+    name: "Boeing_747_8",
     rarity: "ledgendary",
     url: ""
   },
   27: {
-    name: "Swiss 001",
+    name: "Swiss_001",
     rarity: "ledgendary",
     url: ""
   }
 }
+
