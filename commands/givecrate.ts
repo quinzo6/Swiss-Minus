@@ -58,11 +58,11 @@ export async function execute(client: Client, message: Message, args: string[], 
             .setTimestamp()
         return message.channel.send(embed)
     }
-    if (type === 'common') await db.query('UPDATE cards SET common = common + 1 WHERE id = $1', [message.author.id])
-    if (type === 'rare') await db.query('UPDATE cards SET rare = rare + 1 WHERE id = $1', [message.author.id])
-    if (type === 'jumbo') await db.query('UPDATE cards SET jumbo = jumbo + 1 WHERE id = $1', [message.author.id])
-    if (type === 'ultra') await db.query('UPDATE cards SET ultra = ultra + 1 WHERE id = $1', [message.author.id])
-    if (type === 'ledgendary') await db.query('UPDATE cards SET ledgendary = ledgendary + 1 WHERE id = $1', [message.author.id])
+    if (type === 'common') await db.query('UPDATE cards SET common = common + 1 WHERE id = $1', [whoisUser.id])
+    if (type === 'rare') await db.query('UPDATE cards SET rare = rare + 1 WHERE id = $1', [whoisUser.id])
+    if (type === 'jumbo') await db.query('UPDATE cards SET jumbo = jumbo + 1 WHERE id = $1', [whoisUser.id])
+    if (type === 'ultra') await db.query('UPDATE cards SET ultra = ultra + 1 WHERE id = $1', [whoisUser.id])
+    if (type === 'ledgendary') await db.query('UPDATE cards SET ledgendary = ledgendary + 1 WHERE id = $1', [whoisUser.id])
     let embed1 = new Discord.RichEmbed()
     embed1
         .setDescription('I added the crate!')

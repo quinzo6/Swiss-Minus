@@ -16,24 +16,15 @@ import {
     version
 } from '../package.json'
 import planes from '../planes'
-import {
-    Cipher
-} from "crypto";
 
 export let name = 'crates'
 export let description = 'Collect your daily crate!';
 export let usage = '<open> <crate type>'
+export let aliases = ['crate'];
 
 export async function execute(client: Client, message: Message, args: string[], db: PgClient) {
-    const aplanes = Object.values(planes)
-    class Plane {
-        name: string;
-        rarity: any;
-        constructor(name: string) {
-            this.name = name;
-            this.rarity = aplanes.find(p => p.name === name).rarity
-        }
-    }
+export async function execute(client: Client, message: Message, args: string[], db: PgClient) {
+
     const crate: string[] = [
         "common",
         'rare',
