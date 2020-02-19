@@ -23,6 +23,7 @@ import {
 export let name = 'crates'
 export let description = 'Collect your daily crate!';
 export let usage = '<open> <crate type>'
+export let aliases = ['crate']
 
 export async function execute(client: Client, message: Message, args: string[], db: PgClient) {
     const aplanes = Object.values(planes)
@@ -184,7 +185,7 @@ export async function execute(client: Client, message: Message, args: string[], 
                 let ran = Math.floor(Math.random() * amtL)
                 cardss.push(legendaryss[ran])
             }}
-            let mes = 'From your common crate: \n```diff\n'
+            let mes = 'From your rare crate: \n```diff\n'
             for (let c = 0; c < cardss.length; c++) {
                 console.log(cardss)
                 console.log(mes)

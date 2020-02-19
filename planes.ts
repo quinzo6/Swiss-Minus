@@ -1,6 +1,6 @@
 export = { 
   1: {
-    name: "Boeing_747",
+    name: "Boeing747",
     rarity: "ultra",
     url: "https://i.pinimg.com/originals/0f/0b/d4/0f0bd48d08fa28f862b3bbeaf3508ccd.jpg"
   },
