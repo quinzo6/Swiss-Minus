@@ -104,7 +104,7 @@ export async function execute(client: Client, message: Message, args: string[], 
         }
     cards
     .setColor(swiss_blue)
-    .setTitle(cards)
+    .setTitle('Cards')
     .addField('Commons', `You have: ${cs}`)
     .addField('Rares', `You have: ${rs}`)
     .addField('Epics', `You have: ${es}`)
