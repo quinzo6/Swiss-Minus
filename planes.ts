@@ -105,12 +105,12 @@ export = {
     url: ""
   },
   22: {
-    name: "Boeing_737_Max",
+    name: "Boeing_737Max",
     rarity: "common",
     url: ""
   },
   23: {
-    name: "Boing_737_Max",
+    name: "Boing_737Max",
     rarity: "rare",
     url: ""
   },

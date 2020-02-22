@@ -32,7 +32,6 @@ export async function execute(client: Client, message: Message, args: string[], 
         let mentioned = message.mentions.members.first() || message.guild.members.get(args[1] || message.author.id)
         const result = await db.query('UPDATE money SET balance = balance + 0 WHERE id = $1', [mentioned.id]);
         if (result.rowCount === 0) {
-            console.log
             let broke = new Discord.RichEmbed()
             broke
                 .setAuthor(message.author.tag, message.author.avatarURL)
@@ -44,7 +43,6 @@ export async function execute(client: Client, message: Message, args: string[], 
         }
         let balance = (await db.query('SELECT balance FROM money WHERE id = $1', [mentioned.id])).rows[0].balance
 
-        console.log(balance)
 
         let money = new Discord.RichEmbed()
         money
@@ -81,7 +79,6 @@ export async function execute(client: Client, message: Message, args: string[], 
             let mentioned = message.mentions.members.first() || message.guild.members.get(args[1] || message.author.id)
             const result = await db.query('UPDATE money SET balance = balance + 0 WHERE id = $1', [mentioned.id]);
             if (result.rowCount === 0) {
-                console.log
                 let broke = new Discord.RichEmbed()
                 broke
                     .setAuthor(message.author.tag, message.author.avatarURL)

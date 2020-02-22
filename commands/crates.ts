@@ -187,13 +187,9 @@ export async function execute(client: Client, message: Message, args: string[], 
             }}
             let mes = 'From your rare crate: \n```diff\n'
             for (let c = 0; c < cardss.length; c++) {
-                console.log(cardss)
-                console.log(mes)
                 mes = `${mes}+ 1 ${cardss[c].split('_').join(" ")} \n`
-                console.log(mes)
             }
             for (let ddd = 0; ddd < cardss.length; ddd++) {
-                console.log(cardss[ddd])
                 let texts: string = `UPDATE cards SET ${cardss[ddd]}count = ${cardss[ddd]}count + 1 WHERE id = '${message.author.id}'`
                 await db.query(texts);
             }

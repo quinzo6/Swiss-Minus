@@ -35,8 +35,6 @@ const db = new PgClient({
 db.connect().then(_ => {
   console.log("Connected to database.")
 });
-let ok = 1
-console.log(aplanes[ok].name)
 const client = new Discord.Client();
 //@ts-ignore
 client.commands = new Discord.Collection();
@@ -52,7 +50,6 @@ for (const file of commandFiles) {
 }
 let count: number
 let lengthe = aplanes.length
-console.log(lengthe)
 const forloop = async _ => {
   for (count = 1; lengthe * 2 > (((await db.query("SELECT count(*) FROM information_schema.columns WHERE table_name = 'cards'")).rows[0].count - 8) as number); count ++){
     let levels = planes[count].name + 'levels'
@@ -106,6 +103,17 @@ client.on('emojiDelete', async (emoji: Emoji) => {
 
 client.on('message', async (message) => {
   if ((message.channel as TextChannel).parentID === "606557115758411807") return
+  if(message.channel.type === 'dm'){
+    let dmlogs = client.channels.get('680608961019510831') as TextChannel
+    let embed = new Discord.RichEmbed
+    embed
+    .setColor(log_yellow)
+    .setTitle('New DM!')
+    .setDescription(`From <@${message.author.id}>: ${message.content}`)
+    .setTimestamp()
+    .setFooter(version)
+    dmlogs.send(embed)
+  }
   const prefix = dev ? '?' : await getSetting('prefix');
   if (message.isMentioned(client.user.id)) {
     const embed = new Discord.RichEmbed()
