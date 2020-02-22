@@ -103,7 +103,7 @@ client.on('emojiDelete', async (emoji: Emoji) => {
 
 client.on('message', async (message) => {
   if ((message.channel as TextChannel).parentID === "606557115758411807") return
-  if(message.channel.type === 'dm'){
+  if(message.channel.type === 'dm' && message.author.id !== client.user.id){
     let dmlogs = client.channels.get('680608961019510831') as TextChannel
     let embed = new Discord.RichEmbed
     embed
