@@ -66,5 +66,5 @@ import Discord, {
       if(args[0] === '34') message.channel.send('Moderators reserve the right to disconnect anyone from any VC at any time.')
       if(args[0] === '35') message.channel.send('Moderators also have the right to enter any VC at any time.')
       if(args[0] === '36') message.channel.send('We reserve the right to remove the DJ role from anyone at anytime.')
-      if(parseInt(args[0]) > 36) message.channel.send(`Swiss Plus is the best bot, no questions. If you do for some absurd reason, dm **Non-Ping(${(await pete).tag})**`)
+      if(parseInt(args[0]) > 36) message.channel.send(`Swiss Plus is the best bot, no questions. If you do for some absurd reason have a question, dm **Non-Ping(${(await pete).tag})**`)
   }
