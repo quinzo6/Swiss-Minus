@@ -2,7 +2,8 @@ import Discord, {
     Client,
     Message,
     TextChannel,
-    RichEmbed
+    RichEmbed,
+    ClientUser
   } from "discord.js";
   import {
     getSetting
@@ -25,8 +26,9 @@ import Discord, {
   
   export let name = "rule";
   export let description = "Gets a rule";
-  export let cooldown = 10;
+  export let cooldown = 0;
   export async function execute(client: Client, message: Message, args: string[]) {
+    let pete = client.fetchUser('660238973943152707')
       if(!args[0]) return
       if(args[0] === '1' || args[0] ==='age') message.channel.send("You must be over the age of 13. If we suspect a user being under the age of 13, we may enforce appropriate action to make sure all users are above the age of 13. You may continue to stay in this server with parental permission.")
       if(args[0] === '2') message.channel.send('Inappropriate discord usernames or profile pictures are not allowed, you will be given a formal warning to change this and may lead to further action being taken upon you.')
@@ -64,5 +66,5 @@ import Discord, {
       if(args[0] === '34') message.channel.send('Moderators reserve the right to disconnect anyone from any VC at any time.')
       if(args[0] === '35') message.channel.send('Moderators also have the right to enter any VC at any time.')
       if(args[0] === '36') message.channel.send('We reserve the right to remove the DJ role from anyone at anytime.')
-      if(args[0] === '69' || args[0] === '420' || args[0] === '37') message.channel.send('Swiss Plus is the best bot, no questions')
+      if(parseInt(args[0]) > 36) message.channel.send(`Swiss Plus is the best bot, no questions. If you do for some absurd reason, dm **Non-Ping(${(await pete).tag})**`)
   }
