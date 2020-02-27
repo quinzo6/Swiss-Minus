@@ -50,7 +50,7 @@ for (const file of commandFiles) {
 }
 let count: number
 let lengthe = aplanes.length
-const forloop = async _ => {
+const forloop = async (_: string) => {
   for (count = 1; lengthe * 2 > (((await db.query("SELECT count(*) FROM information_schema.columns WHERE table_name = 'cards'")).rows[0].count - 8) as number); count ++){
     let levels = planes[count].name + 'levels'
     let counts = planes[count].name + 'count'
@@ -129,16 +129,9 @@ client.on('message', async (message) => {
   const commandName = args.shift().toLowerCase();
 
   //@ts-ignore
-  const command = client.commands.get(commandName) || client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
+  const command = client.commands.get(commandName) || client.commands.find((cmd: { aliases: string | string[]; }) => cmd.aliases && cmd.aliases.includes(commandName));
   if (!args[0] && !commandName) return;
-  if (!command) {
-    const embed = new Discord.RichEmbed()
-      .setTitle('Invalid Command!')
-      .setAuthor(message.author.tag, message.author.avatarURL)
-      .setColor(error_red)
-      .addField('Invalid Command!', `Hey ${message.author}, That doesn't seem to be a command!`);
-    return await message.channel.send(embed);
-  }
+  if (!command) return
 
   if (command.guildOnly && message.channel.type !== 'text') {
     const embed = new Discord.RichEmbed()
