@@ -211,7 +211,7 @@ export async function execute(client: Client, message: Message, args: string[], 
         if (max === true) {
             return message.channel.send('That card is maxiumn level!')
         }
-        if (upgradeable === true){
+        if (upgradeable === true) {
             let ut = `UPDATE cards SET ${namey[0]}levels = ${namey[0]}levels + 1 WHERE id = '${message.author.id}'`
             let mt = `UPDATE cards SET ${namey[0]}count = ${namey[0]}count - ${minus} WHERE id = '${message.author.id}'`
             await db.query(ut)

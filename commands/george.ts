@@ -1,5 +1,7 @@
 import Discord, {
-    Attachment, Client, Message
+    Attachment,
+    Client,
+    Message
 } from 'discord.js'
 
 export let name = 'george'

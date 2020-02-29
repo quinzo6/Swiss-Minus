@@ -22,10 +22,10 @@ export let name = 'pen'
 export let description = 'penguin bad';
 
 export async function execute(client: Client, message: Message, args: string[]) {
-    if(message.author.id !== '660238973943152707') return message.channel.send('Penguins suck?')
-     await message.channel.send(':penguin: :penguin: :penguin:')
-     setTimeout(async function () {
-    client.user.lastMessage.edit(':x::penguin::penguin:')
+    if (message.author.id !== '660238973943152707') return message.channel.send('Penguins suck?')
+    await message.channel.send(':penguin: :penguin: :penguin:')
+    setTimeout(async function () {
+        client.user.lastMessage.edit(':x::penguin::penguin:')
     }, 1000)
 
     setTimeout(function () {

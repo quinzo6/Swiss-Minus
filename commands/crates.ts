@@ -60,7 +60,7 @@ export async function execute(client: Client, message: Message, args: string[], 
         message.author.send(cards)
     }
     if (args[0] === "open" || args[1] === "Open") {
-        if(!args[1]){
+        if (!args[1]) {
             message.channel.send('You need to open something')
         }
         let commonss = aplanes.filter(planes => planes.rarity === 'common').map(m => m.name)
@@ -97,21 +97,24 @@ export async function execute(client: Client, message: Message, args: string[], 
                 Eextra = 1
             }
             let cardss = []
-            if(Cextra > 0){
-            for (let hhh = 0; hhh < Cextra; hhh++) {
-                let ran = Math.floor(Math.random() * amtC)
-                cardss.push(commonss[ran])
-            }}
-            if(Rextra > 0){
-            for (let bbb = 0; bbb < Rextra; bbb++) {
-                let ran = Math.floor(Math.random() * amtR)
-                cardss.push(raress[ran])
-            }}
-            if(Eextra > 0){
-            for (let ccc = 0; ccc < Eextra; ccc++) {
-                let ran = Math.floor(Math.random() * amtE)
-                cardss.push(epicss[ran])
-            }}
+            if (Cextra > 0) {
+                for (let hhh = 0; hhh < Cextra; hhh++) {
+                    let ran = Math.floor(Math.random() * amtC)
+                    cardss.push(commonss[ran])
+                }
+            }
+            if (Rextra > 0) {
+                for (let bbb = 0; bbb < Rextra; bbb++) {
+                    let ran = Math.floor(Math.random() * amtR)
+                    cardss.push(raress[ran])
+                }
+            }
+            if (Eextra > 0) {
+                for (let ccc = 0; ccc < Eextra; ccc++) {
+                    let ran = Math.floor(Math.random() * amtE)
+                    cardss.push(epicss[ran])
+                }
+            }
             for (let ddd = 0; ddd < cardss.length; ddd++) {
                 let texts: string = `UPDATE cards SET ${cardss[ddd]}count = ${cardss[ddd]}count + 1 WHERE id = '${message.author.id}'`
                 await db.query(texts);
@@ -165,26 +168,30 @@ export async function execute(client: Client, message: Message, args: string[], 
                 let ran = Math.floor(Math.random() * amtC)
                 cardss.push(commonss[ran])
             }
-            if(Rextra > 0){
-            for (let bbb = 0; bbb < Rextra; bbb++) {
-                let ran = Math.floor(Math.random() * amtR)
-                cardss.push(raress[ran])
-            }}
-            if(Eextra > 0){
-            for (let ccc = 0; ccc < Eextra; ccc++) {
-                let ran = Math.floor(Math.random() * amtE)
-                cardss.push(epicss[ran])
-            }}
-            if(Uextra > 0){
-            for (let m = 0; m < Uextra; m++) {
-                let ran = Math.floor(Math.random() * amtU)
-                cardss.push(ultrass[ran])
-            }}
-            if(Lextra > 0){
-            for (let m = 0; m < Lextra; m++) {
-                let ran = Math.floor(Math.random() * amtL)
-                cardss.push(legendaryss[ran])
-            }}
+            if (Rextra > 0) {
+                for (let bbb = 0; bbb < Rextra; bbb++) {
+                    let ran = Math.floor(Math.random() * amtR)
+                    cardss.push(raress[ran])
+                }
+            }
+            if (Eextra > 0) {
+                for (let ccc = 0; ccc < Eextra; ccc++) {
+                    let ran = Math.floor(Math.random() * amtE)
+                    cardss.push(epicss[ran])
+                }
+            }
+            if (Uextra > 0) {
+                for (let m = 0; m < Uextra; m++) {
+                    let ran = Math.floor(Math.random() * amtU)
+                    cardss.push(ultrass[ran])
+                }
+            }
+            if (Lextra > 0) {
+                for (let m = 0; m < Lextra; m++) {
+                    let ran = Math.floor(Math.random() * amtL)
+                    cardss.push(legendaryss[ran])
+                }
+            }
             let mes = 'From your rare crate: \n```diff\n'
             for (let c = 0; c < cardss.length; c++) {
                 mes = `${mes}+ 1 ${cardss[c].split('_').join(" ")} \n`
@@ -226,21 +233,24 @@ export async function execute(client: Client, message: Message, args: string[], 
                 let ran = Math.floor(Math.random() * amtR)
                 cardss.push(raress[ran])
             }
-            if(Eextra > 0){
-            for (let ccc = 0; ccc < Eextra; ccc++) {
-                let ran = Math.floor(Math.random() * amtE)
-                cardss.push(epicss[ran])
-            }}
-            if(Uextra > 0){
-            for (let ccc = 0; ccc < Uextra; ccc++) {
-                let ran = Math.floor(Math.random() * amtU)
-                cardss.push(ultrass[ran])
-            }}
-            if(Lextra > 0){
-            for (let ccc = 0; ccc < Lextra; ccc++) {
-                let ran = Math.floor(Math.random() * amtL)
-                cardss.push(legendaryss[ran])
-            }}
+            if (Eextra > 0) {
+                for (let ccc = 0; ccc < Eextra; ccc++) {
+                    let ran = Math.floor(Math.random() * amtE)
+                    cardss.push(epicss[ran])
+                }
+            }
+            if (Uextra > 0) {
+                for (let ccc = 0; ccc < Uextra; ccc++) {
+                    let ran = Math.floor(Math.random() * amtU)
+                    cardss.push(ultrass[ran])
+                }
+            }
+            if (Lextra > 0) {
+                for (let ccc = 0; ccc < Lextra; ccc++) {
+                    let ran = Math.floor(Math.random() * amtL)
+                    cardss.push(legendaryss[ran])
+                }
+            }
             for (let ddd = 0; ddd < cardss.length; ddd++) {
                 let texts = `UPDATE cards SET ${cardss[ddd]}count = ${cardss[ddd]}count + 1 WHERE id = '${message.author.id}'`
                 await db.query(texts)
@@ -290,11 +300,12 @@ export async function execute(client: Client, message: Message, args: string[], 
                 let ran = Math.floor(Math.random() * amtU)
                 cardss.push(ultrass[ran])
             }
-            if(Lextra > 0){
-            for (let ccc = 0; ccc < Lextra; ccc++) {
-                let ran = Math.floor(Math.random() * amtL)
-                cardss.push(legendaryss[ran])
-            }}
+            if (Lextra > 0) {
+                for (let ccc = 0; ccc < Lextra; ccc++) {
+                    let ran = Math.floor(Math.random() * amtL)
+                    cardss.push(legendaryss[ran])
+                }
+            }
             for (let ddd = 0; ddd < cardss.length; ddd++) {
                 let texts = `UPDATE cards SET ${cardss[ddd]}count = ${cardss[ddd]}count + 1 WHERE id = '${message.author.id}'`
                 await db.query(texts)
