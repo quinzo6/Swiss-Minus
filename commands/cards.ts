@@ -1,7 +1,7 @@
 import Discord, {
     Client,
     Message,
-    RichEmbed,
+    MessageEmbed,
     DiscordAPIError,
     MessageAttachment
 } from "discord.js";
@@ -63,7 +63,7 @@ export async function execute(client: Client, message: Message, args: string[], 
         await db.query(testn)
     }
     if (!args[0]) {
-        let cards = new Discord.RichEmbed() as RichEmbed
+        let cards = new Discord.MessageEmbed() as MessageEmbed
         let cs = []
         let rs = []
         let es = []
@@ -122,7 +122,7 @@ export async function execute(client: Client, message: Message, args: string[], 
         return message.author.send(cards)
     }
     if (aplanes.map(m => m.name).includes(carda.join('_').charAt(0).toUpperCase() + carda.join('_').slice(1))) {
-        let cardP = new Discord.RichEmbed
+        let cardP = new Discord.MessageEmbed
         let cardRarity = aplanes.filter(plane => plane.name === (carda.join("_").charAt(0).toUpperCase() + carda.join('_').slice(1))).map(m => m.rarity)
         let namey = aplanes.filter(plane => plane.name === (carda.join("_").charAt(0).toUpperCase() + carda.join('_').slice(1))).map(m => m.name)
         let color
@@ -161,7 +161,7 @@ export async function execute(client: Client, message: Message, args: string[], 
         let carde = [args[1]]
         if (args[2]) carde.push(args[1])
         if (!aplanes.map(m => m.name).includes(carde.join('_').charAt(0).toUpperCase() + carde.join('_').slice(1))) {
-            let no = new Discord.RichEmbed
+            let no = new Discord.MessageEmbed
             no
                 .setColor(error_red)
                 .setDescription('Thats a error! Either the card you submitted was incorrect, or something happened. When typing in a card, please use this format: For all planes with two words in it do this: `!cards <thing 1> <thing2>` for example: `!card boeing 747`. If the plane is the max, please do `!card boeing 737max` instead. If the plane is the Boeing 747, do `!plane boeing747`. Thank you for your help!')
@@ -220,7 +220,7 @@ export async function execute(client: Client, message: Message, args: string[], 
         }
         return message.channel.send('You appear not to have enough to upgrade sorry!')
     }
-    let no = new Discord.RichEmbed
+    let no = new Discord.MessageEmbed
     no
         .setColor(error_red)
         .setDescription('Thats a error! Either the card you submitted was incorrect, or something happened. When typing in a card, please use this format: For all planes with two words in it do this: `!cards <thing 1> <thing2>` for example: `!card boeing 747`. If the plane is the max, please do `!card boeing 737max` instead. If the plane is the Boeing 747, do `!plane boeing747`. Thank you for your help!')

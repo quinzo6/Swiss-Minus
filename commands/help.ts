@@ -30,10 +30,10 @@ export async function execute(client: Client, message: Message, args: string[]) 
 
     if (!args.length) {
         const cmds = commands.map((command) => command.name).join(', ');
-        const helpEmbed = new Discord.RichEmbed()
+        const helpEmbed = new Discord.MessageEmbed()
             .setTitle('Help!')
             .setColor(swiss_blue)
-            .setAuthor(message.author.tag, message.author.avatarURL)
+            .setAuthor(message.author.tag, message.author.avatarURL())
             .addField('Commands:', `${cmds}`)
             .addField('Tip:', `You can send \`${await getSetting('prefix')}help [command name]\` to get info on a specific command!`)
             .setFooter(version)
@@ -44,9 +44,9 @@ export async function execute(client: Client, message: Message, args: string[]) 
                 message.reply('I\'ve sent you a DM with all my commands!');
             })
             .catch((error) => {
-                const embed = new Discord.RichEmbed()
+                const embed = new Discord.MessageEmbed()
                     .setTitle('Error!')
-                    .setAuthor(message.author.tag, message.author.avatarURL)
+                    .setAuthor(message.author.tag, message.author.avatarURL())
                     .setColor(error_red)
                     .setTitle('Error')
                     .setDescription('Unable to send you a dmd with my commands! This may be because your dms are turned off. Please try again later.')
@@ -62,10 +62,10 @@ export async function execute(client: Client, message: Message, args: string[]) 
     const command = commands.get(name) || commands.find((c) => c.aliases && c.aliases.includes(name));
 
     if (!command) {
-        const nValidComm = new Discord.RichEmbed();
+        const nValidComm = new Discord.MessageEmbed();
         nValidComm
             .setTitle('Error!')
-            .setAuthor(message.author.tag, message.author.avatarURL)
+            .setAuthor(message.author.tag, message.author.avatarURL())
             .setColor(error_red)
             .addField('Invalid Command!', 'The Command you put in is invalid!')
             .setFooter(version)
@@ -74,10 +74,10 @@ export async function execute(client: Client, message: Message, args: string[]) 
     }
 
     const cmdName = `${command.name}`;
-    const cmd = new Discord.RichEmbed();
+    const cmd = new Discord.MessageEmbed();
     cmd
         .setTitle('Help')
-        .setAuthor(message.author.tag, message.author.avatarURL)
+        .setAuthor(message.author.tag, message.author.avatarURL())
         .addField('Command:', cmdName);
 
     if (command.aliases) {

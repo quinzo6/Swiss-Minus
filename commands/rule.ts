@@ -2,8 +2,9 @@ import Discord, {
   Client,
   Message,
   TextChannel,
-  RichEmbed,
-  ClientUser
+  MessageEmbed,
+  ClientUser,
+  UserManager
 } from "discord.js";
 import {
   getSetting
@@ -28,7 +29,7 @@ export let name = "rule";
 export let description = "Gets a rule";
 export let cooldown = 0;
 export async function execute(client: Client, message: Message, args: string[]) {
-  let pete = client.fetchUser('660238973943152707')
+  let pete = client.users.cache.get('660238973943152707')
   if (!args[0]) return
   if (args[0] === '1' || args[0] === 'age') message.channel.send("You must be over the age of 13. If we suspect a user being under the age of 13, we may enforce appropriate action to make sure all users are above the age of 13. You may continue to stay in this server with parental permission.")
   if (args[0] === '2') message.channel.send('Inappropriate discord usernames or profile pictures are not allowed, you will be given a formal warning to change this and may lead to further action being taken upon you.')

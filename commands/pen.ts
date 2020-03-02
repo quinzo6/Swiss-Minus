@@ -1,9 +1,9 @@
 import Discord, {
     Client,
     Message,
-    RichEmbed,
+    MessageEmbed,
     DiscordAPIError,
-    Attachment
+    MessageAttachment
 } from "discord.js";
 import {
     Client as PgClient

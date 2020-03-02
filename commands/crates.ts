@@ -1,7 +1,7 @@
 import Discord, {
     Client,
     Message,
-    RichEmbed,
+    MessageEmbed,
     DiscordAPIError
 } from "discord.js";
 import {
@@ -50,9 +50,9 @@ export async function execute(client: Client, message: Message, args: string[], 
     let ultras: Number = (await db.query('SELECT ultra FROM cards WHERE id = $1', [message.author.id])).rows[0].ultra
     let legendarys: Number = (await db.query('SELECT ledgendary FROM cards WHERE id = $1', [message.author.id])).rows[0].ledgendary
     if (!args[0]) {
-        let cards = new Discord.RichEmbed as RichEmbed
+        let cards = new Discord.MessageEmbed as MessageEmbed
         cards
-            .setAuthor(message.author.tag, message.author.avatarURL)
+            .setAuthor(message.author.tag, message.author.avatarURL())
             .setColor(swiss_blue)
             .setFooter(version)
             .setTimestamp()
@@ -340,7 +340,7 @@ export async function execute(client: Client, message: Message, args: string[], 
             let messa = `UPDATE cards SET ledgendary = ledgendary - 1 WHERE id = '${message.author.id}'`
             return await db.query(messa)
         }
-        let no = new Discord.RichEmbed
+        let no = new Discord.MessageEmbed
         no
             .setColor(error_red)
             .setDescription("Hey that dosent seem to be a crate type, do !crates to see crate types. It also might be that you have ran out of crates, do !crates to see")

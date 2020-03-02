@@ -1,6 +1,7 @@
 import Discord, {
     Client,
-    Message
+    Message,
+    GuildMember
 } from "discord.js";
 import {
     getSetting
@@ -25,26 +26,24 @@ import {
 export async function execute(client: Client, message: Message, args: string[]) {
     const on = await getSetting("whois") === "on";
     if (!on) {
-        const notOn = new Discord.RichEmbed();
+        const notOn = new Discord.MessageEmbed();
         notOn
             .setTitle(message.author.tag)
-            .setAuthor(message.author.tag, message.author.avatarURL)
+            .setAuthor(message.author.tag, message.author.avatarURL())
             .setColor(error_red)
             .addField("I'm Not On!", 'This command it turned off! Please ask a mod or admin to turn it back on!');
         return await message.channel.send(notOn);
     }
 
-    const whoisUser = message.mentions.members.first() || message.guild.members.get(args[0]);
+    const whoisUser = message.mentions.members.first() || message.guild.members.fetch(args[0]) as unknown as GuildMember;
     if (!whoisUser) {
-        const roles = message.member.roles.map((r) => r).join(',');
-        const {
-            highestRole
-        } = message.member;
-        const whois = new Discord.RichEmbed();
+        const roles = message.member.roles.cache.map((r) => r).join(',');
+        let highestRole = message.member.roles.highest
+        const whois = new Discord.MessageEmbed();
         whois
-            .setThumbnail(message.author.avatarURL)
+            .setThumbnail(message.author.avatarURL())
             .setTitle(message.author.tag)
-            .setAuthor(message.author.tag, message.author.avatarURL)
+            .setAuthor(message.author.tag, message.author.avatarURL())
             .setColor(swiss_blue)
             .addField('ID:', message.author.id)
             .addField('Username:', message.author.tag)
@@ -58,13 +57,13 @@ export async function execute(client: Client, message: Message, args: string[]) 
         await message.channel.send(whois);
     }
     if (whoisUser) {
-        const roles1 = whoisUser.roles.map((r) => r).join(',');
-        const highestRole1 = whoisUser.highestRole;
-        const whois1 = new Discord.RichEmbed();
+        const roles1 = whoisUser.roles.cache.map((r) => r).join(',');
+        const highestRole1 = whoisUser.roles.highest;
+        const whois1 = new Discord.MessageEmbed();
         whois1
-            .setThumbnail(whoisUser.user.avatarURL)
+            .setThumbnail(whoisUser.user.avatarURL())
             .setTitle(whoisUser.user.tag)
-            .setAuthor(message.author.tag, message.author.avatarURL)
+            .setAuthor(message.author.tag, message.author.avatarURL())
             .setColor(swiss_blue)
             .addField('ID:', whoisUser.id)
             .addField('Username:', whoisUser.user.username)

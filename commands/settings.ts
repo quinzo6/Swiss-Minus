@@ -1,7 +1,7 @@
 import {
     Client,
     Message,
-    RichEmbed
+    MessageEmbed
 } from "discord.js";
 import {
     Client as PgClient
@@ -28,10 +28,10 @@ export async function execute(client: Client, message: Message, args: string[], 
         } = {};
         const rows = (await db.query("SELECT * FROM settings")).rows;
 
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
             .setTitle("Settings")
             .setColor(swiss_blue)
-            .setAuthor(client.user.tag, client.user.displayAvatarURL)
+            .setAuthor(client.user.tag, client.user.displayAvatarURL())
             .setFooter(version)
             .setTimestamp()
         for (let row of rows) {

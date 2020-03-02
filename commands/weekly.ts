@@ -1,7 +1,7 @@
 import Discord, {
     Client,
     Message,
-    RichEmbed,
+    MessageEmbed,
 } from "discord.js";
 import {
     Client as PgClient
@@ -57,7 +57,7 @@ export async function execute(client: Client, message: Message, args: string[], 
     }
     const waitTill = (await db.query('SELECT weekly + interval \'7 days\' AS time FROM cards WHERE id = $1', [message.author.id])).rows[0].time
     const timeTill: Number = (await db.query('SELECT (EXTRACT(EPOCH FROM $1 - current_timestamp)/86400)::Integer AS sub', [waitTill])).rows[0].sub
-    let coolDown: RichEmbed = new Discord.RichEmbed()
+    let coolDown: MessageEmbed = new Discord.MessageEmbed()
     coolDown
         .setTitle('Cooldown')
         .setColor(error_red)

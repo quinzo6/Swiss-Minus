@@ -23,13 +23,13 @@ export let usage = '[Number of messages] <channel>';
 export let cooldown = 5;
 
 export async function execute(client: Client, message: Message, args: string[]) {
-  const mentionedChannel = message.mentions.channels.first() || client.channels.get(args[0]) as TextChannel;
+  const mentionedChannel = message.mentions.channels.first() || client.channels.cache.get(args[0]) as TextChannel;
   const messagesDelete = parseInt(args[0]) + 1
   const mod = message.member.hasPermission("MANAGE_MESSAGES")
   if (!mod) {
-    const noPerms = new Discord.RichEmbed();
+    const noPerms = new Discord.MessageEmbed();
     noPerms
-      .setAuthor(message.author.tag, message.author.avatarURL)
+      .setAuthor(message.author.tag, message.author.avatarURL())
       .setTitle('Missing Permisions')
       .setColor(error_red)
       .addField('Missing Perms!', `Hey <@${message.author.id}>, you are missing permissions to use this command.`)
@@ -39,9 +39,10 @@ export async function execute(client: Client, message: Message, args: string[]) 
   }
   if (!args[1]) {
     if (messagesDelete > 0 && messagesDelete < 100) {
-      const sucsess = new Discord.RichEmbed();
+      const sucsess = new Discord.MessageEmbed();
+      let num = 2000
       sucsess
-        .setAuthor(message.author.tag, message.author.avatarURL)
+        .setAuthor(message.author.tag, message.author.avatarURL())
         .setTitle('Purge')
         .setColor(swiss_blue)
         .addField('Purged Messages', `I purged ${messagesDelete} messages!`)
@@ -51,14 +52,14 @@ export async function execute(client: Client, message: Message, args: string[]) 
         .then(async () => {
           await message.channel.send(sucsess)
             .then((msg: Message) => {
-              msg.delete(2000)
+              msg.delete({timeout: 2000})
                 .then(() => console.log())
                 .catch(console.error);
             })
         }).catch((error) => {
-          const err = new Discord.RichEmbed()
+          const err = new Discord.MessageEmbed()
             .setTitle('Error')
-            .setAuthor(message.author.tag, message.author.avatarURL)
+            .setAuthor(message.author.tag, message.author.avatarURL())
             .setColor(error_red)
             .addField('Error!', `An error occored. ${error}`)
             .setFooter(version)
@@ -66,9 +67,9 @@ export async function execute(client: Client, message: Message, args: string[]) 
           return message.channel.send(err);
         })
     } else {
-      const oops = new Discord.RichEmbed();
+      const oops = new Discord.MessageEmbed();
       oops
-        .setAuthor(message.author.tag, message.author.avatarURL)
+        .setAuthor(message.author.tag, message.author.avatarURL())
         .setTitle('Invalid Arguments')
         .setColor(error_red)
         .addField('Arguments!', 'Either you provided a number below 0, a number above 99, or it wasn\'t a number at all!')
@@ -78,18 +79,18 @@ export async function execute(client: Client, message: Message, args: string[]) 
     }
   } else if (args[1]) {
     if (!mentionedChannel) {
-      const yikes = new Discord.RichEmbed();
+      const yikes = new Discord.MessageEmbed();
       yikes
-        .setAuthor(message.author.tag, message.author.avatarURL)
+        .setAuthor(message.author.tag, message.author.avatarURL())
         .setTitle('What?')
         .setColor(error_red)
         .addField('What is that?', 'Thats not a channel? Try again with mentioning a channel').setFooter(version)
         .setTimestamp()
       return message.channel.send(yikes);
     }
-    const sucsess = new Discord.RichEmbed();
+    const sucsess = new Discord.MessageEmbed();
     sucsess
-      .setAuthor(message.author.tag, message.author.avatarURL)
+      .setAuthor(message.author.tag, message.author.avatarURL())
       .setTitle('Purge')
       .setColor(swiss_blue)
       .addField('Purged Messages', `I purged ${args[0]} messages!`)
@@ -99,15 +100,15 @@ export async function execute(client: Client, message: Message, args: string[]) 
       .then(() => {
         return message.channel.send(sucsess)
           .then((msg: Message) => {
-            msg.delete(2000)
+            msg.delete({timeout: 2000})
               .then(() => console.log)
               .catch(console.error)
           }).catch(console.error);
       })
       .catch(async (error) => {
-        const err = new Discord.RichEmbed()
+        const err = new Discord.MessageEmbed()
           .setTitle('Error')
-          .setAuthor(message.author.tag, message.author.avatarURL)
+          .setAuthor(message.author.tag, message.author.avatarURL())
           .setColor(error_red)
           .addField('Error!', `An error occored. ${error}`)
           .setFooter(version)

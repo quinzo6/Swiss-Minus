@@ -1,7 +1,7 @@
 import Discord, {
     Client,
     Message,
-    RichEmbed,
+    MessageEmbed,
     DiscordAPIError,
     MessageAttachment,
     Channel,
@@ -39,8 +39,8 @@ export async function execute(client: Client, message: Message, args: string[], 
         return message.channel.send('You didnt provide any arguments!')
     }
     let body = ''
-    let log = client.channels.get('682450929634770946') as TextChannel
-    let embed = new Discord.RichEmbed
+    let log = client.channels.cache.get('682450929634770946') as TextChannel
+    let embed = new Discord.MessageEmbed
     embed
         .setTitle('New Bug!')
     for (let c = 1; args.length > c; c++) {
@@ -53,20 +53,21 @@ export async function execute(client: Client, message: Message, args: string[], 
     let issue = gh.getIssues('carterdacat', 'Swiss-Plus')
     issue.createIssue(iText)
         .then(b => {
-            let report = new Discord.RichEmbed
+            console.log(b.data.html_url)
+            let report = new Discord.MessageEmbed
             report
-            .setColor(log_yellow)
-            .setTitle('Succsesfuly sent the issue')
-            .setURL(b.headers.location)
-            .setFooter(version)
-            .setTimestamp()
+                .setColor(log_yellow)
+                .setTitle('Succsesfuly sent the issue')
+                .setURL(b.data.html_url)
+                .setFooter(version)
+                .setTimestamp()
             message.channel.send(report)
             embed
-            .setColor(log_yellow)
-            .setDescription('A new issue!')
-            .setURL(b.headers.location)
-            .setFooter(version)
-            .setTimestamp()
+                .setColor(log_yellow)
+                .setDescription('A new issue!')
+                .setURL(b.data.html_url)
+                .setFooter(version)
+                .setTimestamp()
             log.send(embed)
             log.send('<@660238973943152707>')
         })
