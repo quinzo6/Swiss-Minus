@@ -13,7 +13,7 @@ export let cooldown = 5;
 export let guildOnly = true
 
 export async function execute(client: Client, message: Message, args: string[]) {
-    const permMentioned = message.mentions.members.first() || message.guild.members.fetch(args[0]) as unknown as GuildMember;
+    const permMentioned = message.mentions.members.first() || message.guild.members.cache.get(args[0]) as GuildMember;
     if (!permMentioned) {
         const permNoMentionedEmbed = new Discord.MessageEmbed();
         permNoMentionedEmbed

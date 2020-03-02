@@ -34,8 +34,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .addField("I'm Not On!", 'This command it turned off! Please ask a mod or admin to turn it back on!');
         return await message.channel.send(notOn);
     }
-
-    const whoisUser = message.mentions.members.first() || message.guild.members.fetch(args[0]) as unknown as GuildMember;
+    const whoisUser = message.mentions.members.first() || message.guild.members.cache.get(args[0]) as GuildMember;
     if (!whoisUser) {
         const roles = message.member.roles.cache.map((r) => r).join(',');
         let highestRole = message.member.roles.highest

@@ -27,7 +27,7 @@ export const guildOnly = true
 export async function execute(client: Client, message: Message, args: string[], db: PgClient) {
     const id = await db.query('SELECT id FROM cards WHERE id = $1', [message.author.id])
     if (id.rowCount === 0) await db.query('INSERT INTO cards (id, common, rare, jumbo, ultra, ledgendary) VALUES($1, 0, 0, 0, 0, 0)', [message.author.id])
-    const whoisUser = message.mentions.members.first() || message.guild.members.fetch(args[0]) as unknown as GuildMember;
+    const whoisUser = message.mentions.members.first() || message.guild.members.cache.get(args[0]) as GuildMember;
     const mod = message.member.hasPermission("MANAGE_ROLES") || (message.author.id === "660238973943152707")
     if (!mod) {
         const embed = new Discord.MessageEmbed() as MessageEmbed
