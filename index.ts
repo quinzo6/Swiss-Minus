@@ -22,7 +22,10 @@ import {
   log_yellow,
   error_red
 } from "./config";
-
+import yt from 'simple-youtube-api'
+import ffmpeg from 'ffmpeg-static'
+import opus from 'node-opus'
+import ytdl from 'ytdl-core'
 dotenv_config();
 
 const dev = process.env.NODE_ENV === "dev";
@@ -139,7 +142,7 @@ client.on('message', async (message) => {
     let embed = new Discord.MessageEmbed as MessageEmbed
     embed
     .setColor(log_yellow)
-    .setDescription(`The command ${commandName} was used by <@${message.author.id}>. The whole message was ${message}`)
+    .setDescription(`The command ${commandName} was used by <@${message.author.id}>. The whole message was ${message.content}`)
     .setTimestamp()
     .setFooter(version)
     let channel = client.channels.cache.get('677356042723524608') as TextChannel
