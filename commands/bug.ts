@@ -44,7 +44,7 @@ export async function execute(client: Client, message: Message, args: string[], 
     embed
         .setTitle('New Bug!')
     for (let c = 1; args.length > c; c++) {
-        body = body + args[c]
+        body = body + " " + args[c]
     }
     let iText = {
         "title": args[0],
