@@ -42,12 +42,10 @@ export async function execute(client: Client, message: Message, args: string[]) 
       .setTimestamp()
     return await message.channel.send(notOn);
   }
-  if (message.channel.id === '592463507124125706') return;
   const {
     subReddits
   } = subreddits;
   const random = subReddits[Math.floor(Math.random() * subReddits.length)];
-  // Get a random image from the subreddit page
   if (!args[0]) {
     const img = await randomPuppy(random);
     const embed = new Discord.MessageEmbed()
