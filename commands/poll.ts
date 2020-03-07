@@ -52,11 +52,9 @@ export async function execute(client: Client, message: Message, args: string[]) 
             resolve(msg);
         });
         channelCo.on('end', msg => {
-            timeout = true
             reject('You ran out of time!')
         });
     })
-    if(timeout === true) return
     await channelP
         .then(function (msg: Message) {
             if(msg === undefined) return
@@ -64,7 +62,8 @@ export async function execute(client: Client, message: Message, args: string[]) 
             mentionedChannel = msg.mentions.channels.first()
         })
         .catch(function (x) {
-            return message.channel.send('Oops, time ran out!')
+            if(timeout === true) return
+            message.channel.send('Oops, time ran out!')
         })
     let question
     let questionEmbed = new Discord.MessageEmbed
@@ -92,7 +91,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
     })
     .catch(function (b) {
         timeout = true
-        return message.channel.send('Oops, your time ran out!')
+        message.channel.send('Oops, your time ran out!')
     })
     if(timeout === true) return
     let oneOption
@@ -130,6 +129,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
                 return message.channel.send('Oops, your time ran out!')
             }
         )
+        console.log(timeout)
         if(timeout === true) return
 
     let twoOption
@@ -158,7 +158,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
     })
     .catch(function(x) {
         timeout = true
-        return message.channel.send('Oops, your time ran out!')
+        message.channel.send('Oops, your time ran out!')
     })
     if(timeout === true) return
 
@@ -195,7 +195,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
     })
     .catch(function(x) {
         timeout = true
-        return message.channel.send('Oops, you ran out of time!')
+        message.channel.send('Oops, you ran out of time!')
     })
     if(timeout === true) return
 
@@ -235,8 +235,6 @@ export async function execute(client: Client, message: Message, args: string[]) 
         timeout = true
         return message.channel.send('Oops, you ran out of time!')
     })
-        if(timeout === true) return
-
     let fiveOption
     let fiveEmbed = new Discord.MessageEmbed
     fiveEmbed
