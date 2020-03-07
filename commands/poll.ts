@@ -31,6 +31,7 @@ export let description = 'creates a poll';
 export let usage = '[channel][option 1] ; [option 2] ; <option 3> up to 10 options';
 export let cooldown = 5;
 export async function execute(client: Client, message: Message, args: string[]) {
+    let timeout
     let poll = new Discord.MessageEmbed
     poll
     .setColor(swiss_blue)
@@ -51,9 +52,11 @@ export async function execute(client: Client, message: Message, args: string[]) 
             resolve(msg);
         });
         channelCo.on('end', msg => {
+            timeout = true
             reject('You ran out of time!')
         });
     })
+    if(timeout === true) return
     await channelP
         .then(function (msg: Message) {
             if(msg === undefined) return
@@ -88,8 +91,10 @@ export async function execute(client: Client, message: Message, args: string[]) 
         .setTitle(msg.content)
     })
     .catch(function (b) {
+        timeout = true
         return message.channel.send('Oops, your time ran out!')
     })
+    if(timeout === true) return
     let oneOption
     let oneEmbed = new Discord.MessageEmbed
     oneEmbed
@@ -121,9 +126,12 @@ export async function execute(client: Client, message: Message, args: string[]) 
         })
         .catch(
             function (x) {
+                timeout = true
                 return message.channel.send('Oops, your time ran out!')
             }
         )
+        if(timeout === true) return
+
     let twoOption
     let twoEmbed = new Discord.MessageEmbed
     twoEmbed
@@ -149,8 +157,11 @@ export async function execute(client: Client, message: Message, args: string[]) 
         .addField('2️⃣', msg.content)
     })
     .catch(function(x) {
+        timeout = true
         return message.channel.send('Oops, your time ran out!')
     })
+    if(timeout === true) return
+
     let threeOption
     let threeEmbed = new Discord.MessageEmbed
     threeEmbed
@@ -183,8 +194,11 @@ export async function execute(client: Client, message: Message, args: string[]) 
         poll.addField('3️⃣', msg.content)
     })
     .catch(function(x) {
+        timeout = true
         return message.channel.send('Oops, you ran out of time!')
     })
+    if(timeout === true) return
+
     let fourOption
     let fourEmbed = new Discord.MessageEmbed
     fourEmbed
@@ -218,8 +232,11 @@ export async function execute(client: Client, message: Message, args: string[]) 
         poll.addField('4️⃣', msg.content)
     })
     .catch(function(x) {
+        timeout = true
         return message.channel.send('Oops, you ran out of time!')
     })
+        if(timeout === true) return
+
     let fiveOption
     let fiveEmbed = new Discord.MessageEmbed
     fiveEmbed
