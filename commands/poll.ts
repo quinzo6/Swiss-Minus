@@ -171,7 +171,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
             await mentionedChannel.send(poll)
             .then(message => {
                 message.react('1️⃣')
-                message.react('2️⃣')
+                return message.react('2️⃣')
             })
         }
         threeOption = msg.content
@@ -205,7 +205,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .then(message => {
                 message.react('1️⃣')
                 message.react('2️⃣')
-                message.react('3️⃣')
+                return message.react('3️⃣')
             })
         }
         fourOption = msg.content
@@ -240,7 +240,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
                 message.react('1️⃣')
                 message.react('2️⃣')
                 message.react('3️⃣')
-                message.react('4️⃣')
+                return message.react('4️⃣')
             })
         }
         fiveOption = msg.content
@@ -251,7 +251,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
             message.react('2️⃣')
             message.react('3️⃣')
             message.react('4️⃣')
-            message.react('5️⃣')
+            return message.react('5️⃣')
         })
     })
     .catch(function(x) {
