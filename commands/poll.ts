@@ -56,6 +56,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
     })
     await channelP
         .then(function (msg: Message) {
+            if(msg === undefined) return
             if (!msg.mentions.channels.first()) return
             mentionedChannel = msg.mentions.channels.first()
         })
@@ -81,6 +82,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
     })
     await questionP
     .then(function (msg: Message) {
+        if(msg === undefined) return
         question = msg.content
         poll
         .setTitle(msg.content)
@@ -112,6 +114,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
     })
     await firstO
         .then(function (msg: Message) {
+            if(msg === undefined) return
             oneOption = msg.content
             poll
             .addField('1️⃣', msg.content)
@@ -140,6 +143,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
     })
     await secondO
     .then(function(msg: Message) {
+        if(msg === undefined) return
         twoOption = msg.content
         poll
         .addField('2️⃣', msg.content)
@@ -166,6 +170,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
     })
     await thirdO
     .then(async function(msg: Message) {
+        if(msg === undefined) return
         if(msg.content === 'finish' || msg.content === 'end'){
             poll.setTimestamp()
             await mentionedChannel.send(poll)
@@ -199,6 +204,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
     })
     await fourO
     .then(async function(msg: Message) {
+        if(msg === undefined) return
         if(msg.content === 'finish' || msg.content === 'end'){
             poll.setTimestamp()
             await mentionedChannel.send(poll)
@@ -233,6 +239,7 @@ export async function execute(client: Client, message: Message, args: string[]) 
     })
     await fiveO
     .then(async function(msg: Message) {
+        if(msg === undefined) return
         if(msg.content === 'finish' || msg.content === 'end'){
             poll.setTimestamp()
             await mentionedChannel.send(poll)
