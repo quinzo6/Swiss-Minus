@@ -8,6 +8,7 @@
   },
   "scripts": {
     "lint": "eslint --ext .jsx,.js src",
+    "heroku-dev": "npm i -dev",
     "wbuild": "webpack --mode production",
     "wstart": "webpack-dev-server --mode development --hot --open --port 3100",
     "start": "node index.ts",
