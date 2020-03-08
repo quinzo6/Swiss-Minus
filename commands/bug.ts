@@ -66,7 +66,6 @@ export async function execute(client: Client, message: Message, args: string[], 
     let issue = gh.getIssues('carterdacat', 'Swiss-Plus')
     issue.createIssue(iText)
         .then(b => {
-            console.log(b.data.html_url)
             let report = new Discord.MessageEmbed
             report
                 .setColor(log_yellow)

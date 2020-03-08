@@ -118,7 +118,6 @@ export async function execute(client: Client, message: Message, args: string[]) 
     })
     await firstO
         .then(function (msg: Message) {
-            if(msg === undefined) return
             oneOption = msg.content
             poll
             .addField('1️⃣', msg.content)
@@ -129,7 +128,6 @@ export async function execute(client: Client, message: Message, args: string[]) 
                 return message.channel.send('Oops, your time ran out!')
             }
         )
-        console.log(timeout)
         if(timeout === true) return
 
     let twoOption
@@ -151,7 +149,6 @@ export async function execute(client: Client, message: Message, args: string[]) 
     })
     await secondO
     .then(function(msg: Message) {
-        if(msg === undefined) return
         twoOption = msg.content
         poll
         .addField('2️⃣', msg.content)
@@ -181,13 +178,13 @@ export async function execute(client: Client, message: Message, args: string[]) 
     })
     await thirdO
     .then(async function(msg: Message) {
-        if(msg === undefined) return
         if(msg.content === 'finish' || msg.content === 'end'){
             poll.setTimestamp()
             await mentionedChannel.send(poll)
             .then(message => {
                 message.react('1️⃣')
-                return message.react('2️⃣')
+                message.react('2️⃣')
+                timeout = true
             })
         }
         threeOption = msg.content
@@ -225,7 +222,8 @@ export async function execute(client: Client, message: Message, args: string[]) 
             .then(message => {
                 message.react('1️⃣')
                 message.react('2️⃣')
-                return message.react('3️⃣')
+                message.react('3️⃣')
+                timeout = true
             })
         }
         fourOption = msg.content
@@ -262,9 +260,11 @@ export async function execute(client: Client, message: Message, args: string[]) 
                 message.react('1️⃣')
                 message.react('2️⃣')
                 message.react('3️⃣')
-                return message.react('4️⃣')
+                message.react('4️⃣')
+                timeout = true
             })
         }
+        if(timeout === true) return
         fiveOption = msg.content
         poll.addField('5️⃣', msg.content).setTimestamp()
         await mentionedChannel.send(poll)

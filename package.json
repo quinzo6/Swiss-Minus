@@ -1,6 +1,6 @@
 {
   "name": "swiss-plus",
-  "version": "3.3.6",
+  "version": "3.3.7",
   "main": "index.ts",
   "engines": {
     "node": "12.13.0",
