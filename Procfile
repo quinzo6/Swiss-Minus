@@ -1,2 +1,2 @@
 worker: node index.js
-web: npm run wbuild && npm run wstart && npm run heroku-dev
+web: npm run heroku-dev && npm run wbuild && npm run wstart
