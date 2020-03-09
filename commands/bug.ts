@@ -30,20 +30,9 @@ export let name = 'bug'
 export let description = 'Report a bug, or suggest a feature!';
 export let usage = '[bug/suggestions/report]'
 export let aliases = ['report', 'suggest']
+export let canBeOff = true;
 
 export async function execute(client: Client, message: Message, args: string[], db: PgClient) {
-    const on = await getSetting("council") === "on";
-    if (!on) {
-      const notOn = new Discord.MessageEmbed();
-      notOn
-        .setTitle(message.author.tag)
-        .setAuthor(message.author.tag, message.author.avatarURL())
-        .setColor(error_red)
-        .addField("I'm Not On!", 'This command it turned off! Please ask a mod or admin to turn it back on!')
-        .setFooter(version)
-        .setTimestamp()
-      return await message.channel.send(notOn);
-    }
     const gh = new GitHub({
         username: 'Swiss-Plus',
         password: process.env.gitlogin
