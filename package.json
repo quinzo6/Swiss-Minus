@@ -14,7 +14,8 @@
     "start": "node index.ts",
     "build": "tsc",
     "dev": "cross-env NODE_ENV=dev ts-node-dev .",
-    "debug": "cross-env NODE_ENV=dev ts-node-dev ."
+    "debug": "cross-env NODE_ENV=dev ts-node-dev .",
+    "heroku-postbuild": "npm i -dev && webpack --mode production"
   },
   "heroku-run-build-script": true,
   "repository": {
