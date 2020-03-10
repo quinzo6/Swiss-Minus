@@ -1,6 +1,6 @@
 {
   "name": "swiss-plus",
-  "version": "3.3.10",
+  "version": "3.3.11",
   "main": "index.ts",
   "engines": {
     "node": "12.13.0",
@@ -9,8 +9,7 @@
   "scripts": {
     "lint": "eslint --ext .jsx,.js src",
     "heroku-dev": "npm i -dev",
-    "wbuild": "webpack --mode production",
-    "wstart": "webpack-dev-server --mode development --hot --open --port $PORT",
+
     "start": "node index.ts",
     "build": "tsc",
     "dev": "cross-env NODE_ENV=dev ts-node-dev .",

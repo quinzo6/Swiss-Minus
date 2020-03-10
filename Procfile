@@ -1,2 +1,1 @@
-worker: node index.js
-web: npm run wstart
+worker: node index.ts
