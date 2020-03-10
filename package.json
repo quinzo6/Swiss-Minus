@@ -1,20 +1,16 @@
 {
   "name": "swiss-plus",
-  "version": "3.3.11",
+  "version": "3.3.12",
   "main": "index.ts",
   "engines": {
     "node": "12.13.0",
     "npm": "6.12.0"
   },
   "scripts": {
-    "lint": "eslint --ext .jsx,.js src",
-    "heroku-dev": "npm i -dev",
-
     "start": "node index.ts",
     "build": "tsc",
     "dev": "cross-env NODE_ENV=dev ts-node-dev .",
-    "debug": "cross-env NODE_ENV=dev ts-node-dev .",
-    "heroku-postbuild": "npm i -dev && webpack --mode production"
+    "debug": "cross-env NODE_ENV=dev ts-node-dev ."
   },
   "heroku-run-build-script": true,
   "repository": {
