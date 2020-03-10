@@ -30,6 +30,7 @@ How to keep your branch updated with `carterdacat:master`
 1. Type `git fetch upstream`
 2. Type `git checkout master`
 3. Then type `git merge upstream/master`
+
 Do these commands when your branch is behind the master. It will say on top off the GitHub repository.
 Example: `This branch is 4 commits behind carterdacat:master.`
 
