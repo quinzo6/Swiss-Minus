@@ -1,6 +1,6 @@
 {
   "name": "swiss-plus",
-  "version": "3.3.12",
+  "version": "3.3.14",
   "main": "index.ts",
   "engines": {
     "node": "12.13.0",
@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/carterdacat/Swiss-Plus",
   "dependencies": {
-    "eslint-import-resolver-alias": "^1.1.2",
     "@discordjs/opus": "^0.1.0",
     "better-sqlite3": "^5.4.3",
     "canvas": "^2.6.1",
@@ -40,8 +39,6 @@
     "node-opus": "^0.3.3",
     "pg": "^7.18.2",
     "random-puppy": "^1.1.0",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
     "recursive-readdir": "^2.2.2",
     "simple-youtube-api": "^5.2.1",
     "translate": "^1.1.1",
@@ -50,31 +47,16 @@
     "ytdl-core": "^2.0.0"
   },
   "devDependencies": {
-    "css-loader": "^2.1.1",
-    "eslint-config-airbnb": "^17.1.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.3",
-    "file-loader": "^3.0.1",
-    "style-loader": "^0.23.1",
-    "uglifyjs-webpack-plugin": "^2.2.0",
-    "@babel/core": "^7.8.7",
-    "@babel/preset-env": "^7.8.7",
-    "@babel/preset-react": "^7.8.3",
     "@types/node": "^13.7.7",
     "@types/pg": "^7.14.1",
-    "babel-loader": "^8.0.6",
     "cross-env": "^6.0.3",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^11.0.0",
-    "html-webpack-plugin": "^3.2.0",
     "ts-node": "^8.6.2",
     "ts-node-dev": "^1.0.0-pre.44",
-    "typescript": "^3.8.3",
-    "webpack": "^4.42.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "typescript": "^3.8.3"
   },
   "private": true,
   "license": "UNLICENSED",
