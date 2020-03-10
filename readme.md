@@ -25,6 +25,15 @@ After that you want to `clone` the repository to your computer.
 4. Navigate in the folder by typing `cd Swiss-Plus`
 5. Copy paste the following into your Git Bash window `git remote add upstream https://github.com/carterdacat/Swiss-Plus.git`
 
+### How to catch up to your git fork to master
+1. Right-click on the `Swiss-Plus` folder and click on `Git Bash here`
+2. Type `git fetch upstream`
+3. Type `git checkout master`
+4. Then type `git merge upstream/master`
+
+Do these commands when your branch is behind the master. It will say on top off the GitHub repository.
+Example: `This branch is 4 commits behind carterdacat:master.`
+
 ### Installing Project Packages
 1. Type `npm install` in your Git Bash window
 

@@ -26,7 +26,7 @@ export async function execute(client: Client, message: Message, _args: string[])
         .setAuthor(message.author.tag, message.author.avatarURL())
         .setTitle('Dice roll')
         .setColor(swiss_blue)
-        .addField('I threw a dice and it turned it to be', answer)
+        .addField('I threw a dice and it turned out to be', answer)
         .setFooter(version)
         .setTimestamp() 
     message.channel.send(embed);
