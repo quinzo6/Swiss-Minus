@@ -7,8 +7,8 @@ import { version } from '../package.json'
 export let name = "coinflip";
 export let description = "Game: Coin, return head or tails to the user";
 export let cooldown = 5;
-export let aliases = ['coinflip', 'coin', 'roll'];
-
+export let aliases = ['coinflip', 'coin', 'flip', 'headsortails'];
+ 
 export async function execute(client: Client, message: Message, _args: string[]) {
 
     const coinArray = [
