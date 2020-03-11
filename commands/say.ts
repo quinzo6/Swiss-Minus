@@ -28,7 +28,7 @@ export async function execute(
       .setColor(error_red)
       .addField(
         "Missing Perms!",
-        `Hey ${message.author}, you are missing permissions to use this command.`
+        `Hey <@${message.author}>, you are missing permissions to use this command.`
       )
       .setFooter(version)
       .setTimestamp();
