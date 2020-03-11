@@ -7,8 +7,8 @@ import { version } from '../package.json'
 export let name = "diceroll";
 export let description = "Game: Dice roll, returns a number between 1 and 6";
 export let cooldown = 5;
-export let aliases = ['diceroll', 'dice', 'role'];
-
+export let aliases = ['diceroll', 'dice', 'roll'];
+ 
 export async function execute(client: Client, message: Message, _args: string[]) {
 
     const diceArray = [
