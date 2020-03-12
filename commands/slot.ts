@@ -17,10 +17,10 @@ const worst = [
   "Better luck next time",
   "Try again, maybe you'll get something better"
 ];
-
 function getRandom(array: Array<any>) {
   return array[Math.floor(Math.random() * array.length)];
 }
+
 export async function execute(
   client: SwissClient,
   message: Message,
