@@ -20,20 +20,32 @@ export async function execute(
   const { commands } = client;
 
   if (!args.length) {
-    const cmds = commands.map(command => command.name).join(", ");
+    const categories = {};
+    const prefix = await getSetting("prefix");
+    client.commands.map(command => {
+      if (!Object.keys(categories).includes(command.category)) {
+        if (categories[command.category] === undefined)
+          categories[command.category] = [];
+      }
+      categories[command.category].push(`${command.name}`);
+    });
     const helpEmbed = new MessageEmbed()
       .setTitle("Help!")
       .setColor(swiss_blue)
       .setAuthor(message.author.tag, message.author.avatarURL())
-      .addField("Commands:", `${cmds}`)
-      .addField(
-        "Tip:",
-        `You can send \`${await getSetting(
-          "prefix"
-        )}help [command name]\` to get info on a specific command!`
-      )
+      // .addField("Commands:", `${cmds}`)
       .setFooter(version)
       .setTimestamp();
+    Object.keys(categories).forEach(key => {
+      helpEmbed.addField(
+        `${key} : ${categories[key].length} commands`,
+        `\`${prefix}${categories[key].join(`\`, \`${prefix}`)}\``
+      );
+    });
+    helpEmbed.addField(
+      "Tip:",
+      `You can send \`${prefix}help [command name]\` to get info on a specific command!`
+    );
     return message.author
       .send(helpEmbed)
       .then(() => {

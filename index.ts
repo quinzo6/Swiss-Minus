@@ -24,19 +24,20 @@ db.connect().then(_ => {
   console.log("Connected to database.");
 });
 
-const client = new SwissClient({ db }, {});
-const commandFiles = fs
-  .readdirSync("./commands")
-  .filter(file => file.endsWith(dev ? ".ts" : ".js"));
+const client = new SwissClient({ db, dev }, {});
+client.readCommands("./commands");
+// const commandFiles = fs
+//   .readdirSync("./commands")
+//   .filter(file => file.endsWith(dev ? ".ts" : ".js"));
 
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  if (dev) {
-    console.log(`Loading in ${command.name}`);
-  }
-  //@ts-ignore
-  client.commands.set(command.name, command);
-}
+// for (const file of commandFiles) {
+//   const command = require(`./commands/${file}`);
+//   if (dev) {
+//     console.log(`Loading in ${command.name}`);
+//   }
+//   //@ts-ignore
+//   client.commands.set(command.name, command);
+// }
 let count: number;
 let lengthe = aplanes.length;
 const forloop = async (_: string) => {

@@ -38,9 +38,9 @@ export async function execute(
   const randomOption = choices[Math.floor(Math.random() * choices.length)];
   const embed = new MessageEmbed()
     .setAuthor(message.author.tag, message.author.avatarURL())
-    .setTitle("8Ball")
+    .setTitle("Your fortune is:")
+    .setDescription(randomOption)
     .setColor(swiss_blue)
-    .addField("Your fortune is", randomOption)
     .setFooter(version)
     .setTimestamp();
   message.channel.send(embed);
