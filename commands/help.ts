@@ -1,4 +1,5 @@
-import Discord, { Client, Message, MessageEmbed } from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
+import SwissClient from "../SwissClient";
 import { getSetting } from "../index";
 import { swiss_blue } from "../config";
 import { error_red } from "../config";
@@ -12,14 +13,11 @@ export let usage = "[command name]";
 export let cooldown = 5;
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[]
 ) {
-  const {
-    // @ts-ignore
-    commands
-  } = message.client;
+  const { commands } = client;
 
   if (!args.length) {
     const cmds = commands.map(command => command.name).join(", ");
@@ -49,7 +47,7 @@ export async function execute(
           .setColor(error_red)
           .setTitle("Error")
           .setDescription(
-            "Unable to send you a dmd with my commands! This may be because your dms are turned off. Please try again later."
+            "Unable to send you a dm with my commands! This may be because your dms are turned off. Please try again later."
           )
           .addField("Error:", error)
           .setFooter(version)
@@ -65,8 +63,7 @@ export async function execute(
     commands.find(c => c.aliases && c.aliases.includes(name));
 
   if (!command) {
-    const nValidComm = new Discord.MessageEmbed();
-    nValidComm
+    const nValidComm = new MessageEmbed()
       .setTitle("Error!")
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setColor(error_red)
@@ -77,8 +74,7 @@ export async function execute(
   }
 
   const cmdName = `${command.name}`;
-  const cmd = new Discord.MessageEmbed();
-  cmd
+  const cmd = new MessageEmbed()
     .setTitle("Help")
     .setAuthor(message.author.tag, message.author.avatarURL())
     .addField("Command:", cmdName);

@@ -4,7 +4,7 @@ import { version } from "../package.json";
 
 export let name = "whois";
 export let description = "Gets info about a user";
-export let aliases = ["Whois"];
+export let aliases = ["Whois", "userinfo"];
 export let usage = "[user]";
 export let cooldown = 5;
 export let canBeOff = true;

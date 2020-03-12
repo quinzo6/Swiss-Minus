@@ -1,13 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable global-require */
 import fs from "fs";
-import {
-  Collection,
-  TextChannel,
-  MessageEmbed,
-  Client,
-  ClientOptions
-} from "discord.js";
+import { Collection, TextChannel, MessageEmbed } from "discord.js";
 import { Client as PgClient } from "pg";
 import { config as dotenv_config } from "dotenv";
 import { version } from "./package.json";
@@ -20,6 +14,7 @@ dotenv_config();
 
 const dev = process.env.NODE_ENV === "dev";
 import planes from "./planes";
+import SwissClient from "./SwissClient";
 const aplanes = Object.values(planes);
 const db = new PgClient({
   connectionString: dev ? process.env.dev_db_url : process.env.DATABASE_URL,
@@ -29,19 +24,6 @@ db.connect().then(_ => {
   console.log("Connected to database.");
 });
 
-interface SwissOptions {
-  db: PgClient;
-}
-class SwissClient extends Client {
-  public db: PgClient;
-  public commands: Collection<string, any>;
-
-  public constructor(options: SwissOptions, discordOptions: ClientOptions) {
-    super(discordOptions);
-    this.db = options.db;
-    this.commands = new Collection();
-  }
-}
 const client = new SwissClient({ db }, {});
 const commandFiles = fs
   .readdirSync("./commands")
