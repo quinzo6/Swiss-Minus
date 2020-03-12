@@ -1,7 +1,5 @@
-import Discord, { Client, Message, GuildMember } from "discord.js";
-import { getSetting } from "../index";
+import { Client, Message, GuildMember, MessageEmbed } from "discord.js";
 import { swiss_blue } from "../config";
-import { error_red } from "../config";
 import { version } from "../package.json";
 
 export let name = "whois";
@@ -17,12 +15,19 @@ export async function execute(
   args: string[]
 ) {
   const whoisUser =
-    message.mentions.members.first() ||
-    (message.guild.members.cache.get(args[0]) as GuildMember);
+    message.mentions.members.first() || // First mention
+    (message.guild.members.cache.get(args[0]) as GuildMember) || // User ID
+    (message.guild.members.cache.find(
+      m => m.user.username === args[0]
+    ) as GuildMember) || // Username
+    (message.guild.members.cache.find(
+      m => m.nickname === args[0]
+    ) as GuildMember) || // Nickname
+    message.member; // Member who sent the message
   if (!whoisUser) {
     const roles = message.member.roles.cache.map(r => r).join(",");
     let highestRole = message.member.roles.highest;
-    const whois = new Discord.MessageEmbed();
+    const whois = new MessageEmbed();
     whois
       .setThumbnail(message.author.avatarURL())
       .setTitle(message.author.tag)
@@ -38,11 +43,10 @@ export async function execute(
       .setFooter(version)
       .setTimestamp();
     await message.channel.send(whois);
-  }
-  if (whoisUser) {
+  } else {
     const roles1 = whoisUser.roles.cache.map(r => r).join(",");
     const highestRole1 = whoisUser.roles.highest;
-    const whois1 = new Discord.MessageEmbed();
+    const whois1 = new MessageEmbed();
     whois1
       .setThumbnail(whoisUser.user.avatarURL())
       .setTitle(whoisUser.user.tag)

@@ -1,7 +1,5 @@
-import Discord, { Client, Message } from "discord.js";
-import { getSetting } from "../index";
+import { Client, Message, MessageEmbed } from "discord.js";
 import { swiss_blue } from "../config";
-import { error_red } from "../config";
 import { version } from "../package.json";
 
 export let name = "topic";
@@ -28,7 +26,7 @@ export async function execute(
     "Windows or Apple?"
   ];
   const q = quotes[Math.floor(Math.random() * quotes.length)];
-  const embed = new Discord.MessageEmbed()
+  const embed = new MessageEmbed()
     .setTitle("")
     .setAuthor(message.author.tag, message.author.avatarURL())
     .setColor(swiss_blue)

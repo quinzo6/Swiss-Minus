@@ -1,21 +1,21 @@
 /* eslint-disable consistent-return */
 /* eslint-disable global-require */
 import fs from "fs";
-import Discord, {
+import {
   Collection,
   TextChannel,
-  Emoji,
-  Message,
-  MessageEmbed
+  MessageEmbed,
+  Client,
+  ClientOptions
 } from "discord.js";
 import { Client as PgClient } from "pg";
 import { config as dotenv_config } from "dotenv";
 import { version } from "./package.json";
-import { swiss_blue, log_yellow, error_red } from "./config";
-import yt from "simple-youtube-api";
-import ffmpeg from "ffmpeg-static";
-import opus from "node-opus";
-import ytdl from "ytdl-core";
+import { log_yellow, error_red } from "./config";
+// import yt from "simple-youtube-api";
+// import ffmpeg from "ffmpeg-static";
+// import opus from "node-opus";
+// import ytdl from "ytdl-core";
 dotenv_config();
 
 const dev = process.env.NODE_ENV === "dev";
@@ -28,9 +28,20 @@ const db = new PgClient({
 db.connect().then(_ => {
   console.log("Connected to database.");
 });
-const client = new Discord.Client();
-//@ts-ignore
-client.commands = new Discord.Collection();
+
+interface SwissOptions {
+  db: PgClient;
+}
+class SwissClient extends Client {
+  public db: PgClient;
+  public commands: Collection<string, any>;
+  constructor(options: SwissOptions, discordOptions: ClientOptions) {
+    super(discordOptions);
+    this.db = options.db;
+    this.commands = new Collection();
+  }
+}
+const client = new SwissClient({ db }, {});
 const commandFiles = fs
   .readdirSync("./commands")
   .filter(file => file.endsWith(dev ? ".ts" : ".js"));
@@ -68,14 +79,15 @@ forloop("_");
 const cooldowns: Collection<
   string,
   Collection<string, number>
-> = new Discord.Collection();
+> = new Collection();
 
 client.on("message", async message => {
+  console.log(message.content);
   if ((message.channel as TextChannel).parentID === "606557115758411807")
     return;
   if (message.channel.type === "dm" && message.author.id !== client.user.id) {
     let dmlogs = client.channels.cache.get("680608961019510831") as TextChannel;
-    let embed = new Discord.MessageEmbed();
+    let embed = new MessageEmbed();
     embed
       .setColor(log_yellow)
       .setTitle("New DM!")
@@ -86,7 +98,7 @@ client.on("message", async message => {
   }
   const prefixes = [
     dev ? "?" : await getSetting("prefix"),
-    `<@!${client.user.id}>`
+    `<@${client.user.id}>`
   ];
   if (
     !prefixes.some(prefix => message.content.startsWith(prefix)) ||
@@ -113,7 +125,7 @@ client.on("message", async message => {
   if (!command) return;
 
   if (command.guildOnly && message.channel.type !== "text") {
-    const embed = new Discord.MessageEmbed()
+    const embed = new MessageEmbed()
       .setTitle("Error")
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setColor(error_red)
@@ -124,8 +136,7 @@ client.on("message", async message => {
   const on =
     (command.canBeOff ? await getSetting(command.name) : "on") === "on";
   if (!on) {
-    const notOn = new Discord.MessageEmbed();
-    notOn
+    const notOn = new MessageEmbed()
       .setTitle(message.author.tag)
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setColor(error_red)
@@ -139,7 +150,7 @@ client.on("message", async message => {
   }
 
   if (command.args && !args.length) {
-    const embed = new Discord.MessageEmbed()
+    const embed = new MessageEmbed()
       .setTitle("Argument")
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setColor(error_red)
@@ -152,7 +163,7 @@ client.on("message", async message => {
   }
 
   if (!cooldowns.has(command.name)) {
-    cooldowns.set(command.name, new Discord.Collection());
+    cooldowns.set(command.name, new Collection());
   }
 
   const now = Date.now();
@@ -164,7 +175,7 @@ client.on("message", async message => {
 
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
-      const timeOut = new Discord.MessageEmbed();
+      const timeOut = new MessageEmbed();
       timeOut
         .setAuthor(message.author.tag, message.author.avatarURL())
         .setTitle("Cooldown has Not finished")
@@ -184,8 +195,7 @@ client.on("message", async message => {
 
   try {
     command.execute(client, message, args, db);
-    let embed = new Discord.MessageEmbed() as MessageEmbed;
-    embed
+    let embed = new MessageEmbed()
       .setColor(log_yellow)
       .setDescription(
         `The command ${commandName} was used by <@${message.author.id}>. The whole message was ${message.content}`
@@ -200,8 +210,7 @@ client.on("message", async message => {
     const userMen = message.author.id;
     // eslint-disable-next-line no-console
     console.error(error);
-    const err = new Discord.MessageEmbed();
-    err
+    const err = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setTitle("An Error Occurred")
       .setColor(error_red)

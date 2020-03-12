@@ -1,16 +1,4 @@
-import Discord, {
-  Client,
-  Message,
-  TextChannel,
-  MessageEmbed,
-  ClientUser,
-  UserManager
-} from "discord.js";
-import { getSetting } from "../index";
-import { swiss_blue } from "../config";
-import { error_red } from "../config";
-import { log_yellow } from "../config";
-import { version } from "../package.json";
+import { Client, Message } from "discord.js";
 
 const rules = [
   "You must be over the age of 13. If we suspect a user being under the age of 13, we may enforce appropriate action to make sure all users are above the age of 13. You may continue to stay in this server with parental permission.",
@@ -68,7 +56,7 @@ export async function execute(
   if (rules[parseInt(args[0]) - 1] !== undefined)
     message.channel.send(rules[parseInt(args[0]) - 1]);
   if (rules[wordmap[args[0]] - 1] !== undefined)
-    message.channel.send(rules[wordmap[args[0]] - 1]);
+    message.channel.send(rules[wordmap[args[0].toLowerCase()] - 1]);
   if (parseInt(args[0]) > 36)
     `Swiss Plus is the best bot, no questions. If you do for some absurd reason have a question, dm **Non-Ping(${
       (await pete).tag

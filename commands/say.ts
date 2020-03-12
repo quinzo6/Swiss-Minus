@@ -1,5 +1,4 @@
-import Discord, { Client, Message, TextChannel } from "discord.js";
-import { getSetting } from "../index";
+import { Client, Message, TextChannel, MessageEmbed } from "discord.js";
 import { error_red } from "../config";
 import { log_yellow } from "../config";
 import { version } from "../package.json";
@@ -22,7 +21,7 @@ export async function execute(
     message.member.hasPermission("MANAGE_ROLES") ||
     message.author.id === "660238973943152707";
   if (!mod) {
-    const embed = new Discord.MessageEmbed()
+    const embed = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setTitle("Missing Permissions")
       .setColor(error_red)
@@ -35,7 +34,7 @@ export async function execute(
     return message.channel.send(embed);
   }
   if (!mentionedChannel) {
-    const embed = new Discord.MessageEmbed()
+    const embed = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setTitle("Invalid Channel!")
       .setColor("F90B0B")
@@ -45,7 +44,7 @@ export async function execute(
     return message.channel.send(embed);
   }
   if (mentionedChannel && !args[1]) {
-    const embed = new Discord.MessageEmbed()
+    const embed = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setTitle("Error!")
       .setColor(error_red)
@@ -58,7 +57,7 @@ export async function execute(
     return message.channel.send(embed);
   }
   const messages1 = args.slice(1).join(" ");
-  const embed = new Discord.MessageEmbed()
+  const embed = new MessageEmbed()
     .setAuthor(message.author.tag, message.author.avatarURL())
     .setTitle("Say Cmd Log")
     .setColor(log_yellow)

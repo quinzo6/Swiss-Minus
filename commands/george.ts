@@ -1,4 +1,4 @@
-import Discord, { MessageAttachment, Client, Message } from "discord.js";
+import { MessageAttachment, Client, Message } from "discord.js";
 export let name = "george";
 export let canBeOff = true;
 
