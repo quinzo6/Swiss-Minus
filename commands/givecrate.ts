@@ -14,6 +14,7 @@ export const name = "givecrate";
 export const description = "Gives a user a crate";
 export const usage = `[user] [chest type] <reason>`;
 export const guildOnly = true;
+export const permissions = ["MANAGE_ROLES"];
 
 export async function execute(
   client: Client,
@@ -35,19 +36,6 @@ export async function execute(
   const mod =
     message.member.hasPermission("MANAGE_ROLES") ||
     message.author.id === "660238973943152707";
-  if (!mod) {
-    const embed = new MessageEmbed()
-      .setAuthor(message.author.tag, message.author.avatarURL())
-      .setTitle("Missing Permissions")
-      .setColor(error_red)
-      .addField(
-        "Missing Perms!",
-        `Hey ${message.author}, you are missing permissions to use this command.`
-      )
-      .setFooter(version)
-      .setTimestamp();
-    return message.channel.send(embed);
-  }
   if (
     mod &&
     whoisUser.id === message.author.id &&

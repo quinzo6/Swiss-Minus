@@ -1,14 +1,7 @@
-import Discord, {
-  Client,
-  Message,
-  TextChannel,
-  MessageEmbed
-} from "discord.js";
+import { Client, Message, TextChannel, MessageEmbed } from "discord.js";
 import randomPuppy from "random-puppy";
 const subreddits = require("./subreddits.json");
-import { getSetting } from "../index";
 import { swiss_blue } from "../config";
-import { error_red } from "../config";
 import { log_yellow } from "../config";
 import { version } from "../package.json";
 
@@ -27,7 +20,7 @@ export async function execute(
   const random = subReddits[Math.floor(Math.random() * subReddits.length)];
   if (!args[0]) {
     const img = await randomPuppy(random);
-    const embed = new Discord.MessageEmbed()
+    const embed = new MessageEmbed()
       .setColor(swiss_blue)
       .setImage(img)
       .setAuthor(message.author.tag, message.author.avatarURL())
@@ -38,8 +31,7 @@ export async function execute(
       .setTimestamp();
     await message.channel.send(embed);
   } else if (args[0] === "add" && args[1] && !args[2]) {
-    const whoAdded = new Discord.MessageEmbed() as MessageEmbed;
-    whoAdded
+    const whoAdded = new MessageEmbed()
       .setColor(log_yellow)
       .setTitle(message.author.tag)
       .setAuthor(message.author.tag, message.author.avatarURL())
@@ -53,8 +45,7 @@ export async function execute(
     (client.channels.cache.get("665825128415887370") as TextChannel).send(
       whoAdded
     );
-    const confirm = new Discord.MessageEmbed();
-    confirm
+    const confirm = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setTitle(message.author.tag)
       .setColor(swiss_blue)
@@ -66,13 +57,12 @@ export async function execute(
       .setTimestamp();
     message.channel.send(confirm);
   } else if (args[2]) {
-    const wohh = new Discord.MessageEmbed();
-    wohh
+    const wohh = new MessageEmbed()
       .setTitle(message.author.tag)
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setColor(swiss_blue)
       .addField(
-        "To many items, ahhhh",
+        "Too many items, ahhhh",
         "Hey buddy, either you put a extra space or your drunk. Use _ instead of spaces for SubReddit names, thanks"
       )
       .setFooter(version)

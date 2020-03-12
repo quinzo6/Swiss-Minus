@@ -8,6 +8,7 @@ export let description = "Says a message!";
 export let usage = "[channel] [message]";
 export let guildOnly = true;
 export let canBeOff = true;
+export let permissions = ["MANAGE_ROLES"];
 
 export async function execute(
   client: Client,
@@ -21,17 +22,6 @@ export async function execute(
     message.member.hasPermission("MANAGE_ROLES") ||
     message.author.id === "660238973943152707";
   if (!mod) {
-    const embed = new MessageEmbed()
-      .setAuthor(message.author.tag, message.author.avatarURL())
-      .setTitle("Missing Permissions")
-      .setColor(error_red)
-      .addField(
-        "Missing Perms!",
-        `Hey <@${message.author}>, you are missing permissions to use this command.`
-      )
-      .setFooter(version)
-      .setTimestamp();
-    return message.channel.send(embed);
   }
   if (!mentionedChannel) {
     const embed = new MessageEmbed()

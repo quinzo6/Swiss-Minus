@@ -1,6 +1,6 @@
-import { Client, Message, MessageEmbed, DiscordAPIError } from "discord.js";
+import { Client, Message, MessageEmbed } from "discord.js";
 import { Client as PgClient } from "pg";
-import { swiss_blue, error_red, log_yellow } from "../config";
+import { swiss_blue, error_red } from "../config";
 import { version } from "../package.json";
 import planes from "../planes";
 
@@ -9,22 +9,23 @@ export let description = "Collect your daily crate!";
 export let usage = "<open> <crate type>";
 export let aliases = ["crate"];
 
+const aplanes = Object.values(planes);
+class Plane {
+  name: string;
+  rarity: any;
+  constructor(name: string) {
+    this.name = name;
+    this.rarity = aplanes.find(p => p.name === name).rarity;
+  }
+}
+const crate: string[] = ["common", "rare", "epic", "ultra", "ledgendary"];
+
 export async function execute(
   client: Client,
   message: Message,
   args: string[],
   db: PgClient
 ) {
-  const aplanes = Object.values(planes);
-  class Plane {
-    name: string;
-    rarity: any;
-    constructor(name: string) {
-      this.name = name;
-      this.rarity = aplanes.find(p => p.name === name).rarity;
-    }
-  }
-  const crate: string[] = ["common", "rare", "epic", "ultra", "ledgendary"];
   const id = await db.query("SELECT id FROM cards WHERE id = $1", [
     message.author.id
   ]);

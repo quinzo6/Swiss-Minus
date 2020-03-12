@@ -7,24 +7,25 @@ export let description = "Gets a random chat topic, if the chat is dying!";
 export let aliases = ["Topic", "t", "T"];
 export let canBeOff = true;
 
+const quotes = [
+  "If you where any animal, what would you be and why?",
+  "iPhone or Android ",
+  "Look left than right, or right than left?",
+  "Is it half full, or half empty",
+  "Twix left, or twix right",
+  "Is the max safe?",
+  "Democrat or Republican",
+  "What have you been up to recently?",
+  "Whats your favourite plane?",
+  "SwissBot or SwissPlus?",
+  "Windows or Apple?"
+];
+
 export async function execute(
   client: Client,
   message: Message,
   args: string[]
 ) {
-  const quotes = [
-    "If you where any animal, what would you be and why?",
-    "iPhone or Android ",
-    "Look left than right, or right than left?",
-    "Is it half full, or half empty",
-    "Twix left, or twix right",
-    "Is the max safe?",
-    "Democrat or Republican",
-    "What have you been up to recently?",
-    "Whats your favourite plane?",
-    "SwissBot or SwissPlus?",
-    "Windows or Apple?"
-  ];
   const q = quotes[Math.floor(Math.random() * quotes.length)];
   const embed = new MessageEmbed()
     .setTitle("")

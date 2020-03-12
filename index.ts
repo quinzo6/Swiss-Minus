@@ -35,7 +35,8 @@ interface SwissOptions {
 class SwissClient extends Client {
   public db: PgClient;
   public commands: Collection<string, any>;
-  constructor(options: SwissOptions, discordOptions: ClientOptions) {
+
+  public constructor(options: SwissOptions, discordOptions: ClientOptions) {
     super(discordOptions);
     this.db = options.db;
     this.commands = new Collection();
@@ -82,7 +83,6 @@ const cooldowns: Collection<
 > = new Collection();
 
 client.on("message", async message => {
-  console.log(message.content);
   if ((message.channel as TextChannel).parentID === "606557115758411807")
     return;
   if (message.channel.type === "dm" && message.author.id !== client.user.id) {
@@ -114,9 +114,7 @@ client.on("message", async message => {
   const commandName = args.shift().toLowerCase();
 
   const command =
-    //@ts-ignore
     client.commands.get(commandName) ||
-    //@ts-ignore
     client.commands.find(
       (cmd: { aliases: string | string[] }) =>
         cmd.aliases && cmd.aliases.includes(commandName)
@@ -192,6 +190,30 @@ client.on("message", async message => {
 
   timestamps.set(message.author.id, now);
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
+  if (
+    !(command.permissions || []).every(perm =>
+      message.member.hasPermission(perm)
+    )
+  ) {
+    if (message.author.id === "660238973943152707") return;
+    const missingPerms = (command.permissions || []).filter(
+      perm => !message.member.hasPermission(perm)
+    );
+    const embed = new MessageEmbed()
+      .setAuthor(message.author.tag, message.author.avatarURL())
+      .setTitle("Missing Permissions")
+      .setColor(error_red)
+      .addField(
+        "Missing Perms!",
+        `Hey <@${message.author.id}>, you need to have \`${missingPerms.join(
+          "`, `"
+        )}\` permissions to use this command.`
+      )
+      .setFooter(version)
+      .setTimestamp();
+    return message.channel.send(embed);
+  }
 
   try {
     command.execute(client, message, args, db);
