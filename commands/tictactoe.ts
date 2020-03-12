@@ -6,8 +6,6 @@ import {
   MessageCollector,
   CollectorFilter,
   MessageEmbed,
-  ReactionEmoji,
-  User,
   ReactionCollector
 } from "discord.js";
 
@@ -17,7 +15,9 @@ export let aliases = ["ttt"];
 export let cooldown = 10;
 
 const reactions = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"];
-
+function getRandom(array: Array<any>) {
+  return array[Math.floor(Math.random() * array.length)];
+}
 async function awaitMessage(message: Message, filter: CollectorFilter) {
   let promise = new Promise((resolve, reject) => {
     let x = new MessageCollector(message.channel, filter, { time: 60000 });
@@ -54,6 +54,8 @@ export async function execute(
       m => m.nickname === args[0]
     ) as GuildMember) || // Nickname
     message.guild.me; // Bot
+  if (player2.user.bot && player2.user.id !== client.user.id)
+    return message.channel.send(`You can't play with a bot other than me!`);
   if (player1 === player2)
     return message.channel.send(`You can't play with yourself`);
   if (player2 !== message.guild.me) {
@@ -80,12 +82,20 @@ export async function execute(
   var stop = false;
   const gameMsg = await message.channel.send("Preparing the board...");
   const board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+  var playable = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   await Promise.all(reactions.map(r => gameMsg.react(r)));
   function parseSign(sign: string): string {
     var finalSign = "◼️";
     if (sign === player1.user.id) finalSign = "❌";
     if (sign === player2.user.id) finalSign = "⭕";
     return finalSign;
+  }
+  async function delay(ms) {
+    return new Promise((resolve, reject) => setTimeout(resolve, ms));
+  }
+  function allAreSame(...args) {
+    if (args.every(v => v === args[0])) return args[0];
+    return false;
   }
   function updateGameEmbed() {
     embed
@@ -103,15 +113,75 @@ export async function execute(
       );
   }
   function findWinner(): string {
-    var winner = "";
-    return winner;
+    const possibleWins = [
+      // Horizontal
+      allAreSame(board[0], board[1], board[2]),
+      allAreSame(board[3], board[4], board[5]),
+      allAreSame(board[6], board[7], board[8]),
+      // Vertical
+      allAreSame(board[0], board[3], board[6]),
+      allAreSame(board[1], board[4], board[7]),
+      allAreSame(board[2], board[5], board[8]),
+      // The two diagonals
+      allAreSame(board[0], board[4], board[8]),
+      allAreSame(board[2], board[4], board[6])
+    ];
+    return possibleWins.find(w => w !== false && w !== " ") || "";
+  }
+  function handleUserInput(emoji) {
+    board[reactions.indexOf(emoji)] = currentPlayer.id;
+    gameMsg.reactions.cache.find(r => r.emoji.name === emoji).remove();
+    playable[reactions.indexOf(emoji)] = null;
+    const winner = findWinner();
+    console.log(winner);
+    if (playable.every(p => p === null)) {
+      stop = true;
+      message.channel.stopTyping(true);
+      updateGameEmbed();
+      embed.setTitle("Its a draw!");
+      gameMsg.reactions.cache.forEach(r => r.remove());
+      gameMsg.edit(
+        `${player1.user.tag} = ${parseSign(player1.user.id)}\n${
+          player2.user.tag
+        } = ${parseSign(player2.user.id)}`,
+        embed
+      );
+      return;
+    }
+    if (winner !== "") {
+      stop = true;
+      message.channel.stopTyping(true);
+      updateGameEmbed();
+      embed.setTitle(`${client.users.cache.get(winner).tag} won!`);
+      gameMsg.reactions.cache.forEach(r => r.remove());
+      gameMsg.edit(
+        `${player1.user.tag} = ${parseSign(player1.user.id)}\n${
+          player2.user.tag
+        } = ${parseSign(player2.user.id)}`,
+        embed
+      );
+      return;
+    }
+    if (!stop) {
+      loop();
+    }
   }
   loop();
   async function loop() {
     if (currentPlayer === player2) currentPlayer = player1;
     else if (currentPlayer === player1) currentPlayer = player2;
     updateGameEmbed();
-    await gameMsg.edit(" ", embed);
+    await gameMsg.edit(
+      `${player1.user.tag} = ${parseSign(player1.user.id)}\n${
+        player2.user.tag
+      } = ${parseSign(player2.user.id)}`,
+      embed
+    );
+
+    if (currentPlayer.user.id === client.user.id) {
+      await delay(Math.random() * 3 + 2);
+      handleUserInput(reactions[getRandom(playable.filter(p => p !== null))]);
+    }
     message.channel.startTyping(60000);
     const collector = new ReactionCollector(
       gameMsg,
@@ -126,26 +196,7 @@ export async function execute(
     collector.on("collect", reaction => {
       message.channel.stopTyping(true);
       collector.endReason();
-      board[reactions.indexOf(reaction.emoji.name)] = currentPlayer.id;
-      reaction.remove();
-      const winner = findWinner();
-      if (winner === "draw") {
-        stop = true;
-        updateGameEmbed();
-        embed.setTitle("Its a draw!");
-        gameMsg.edit(" ", embed);
-        return;
-      }
-      if (winner !== "") {
-        stop = true;
-        updateGameEmbed();
-        embed.setTitle(`${winner} won!`);
-        gameMsg.edit(" ", embed);
-        return;
-      }
-      if (!stop) {
-        loop();
-      }
+      handleUserInput(reaction.emoji.name);
     });
 
     collector.on("end", collected => {
@@ -168,6 +219,7 @@ export async function execute(
           );
         }
         stop = true;
+        gameMsg.reactions.cache.forEach(r => r.remove());
         message.channel.stopTyping(true);
       }
     });
