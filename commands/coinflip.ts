@@ -15,7 +15,10 @@ export async function execute(
   message: Message,
   _args: string[]
 ) {
-  const answer = coinArray[Math.floor(Math.random() * coinArray.length)];
+  const answer =
+    Math.random() <= 0.01
+      ? "Side"
+      : coinArray[Math.floor(Math.random() * coinArray.length)];
   const embed = new MessageEmbed()
     .setAuthor(message.author.tag, message.author.avatarURL())
     .setTitle("Coin")

@@ -20,6 +20,10 @@ export async function execute(
   message: Message,
   args: string[]
 ) {
+  if (!args[0])
+    return message.channel.send(
+      `Try again but with \`${choices.join("`, `")}\``
+    );
   let p1Choice: string = "";
   if (rock.includes(args[0].toLowerCase())) {
     p1Choice = "Rock";
