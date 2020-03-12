@@ -16,13 +16,12 @@ export async function execute(
   args: string[]
 ) {
   const mentionedChannel =
-    message.mentions.channels.first() ||
-    (client.channels.cache.get(args[0]) as TextChannel);
+    message.mentions.channels.first() || // Mentioned channel
+    (client.channels.cache.get(args[0]) as TextChannel) || // Find channel by id
+    message.channel; // Current Channel
   const mod =
     message.member.hasPermission("MANAGE_ROLES") ||
     message.author.id === "660238973943152707";
-  if (!mod) {
-  }
   if (!mentionedChannel) {
     const embed = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL())

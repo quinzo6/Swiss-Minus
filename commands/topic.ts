@@ -9,7 +9,8 @@ export let canBeOff = true;
 
 const quotes = [
   "If you where any animal, what would you be and why?",
-  "iPhone or Android ",
+  "iPhone or Android?",
+  "Swiss001 old format or new?",
   "Look left than right, or right than left?",
   "Is it half full, or half empty",
   "Twix left, or twix right",
