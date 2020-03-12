@@ -1,4 +1,4 @@
-import Discord, {
+/* import Discord, {
     Client,
     Message,
     MessageEmbed,
@@ -34,4 +34,4 @@ export async function execute(client: Client, message: Message, args: string[]) 
     setTimeout(function () {
         client.user.lastMessage.edit(':x::x::x:')
     }, 3000)
-}
+} */
