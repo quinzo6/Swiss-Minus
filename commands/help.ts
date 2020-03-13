@@ -1,9 +1,8 @@
-import { Message, MessageEmbed } from "discord.js";
 import SwissClient from "../SwissClient";
+import { Message, MessageEmbed } from "discord.js";
 import { getSetting } from "../index";
 import { swiss_blue } from "../config";
 import { error_red } from "../config";
-import { version } from "../package.json";
 
 export let name = "help";
 export let description =
@@ -34,7 +33,7 @@ export async function execute(
       .setColor(swiss_blue)
       .setAuthor(message.author.tag, message.author.avatarURL())
       // .addField("Commands:", `${cmds}`)
-      .setFooter(version)
+      .setFooter(client.version)
       .setTimestamp();
     Object.keys(categories).forEach(key => {
       helpEmbed.addField(
@@ -62,7 +61,7 @@ export async function execute(
             "Unable to send you a dm with my commands! This may be because your dms are turned off. Please try again later."
           )
           .addField("Error:", error)
-          .setFooter(version)
+          .setFooter(client.version)
           .setTimestamp();
         message.channel.send(embed);
       });
@@ -80,7 +79,7 @@ export async function execute(
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setColor(error_red)
       .addField("Invalid Command!", "The Command you put in is invalid!")
-      .setFooter(version)
+      .setFooter(client.version)
       .setTimestamp();
     return message.reply(nValidComm);
   }
@@ -105,6 +104,6 @@ export async function execute(
   }
   const cmdCoolDown = `${command.cooldown || 3} second(s)`;
   cmd.addField("Cooldown:", cmdCoolDown);
-  cmd.setFooter(version).setTimestamp();
+  cmd.setFooter(client.version).setTimestamp();
   return message.channel.send(cmd);
 }

@@ -1,7 +1,7 @@
-import { Client, Message, MessageEmbed } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, MessageEmbed } from "discord.js";
 import { Client as PgClient } from "pg";
 import { swiss_blue } from "../config";
-import { version } from "../package.json";
 
 export let name = "settings";
 export let description = "Shows or changes settings";
@@ -10,7 +10,7 @@ export let usage = "[settings] <name> <value>";
 export let guildOnly = true;
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[],
   db: PgClient
@@ -26,7 +26,7 @@ export async function execute(
       .setTitle("Settings")
       .setColor(swiss_blue)
       .setAuthor(client.user.tag, client.user.displayAvatarURL())
-      .setFooter(version)
+      .setFooter(client.version)
       .setTimestamp();
     for (let row of rows) {
       embed.addField(row.name, row.value);
@@ -39,7 +39,12 @@ export async function execute(
       );
     const setting = args[0];
     const value = args.slice(1).join(" ");
-    if(setting === 'bot' && (!message.member.hasPermission('ADMINISTRATOR') || !(message.author.id === '660238973943152707'))) return
+    if (
+      setting === "bot" &&
+      (!message.member.hasPermission("ADMINISTRATOR") ||
+        !(message.author.id === "660238973943152707"))
+    )
+      return;
     const result = await db.query(
       "UPDATE settings SET value = $2 WHERE name = $1",
       [setting, value]

@@ -1,6 +1,6 @@
-import Discord, { Client, Message, MessageEmbed } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, MessageEmbed } from "discord.js";
 import { swiss_blue } from "../config";
-import { version } from "../package.json";
 
 export let name = "8ball";
 export let description = "Fortune Teller.";
@@ -31,7 +31,7 @@ const choices = [
 ];
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   _args: string[]
 ) {
@@ -41,7 +41,7 @@ export async function execute(
     .setTitle("Your fortune is:")
     .setDescription(randomOption)
     .setColor(swiss_blue)
-    .setFooter(version)
+    .setFooter(client.version)
     .setTimestamp();
   message.channel.send(embed);
 }

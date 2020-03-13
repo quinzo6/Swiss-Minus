@@ -50,6 +50,7 @@ export async function execute(
     .setColor(swiss_blue)
     .setTitle(msg)
     .setDescription(`\`▶️\`  ${slots.join(" ")}  \`◀️\``)
+    .setFooter(`GG | ${client.version}`)
     .setTimestamp();
   message.channel.send(embed);
 }

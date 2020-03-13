@@ -1,7 +1,7 @@
-import { Client, Message, MessageEmbed } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, MessageEmbed } from "discord.js";
 import { Client as PgClient } from "pg";
 import { swiss_blue, error_red } from "../config";
-import { version } from "../package.json";
 import planes from "../planes";
 
 export let name = "crates";
@@ -21,7 +21,7 @@ class Plane {
 const crate: string[] = ["common", "rare", "epic", "ultra", "ledgendary"];
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[],
   db: PgClient
@@ -57,7 +57,7 @@ export async function execute(
     let cards = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setColor(swiss_blue)
-      .setFooter(version)
+      .setFooter(client.version)
       .setTimestamp()
       .setDescription(
         `You have ${commons} commons! \n You have ${rares} rares! \n You have ${jumbos} jumbos! \n You have ${ultras} ultras! \n You have ${legendarys} ledgendarys!`
@@ -385,7 +385,7 @@ export async function execute(
         "Hey that dosent seem to be a crate type, do !crates to see crate types. It also might be that you have ran out of crates, do !crates to see"
       )
       .setTimestamp()
-      .setFooter(version);
+      .setFooter(client.version);
     return message.channel.send(no);
   }
 }

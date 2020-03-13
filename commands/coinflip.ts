@@ -1,4 +1,5 @@
-import { Client, Message, MessageEmbed } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, MessageEmbed } from "discord.js";
 
 import { swiss_blue } from "../config";
 import { version } from "../package.json";
@@ -11,12 +12,15 @@ export let aliases = ["coinflip", "coin", "flip", "headsortails"];
 const coinArray = ["Heads", "Tails"];
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   _args: string[]
 ) {
-  const answer = Math.random() <= 0.01 ? "Side" : coinArray[Math.floor(Math.random() * coinArray.length)];
-  
+  const answer =
+    Math.random() <= 0.01
+      ? "Side"
+      : coinArray[Math.floor(Math.random() * coinArray.length)];
+
   const embed = new MessageEmbed()
     .setAuthor(message.author.tag, message.author.avatarURL())
     .setTitle("Coin")

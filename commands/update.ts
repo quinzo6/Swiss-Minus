@@ -1,5 +1,5 @@
-import { Client, Message, TextChannel, MessageEmbed } from "discord.js";
-import { version } from "../package.json";
+import SwissClient from "../SwissClient";
+import { Message, TextChannel, MessageEmbed } from "discord.js";
 import { swiss_blue } from "../config";
 
 export let name = "update";
@@ -8,7 +8,7 @@ export let usage = "[Version Name] [Description]";
 export let guildOnly = true;
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[]
 ) {
@@ -19,7 +19,7 @@ export async function execute(
   embed
     .setAuthor(vName, client.user.avatarURL())
     .setDescription(description)
-    .setFooter(version)
+    .setFooter(client.version)
     .setTimestamp()
     .setColor(swiss_blue);
   let betaChannel = client.channels.cache.get(

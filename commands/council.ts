@@ -1,4 +1,5 @@
-import { Client, Message, MessageAttachment, GuildMember } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, MessageAttachment, GuildMember } from "discord.js";
 import { Client as PgClient } from "pg";
 
 export let name = "council";
@@ -6,7 +7,7 @@ export let description = "The council will decide your fate";
 export let canBeOff = true;
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[],
   db: PgClient

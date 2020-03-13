@@ -1,4 +1,5 @@
-import { Client, Message, MessageAttachment } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, MessageAttachment } from "discord.js";
 import { Client as PgClient } from "pg";
 
 export let name = "bernie";
@@ -6,7 +7,7 @@ export let description = "I am no longer asking";
 export let canBeOff = true;
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[],
   db: PgClient

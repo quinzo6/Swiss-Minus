@@ -1,10 +1,5 @@
-import {
-  Client,
-  Message,
-  MessageEmbed,
-  TextChannel,
-  GuildMember
-} from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, MessageEmbed, TextChannel, GuildMember } from "discord.js";
 
 import { version } from "../package.json";
 import { Client as PgClient } from "pg";
@@ -17,7 +12,7 @@ export const guildOnly = true;
 export const permissions = ["MANAGE_ROLES"];
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[],
   db: PgClient

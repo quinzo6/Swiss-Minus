@@ -1,7 +1,7 @@
-import { Client, Message, MessageEmbed, TextChannel } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, MessageEmbed, TextChannel } from "discord.js";
 import { Client as PgClient } from "pg";
 import { log_yellow } from "../config";
-import { version } from "../package.json";
 import GitHub from "github-api";
 
 export let name = "bug";
@@ -11,7 +11,7 @@ export let aliases = ["report", "suggest"];
 export let canBeOff = true;
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[],
   db: PgClient
@@ -41,14 +41,14 @@ export async function execute(
         .setColor(log_yellow)
         .setTitle("Succsesfuly sent the issue")
         .setURL(b.data.html_url)
-        .setFooter(version)
+        .setFooter(client.version)
         .setTimestamp();
       message.channel.send(report);
       embed
         .setColor(log_yellow)
         .setDescription("A new issue!")
         .setURL(b.data.html_url)
-        .setFooter(version)
+        .setFooter(client.version)
         .setTimestamp();
       log.send(embed);
       log.send("<@660238973943152707>");

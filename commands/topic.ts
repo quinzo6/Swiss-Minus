@@ -1,6 +1,6 @@
-import { Client, Message, MessageEmbed } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, MessageEmbed } from "discord.js";
 import { swiss_blue } from "../config";
-import { version } from "../package.json";
 
 export let name = "topic";
 export let description = "Gets a random chat topic, if the chat is dying!";
@@ -23,7 +23,7 @@ const quotes = [
 ];
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[]
 ) {
@@ -33,7 +33,7 @@ export async function execute(
     .setAuthor(message.author.tag, message.author.avatarURL())
     .setColor(swiss_blue)
     .addField("**Topic:**", q)
-    .setFooter(version)
+    .setFooter(client.version)
     .setTimestamp();
   await message.channel.send(embed);
 }

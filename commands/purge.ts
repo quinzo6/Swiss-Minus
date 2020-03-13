@@ -1,14 +1,8 @@
 /* eslint-disable vars-on-top */
-import {
-  Client,
-  Message,
-  TextChannel,
-  GuildMember,
-  MessageEmbed
-} from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, TextChannel, MessageEmbed } from "discord.js";
 import { swiss_blue } from "../config";
 import { error_red } from "../config";
-import { version } from "../package.json";
 
 export let name = "purge";
 export let description = "Purges certin messages";
@@ -17,7 +11,7 @@ export let usage = "[Number of messages] <channel>";
 export let cooldown = 5;
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[]
 ) {
@@ -36,7 +30,7 @@ export async function execute(
         "Missing Perms!",
         `Hey <@${message.author.id}>, you are missing permissions to use this command.`
       )
-      .setFooter(version)
+      .setFooter(client.version)
       .setTimestamp();
     return message.channel.send(noPerms);
   }
@@ -49,7 +43,7 @@ export async function execute(
         .setTitle("Purge")
         .setColor(swiss_blue)
         .addField("Purged Messages", `I purged ${messagesDelete} messages!`)
-        .setFooter(version)
+        .setFooter(client.version)
         .setTimestamp();
       message.channel
         .bulkDelete(messagesDelete)
@@ -67,7 +61,7 @@ export async function execute(
             .setAuthor(message.author.tag, message.author.avatarURL())
             .setColor(error_red)
             .addField("Error!", `An error occored. ${error}`)
-            .setFooter(version)
+            .setFooter(client.version)
             .setTimestamp();
           return message.channel.send(err);
         });
@@ -80,7 +74,7 @@ export async function execute(
           "Arguments!",
           "Either you provided a number below 0, a number above 99, or it wasn't a number at all!"
         )
-        .setFooter(version)
+        .setFooter(client.version)
         .setTimestamp();
       return message.channel.send(oops);
     }
@@ -94,7 +88,7 @@ export async function execute(
           "What is that?",
           "Thats not a channel? Try again with mentioning a channel"
         )
-        .setFooter(version)
+        .setFooter(client.version)
         .setTimestamp();
       return message.channel.send(yikes);
     }
@@ -103,7 +97,7 @@ export async function execute(
       .setTitle("Purge")
       .setColor(swiss_blue)
       .addField("Purged Messages", `I purged ${args[0]} messages!`)
-      .setFooter(version)
+      .setFooter(client.version)
       .setTimestamp();
     message.mentions.channels
       .first()
@@ -125,7 +119,7 @@ export async function execute(
           .setAuthor(message.author.tag, message.author.avatarURL())
           .setColor(error_red)
           .addField("Error!", `An error occored. ${error}`)
-          .setFooter(version)
+          .setFooter(client.version)
           .setTimestamp();
         await message.channel.send(err);
       });

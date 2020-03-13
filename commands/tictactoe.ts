@@ -1,6 +1,5 @@
 import SwissClient from "../SwissClient";
 import { swiss_blue } from "../config";
-import { version } from "../package.json";
 import {
   Message,
   GuildMember,
@@ -147,7 +146,7 @@ export async function execute(
       updateGameEmbed();
       embed
         .setTitle("Its a draw!")
-        .setFooter(`GG | ${version}`)
+        .setFooter(`GG | ${client.version}`)
         .setTimestamp();
       gameMsg.reactions.cache.forEach(r => r.remove());
       gameMsg.edit(
@@ -162,7 +161,7 @@ export async function execute(
       updateGameEmbed();
       embed
         .setTitle(`${client.users.cache.get(winner).tag} won!`)
-        .setFooter(`GG | ${version}`)
+        .setFooter(`GG | ${client.version}`)
         .setTimestamp();
       gameMsg.reactions.cache.forEach(r => r.remove());
       gameMsg.edit(
@@ -186,10 +185,15 @@ export async function execute(
     );
 
     if (currentPlayer.user.id === client.user.id) {
-      await delay(Math.random() * 3 + 2);
-      handleUserInput(reactions[getRandom(playable.filter(p => p !== null))]);
+      const randomDelay = [2, 5]; // Delay of 2 - 5s
+      delay(
+        (Math.floor(Math.random() * randomDelay[1] - randomDelay[0]) +
+          randomDelay[0]) *
+          1000
+      ).then(() => {
+        handleUserInput(reactions[getRandom(playable.filter(p => p !== null))]);
+      });
     }
-    message.channel.startTyping(60000);
     const collector = new ReactionCollector(
       gameMsg,
       (r, u) =>
@@ -201,7 +205,6 @@ export async function execute(
     );
 
     collector.on("collect", reaction => {
-      message.channel.stopTyping(true);
       collector.endReason();
       handleUserInput(reaction.emoji.name);
     });
@@ -210,7 +213,7 @@ export async function execute(
       if (collected.size === 0) {
         const timeout = new MessageEmbed()
           .setColor(swiss_blue)
-          .setFooter("GG")
+          .setFooter(`Not fair | ${client.version}`)
           .setTimestamp();
         if (currentPlayer === player1) {
           timeout.setTitle(`${player2.user.tag} won!`);

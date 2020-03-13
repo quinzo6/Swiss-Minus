@@ -1,6 +1,6 @@
-import { Client, Message, GuildMember, MessageEmbed } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, GuildMember, MessageEmbed } from "discord.js";
 import { swiss_blue } from "../config";
-import { version } from "../package.json";
 
 export let name = "whois";
 export let description = "Gets info about a user";
@@ -10,7 +10,7 @@ export let cooldown = 5;
 export let canBeOff = true;
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[]
 ) {
@@ -40,7 +40,7 @@ export async function execute(
       .addField("Account Created on:", message.author.createdAt)
       .addField("Joined on:", message.member.joinedAt)
       .addField("Presence:", message.author.presence.status)
-      .setFooter(version)
+      .setFooter(client.version)
       .setTimestamp();
     await message.channel.send(whois);
   } else {
@@ -59,7 +59,7 @@ export async function execute(
       .addField("Account Created On:", whoisUser.user.createdAt)
       .addField("Joined The Server on:", whoisUser.joinedAt) // says undefined
       .addField("Pressence:", whoisUser.user.presence.status) // says [object Object]
-      .setFooter(version)
+      .setFooter(client.version)
       .setTimestamp();
     await message.channel.send(whois1);
   }

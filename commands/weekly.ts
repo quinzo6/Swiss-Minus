@@ -1,14 +1,14 @@
-import { Client, Message, MessageEmbed } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, MessageEmbed } from "discord.js";
 import { Client as PgClient } from "pg";
 import { error_red } from "../config";
-import { version } from "../package.json";
 
 export let name = "weekly";
 export let description = "Collect your weekly crate!";
 export let guildOnly = true;
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[],
   db: PgClient
@@ -120,7 +120,7 @@ export async function execute(
     .setDescription(
       `Hey, your crate can't be delivered, try again in ${timeTill} days!`
     )
-    .setFooter(version)
+    .setFooter(client.version)
     .setTimestamp();
   return message.channel.send(coolDown);
 }

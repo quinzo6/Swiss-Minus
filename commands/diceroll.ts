@@ -1,7 +1,6 @@
-import { Client, Message, MessageEmbed } from "discord.js";
-
+import SwissClient from "../SwissClient";
+import { Message, MessageEmbed } from "discord.js";
 import { swiss_blue } from "../config";
-import { version } from "../package.json";
 
 export let name = "diceroll";
 export let description = "Game: Dice roll, returns a number between 1 and 6";
@@ -11,7 +10,7 @@ export let aliases = ["diceroll", "dice", "roll"];
 const diceArray = ["1", "2", "3", "4", "5", "6"];
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   _args: string[]
 ) {
@@ -22,7 +21,7 @@ export async function execute(
     .setTitle("Dice roll")
     .setColor(swiss_blue)
     .addField("I threw a dice and it turned out to be", answer)
-    .setFooter(version)
+    .setFooter(client.version)
     .setTimestamp();
   message.channel.send(embed);
 }

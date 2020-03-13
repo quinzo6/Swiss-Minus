@@ -1,7 +1,6 @@
-import Discord, { Client, Message, GuildMember } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, GuildMember, MessageEmbed } from "discord.js";
 import { swiss_blue } from "../config";
-import { error_red } from "../config";
-import { version } from "../package.json";
 
 export let name = "permissions";
 export let description = "Check the permissions of a user";
@@ -11,7 +10,7 @@ export let cooldown = 5;
 export let guildOnly = true;
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[]
 ) {
@@ -25,7 +24,7 @@ export async function execute(
       m => m.nickname === args[0]
     ) as GuildMember) || // Nickname
     message.member; // Member who sent the message
-  const permEmbed = new Discord.MessageEmbed();
+  const permEmbed = new MessageEmbed();
   permEmbed
     .setTitle("Permissions")
     .setAuthor(permMentioned.user.tag, permMentioned.user.avatarURL())
@@ -34,7 +33,7 @@ export async function execute(
       `Permissions of ${permMentioned.user.tag}`,
       `\`${permMentioned.permissions.toArray().join("` , `")}\``
     )
-    .setFooter(version)
+    .setFooter(client.version)
     .setTimestamp();
   await message.channel.send(permEmbed);
 }

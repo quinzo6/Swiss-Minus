@@ -22,7 +22,7 @@ db.connect().then(_ => {
 });
 
 const client = new SwissClient(
-  { db, dev, commandPath: "./commands", eventPath: "./events" },
+  { db, dev, version, commandPath: "./commands", eventPath: "./events" },
   { partials: ["MESSAGE", "CHANNEL", "REACTION"] }
 );
 // const commandFiles = fs

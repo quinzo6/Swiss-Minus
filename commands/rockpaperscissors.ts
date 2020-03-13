@@ -48,6 +48,7 @@ export async function execute(
       .setTitle("Its a draw")
       .setColor(log_yellow)
       .setDescription(`Both players drew ${p1Choice} so its a draw! Try again!`)
+      .setFooter(`GG | ${client.version}`)
       .setTimestamp();
     return message.channel.send(draw);
   }

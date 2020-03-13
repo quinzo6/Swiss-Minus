@@ -6,7 +6,6 @@ import {
   MessageEmbed,
   TextChannel
 } from "discord.js";
-import { version } from "../package.json";
 import { swiss_blue } from "../config";
 
 export let name = "poll";
@@ -14,19 +13,6 @@ export let description = "Creates a poll in whatever channel you would like to";
 export let cooldown = 15;
 
 const reactions = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"];
-const numbers = [
-  "zero",
-  "one",
-  "two",
-  "three",
-  "four",
-  "five",
-  "six",
-  "seven",
-  "eight",
-  "nine",
-  "ten"
-];
 const adjNumbers = [
   "zeroth",
   "first",
@@ -77,7 +63,7 @@ export async function execute(
       )}\``
     )
     .setColor(swiss_blue)
-    .setFooter(version)
+    .setFooter(client.version)
     .setTimestamp();
   const channelMessage = await message.channel.send(channelEmbed);
   const channelResponse: Message = await awaitMessage(
@@ -102,7 +88,7 @@ export async function execute(
       )}\``
     )
     .setColor(swiss_blue)
-    .setFooter(version)
+    .setFooter(client.version)
     .setTimestamp();
   const questionMessage = await message.channel.send(questionEmbed);
   const questionResponse: Message = await awaitMessage(
@@ -124,7 +110,7 @@ export async function execute(
       )}\``
     )
     .setColor(swiss_blue)
-    .setFooter(version)
+    .setFooter(client.version)
     .setTimestamp();
   const amountMessage = await message.channel.send(amountEmbed);
   const amountResponse: Message = await awaitMessage(
@@ -159,7 +145,7 @@ export async function execute(
         )}\``
       )
       .setColor(swiss_blue)
-      .setFooter(version)
+      .setFooter(client.version)
       .setTimestamp();
     if (ctr === 1) {
       optionEmbed.setDescription(

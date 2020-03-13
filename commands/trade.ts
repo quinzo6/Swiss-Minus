@@ -1,4 +1,5 @@
-import { Client, Message } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message } from "discord.js";
 import { Client as PgClient } from "pg";
 import planes from "../planes";
 const aplanes = Object.values(planes);
@@ -20,7 +21,7 @@ export let usage =
   "[card name] [amount] <second card name> <second card amoung> up to five diffrent cards";
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[],
   db: PgClient

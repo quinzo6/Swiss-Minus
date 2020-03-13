@@ -1,7 +1,7 @@
-import { Client, Message, TextChannel, MessageEmbed } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, TextChannel, MessageEmbed } from "discord.js";
 import { error_red } from "../config";
 import { log_yellow } from "../config";
-import { version } from "../package.json";
 
 export let name = "say";
 export let description = "Says a message!";
@@ -11,7 +11,7 @@ export let canBeOff = true;
 export let permissions = ["MANAGE_ROLES"];
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[]
 ) {
@@ -28,7 +28,7 @@ export async function execute(
       .setTitle("Invalid Channel!")
       .setColor("F90B0B")
       .addField("Whats that?", "That's not a channel!")
-      .setFooter(version)
+      .setFooter(client.version)
       .setTimestamp();
     return message.channel.send(embed);
   }
@@ -41,7 +41,7 @@ export async function execute(
         "I think you forgot something",
         "Your forgot what you wanted to say! Think deeper"
       )
-      .setFooter(version)
+      .setFooter(client.version)
       .setTimestamp();
     return message.channel.send(embed);
   }
@@ -52,7 +52,7 @@ export async function execute(
     .setColor(log_yellow)
     .addField("This person used the command!:", `<@${message.author.id}>`)
     .addField("The message was:", messages1)
-    .setFooter(version)
+    .setFooter(client.version)
     .setTimestamp();
   const chl = client.channels.cache.get("668987003517534259") as TextChannel;
   await chl.send(embed);

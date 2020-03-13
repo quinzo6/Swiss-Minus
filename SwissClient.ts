@@ -6,12 +6,14 @@ import { readdirSync } from "fs";
 interface SwissOptions {
   db: PgClient;
   dev: boolean;
+  version: string;
   commandPath: string;
   eventPath: string;
 }
 class SwissClient extends Client {
   public db: PgClient;
   public dev: boolean;
+  public version: string;
   public commands: Collection<string, any>;
   public events: Collection<string, any>;
 
@@ -19,6 +21,7 @@ class SwissClient extends Client {
     super(discordOptions);
     this.db = options.db;
     this.dev = options.dev;
+    this.version = `v${options.version}`;
     this.commands = new Collection();
     this.readCommands(options.commandPath);
     this.events = new Collection();

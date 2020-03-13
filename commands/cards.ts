@@ -1,7 +1,7 @@
-import { Client, Message, MessageEmbed } from "discord.js";
+import SwissClient from "../SwissClient";
+import { Message, MessageEmbed } from "discord.js";
 import { Client as PgClient } from "pg";
 import { swiss_blue, error_red } from "../config";
-import { version } from "../package.json";
 import planes from "../planes";
 
 export let name = "cards";
@@ -38,7 +38,7 @@ let legendaryss = aplanes
   .map(m => m.name);
 
 export async function execute(
-  client: Client,
+  client: SwissClient,
   message: Message,
   args: string[],
   db: PgClient
@@ -144,7 +144,7 @@ export async function execute(
       .addField("Epics", `You have: ${es}`)
       .addField("Ultras", `You have: ${us}`)
       .addField("Ledgendars", `You have: ${ls}`)
-      .setFooter(version)
+      .setFooter(client.version)
       .setTimestamp();
     return message.author.send(cards);
   }
@@ -210,7 +210,7 @@ export async function execute(
           .charAt(0)
           .toUpperCase() + carda.join("-").slice(1)
       )
-      .setFooter(version)
+      .setFooter(client.version)
       .setTimestamp()
       .addField("Rarity:", cardRarity)
       .addField("Count:", quanity)
@@ -237,7 +237,7 @@ export async function execute(
           "Thats a error! Either the card you submitted was incorrect, or something happened. When typing in a card, please use this format: For all planes with two words in it do this: `!cards <thing 1> <thing2>` for example: `!card boeing 747`. If the plane is the max, please do `!card boeing 737max` instead. If the plane is the Boeing 747, do `!plane boeing747`. Thank you for your help!"
         )
         .setTimestamp()
-        .setFooter(version);
+        .setFooter(client.version);
       return message.channel.send(no);
     }
     let namey = aplanes
@@ -309,6 +309,6 @@ export async function execute(
       "Thats a error! Either the card you submitted was incorrect, or something happened. When typing in a card, please use this format: For all planes with two words in it do this: `!cards <thing 1> <thing2>` for example: `!card boeing 747`. If the plane is the max, please do `!card boeing 737max` instead. If the plane is the Boeing 747, do `!plane boeing747`. Thank you for your help!"
     )
     .setTimestamp()
-    .setFooter(version);
+    .setFooter(client.version);
   message.channel.send(no);
 }
