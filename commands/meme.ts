@@ -1,6 +1,7 @@
 import { Client, Message, TextChannel, MessageEmbed } from "discord.js";
 import randomPuppy from "random-puppy";
-const subreddits = require("./subreddits.json");
+// const subreddits = require("./subreddits.json"); who the hell wrote a require statement in ts my god
+import { subReddits } from "./subreddits.json";
 import { swiss_blue } from "../config";
 import { log_yellow } from "../config";
 import { version } from "../package.json";
@@ -15,7 +16,6 @@ export async function execute(
   message: Message,
   args: string[]
 ) {
-  const { subReddits } = subreddits;
   const random = subReddits[Math.floor(Math.random() * subReddits.length)];
   if (!args[0]) {
     const img = await randomPuppy(random);

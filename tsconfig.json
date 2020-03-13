@@ -1,14 +1,22 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    "target": "es5",
-    "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
+    "module": "commonjs",
+    "target": "es2018",
+    "outDir": "dist",
+    "lib": [
+      "ESNext",
+      "ESNext.Array",
+      "ESNext.AsyncIterable",
+      "ESNext.Intl",
+      "ESNext.Symbol"
+    ],
+    "sourceMap": false,
+    "inlineSourceMap": true,
+    "incremental": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true
   },
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
