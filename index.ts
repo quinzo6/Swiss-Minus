@@ -1,7 +1,5 @@
 /* eslint-disable consistent-return */
 /* eslint-disable global-require */
-import fs from "fs";
-import { Collection, TextChannel, MessageEmbed } from "discord.js";
 import { Client as PgClient } from "pg";
 import { config as dotenv_config } from "dotenv";
 import { version } from "./package.json";
