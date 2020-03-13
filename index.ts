@@ -1,11 +1,11 @@
 /* eslint-disable consistent-return */
 /* eslint-disable global-require */
-import fs from "fs";
-import { Collection, TextChannel, MessageEmbed } from "discord.js";
+// import fs from "fs";
+// import { Collection, TextChannel, MessageEmbed } from "discord.js";
 import { Client as PgClient } from "pg";
 import { config as dotenv_config } from "dotenv";
 import { version } from "./package.json";
-import { log_yellow, error_red } from "./config";
+// import { log_yellow, error_red } from "./config";
 // import yt from "simple-youtube-api";
 // import ffmpeg from "ffmpeg-static";
 // import opus from "node-opus";

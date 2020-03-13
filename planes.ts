@@ -1,23 +1,27 @@
-export = { 
+let planes = {
   1: {
     name: "Boeing747",
     rarity: "ultra",
-    url: "https://i.pinimg.com/originals/0f/0b/d4/0f0bd48d08fa28f862b3bbeaf3508ccd.jpg"
+    url:
+      "https://i.pinimg.com/originals/0f/0b/d4/0f0bd48d08fa28f862b3bbeaf3508ccd.jpg"
   },
   2: {
     name: "Boeing_737",
     rarity: "rare",
-    url: "https://www.swiss.com/CMSContent/web/SiteCollectionImages/03-Fleet/Boeing-777/boeing-777-front-view2-id5.jpg"
+    url:
+      "https://www.swiss.com/CMSContent/web/SiteCollectionImages/03-Fleet/Boeing-777/boeing-777-front-view2-id5.jpg"
   },
   3: {
     name: "A380",
     rarity: "ultra",
-    url: "https://simpleflying.com/wp-content/uploads/2019/12/08B37C4C-1C94-4C34-89B7-A1DB0C74029E-700x481.jpeg"
+    url:
+      "https://simpleflying.com/wp-content/uploads/2019/12/08B37C4C-1C94-4C34-89B7-A1DB0C74029E-700x481.jpeg"
   },
   4: {
     name: "A320",
     rarity: "common",
-    url: "https://theflight.info/wp-content/uploads/2016/05/hb-ijr-swiss-airbus-a320-214.jpg"
+    url:
+      "https://theflight.info/wp-content/uploads/2016/05/hb-ijr-swiss-airbus-a320-214.jpg"
   },
   5: {
     name: "Cesna_172",
@@ -134,5 +138,6 @@ export = {
     rarity: "ledgendary",
     url: ""
   }
-}
+};
 
+export default planes;
