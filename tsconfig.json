@@ -2,11 +2,11 @@
   "compilerOptions": {
     "module": "CommonJS",
     "moduleResolution": "node",
-    "target": "es6",
+    "target": "es5",
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
   },
   "exclude": [
     "node_modules"
