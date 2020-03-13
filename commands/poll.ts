@@ -1,73 +1,50 @@
+import SwissClient from "../SwissClient";
 import {
-  Client,
   Message,
-  MessageEmbed,
+  CollectorFilter,
   MessageCollector,
-  User
+  MessageEmbed,
+  TextChannel
 } from "discord.js";
-import { swiss_blue } from "../config";
 import { version } from "../package.json";
+import { swiss_blue } from "../config";
 
 export let name = "poll";
-export let description = "creates a poll";
-export let usage =
-  "[channel][option 1] ; [option 2] ; <option 3> up to 10 options";
-export let cooldown = 5;
+export let description = "Creates a poll in whatever channel you would like to";
+export let cooldown = 15;
 
-export async function execute(
-  client: Client,
-  message: Message,
-  args: string[]
-) {
-  let timeout;
-  let poll = new MessageEmbed().setColor(swiss_blue).setFooter(version);
-  let mentionedChannel;
-  let channelAsk = new MessageEmbed()
-    .setColor(swiss_blue)
-    .setFooter(version)
-    .setTimestamp()
-    .setDescription("Reply with what channel you want this poll to be in?");
-  await message.channel.send(channelAsk);
-  let channelP = new Promise((resolve, reject) => {
-    let channelCo = new MessageCollector(
-      message.channel,
-      m => m.author === message.author,
-      {
-        time: 60000
-      }
-    );
-    channelCo.on("collect", msg => {
-      resolve(msg);
-    });
-    channelCo.on("end", msg => {
-      reject("You ran out of time!");
-    });
-  });
-  await channelP
-    .then(function(msg: Message) {
-      if (msg === undefined) return;
-      if (!msg.mentions.channels.first()) return;
-      mentionedChannel = msg.mentions.channels.first();
-    })
-    .catch(function(x) {
-      if (timeout === true) return;
-      message.channel.send("Oops, time ran out!");
-    });
-  let question;
-  let questionEmbed = new MessageEmbed()
-    .setColor(swiss_blue)
-    .setFooter(version)
-    .setTimestamp()
-    .setDescription(
-      `Ok, you want it to be in <#${mentionedChannel.id}>.What should the question be?`
-    );
-  await message.channel.send(questionEmbed);
-  let questionP = new Promise((resolve, reject) => {
-    let x = new MessageCollector(
-      message.channel,
-      m => m.author === message.author,
-      { time: 60000 }
-    );
+const reactions = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟"];
+const numbers = [
+  "zero",
+  "one",
+  "two",
+  "three",
+  "four",
+  "five",
+  "six",
+  "seven",
+  "eight",
+  "nine",
+  "ten"
+];
+const adjNumbers = [
+  "zeroth",
+  "first",
+  "second",
+  "third",
+  "fourth",
+  "fifth",
+  "sixth",
+  "seventh",
+  "eighth",
+  "ninth",
+  "tenth"
+];
+const abortKeywords = ["cancel", "abort", "go around"];
+async function awaitMessage(message: Message, filter: CollectorFilter) {
+  let promise = new Promise((resolve, reject) => {
+    message.channel.startTyping(60000);
+    let x = new MessageCollector(message.channel, filter, { time: 60000 });
     x.on("collect", msg => {
       resolve(msg);
     });
@@ -75,215 +52,159 @@ export async function execute(
       reject(a);
     });
   });
-  await questionP
+  return await promise
     .then(function(msg: Message) {
-      if (msg === undefined) return;
-      question = msg.content;
-      poll.setTitle(msg.content);
+      message.channel.stopTyping(true);
+      return msg;
     })
     .catch(function(b) {
-      timeout = true;
+      message.channel.stopTyping(true);
       message.channel.send("Oops, your time ran out!");
+      return null;
     });
-  if (timeout === true) return;
-  let oneOption;
-  let oneEmbed = new MessageEmbed()
-    .setColor(swiss_blue)
-    .setFooter(version)
-    .setTimestamp()
-    .setDescription(
-      `Ok you want the question to be \`${question}\`, what should the first option be?`
-    );
-  await message.channel.send(oneEmbed);
+}
 
-  let firstO = new Promise((resolve, reject) => {
-    let oneCo = new MessageCollector(
-      message.channel,
-      (m: { author: User }) => m.author === message.author,
-      {
-        time: 60000
-      }
-    );
-    oneCo.on("collect", msg => {
-      resolve(msg);
-    });
-    oneCo.on("end", collected => {
-      reject("");
-    });
-  });
-  await firstO
-    .then(function(msg: Message) {
-      oneOption = msg.content;
-      poll.addField("1️⃣", msg.content);
-    })
-    .catch(function(x) {
-      timeout = true;
-      return message.channel.send("Oops, your time ran out!");
-    });
-  if (timeout === true) return;
+export async function execute(
+  client: SwissClient,
+  message: Message,
+  args: string[]
+) {
+  // Input the channel
+  const channelEmbed = new MessageEmbed()
+    .setDescription(
+      `What channel should the poll be in? You can cancel the poll by saying \`${abortKeywords.join(
+        "`, `"
+      )}\``
+    )
+    .setColor(swiss_blue)
+    .setFooter(version)
+    .setTimestamp();
+  const channelMessage = await message.channel.send(channelEmbed);
+  const channelResponse: Message = await awaitMessage(
+    message,
+    (m: Message) =>
+      m.author.id === message.author.id && m.mentions.channels.first() !== null
+  );
+  const channel: TextChannel = channelResponse.mentions.channels.first();
+  channelMessage.delete();
+  channelResponse.delete();
+  if (abortKeywords.includes(channelResponse.content.toLowerCase())) {
+    return message.channel.send("Aborted the poll");
+  }
 
-  let twoOption;
-  let twoEmbed = new MessageEmbed()
+  // Input the question
+  const questionEmbed = new MessageEmbed()
+    .setDescription(
+      `Poll will be in <#${
+        channel.id
+      }>, what should the question be? You can cancel the poll by saying \`${abortKeywords.join(
+        "`, `"
+      )}\``
+    )
     .setColor(swiss_blue)
     .setFooter(version)
-    .setTimestamp()
-    .setDescription(
-      `Ok, so option one is \`${oneOption}\`. What should the second one be?`
-    );
-  await message.channel.send(twoEmbed);
-  let secondO = new Promise((resolve, reject) => {
-    let x = new MessageCollector(
-      message.channel,
-      m => m.author === message.author,
-      { time: 60000 }
-    );
-    x.on("collect", msg => {
-      resolve(msg);
-    });
-    x.on("end", msg => {
-      reject("");
-    });
-  });
-  await secondO
-    .then(function(msg: Message) {
-      twoOption = msg.content;
-      poll.addField("2️⃣", msg.content);
-    })
-    .catch(function(x) {
-      timeout = true;
-      message.channel.send("Oops, your time ran out!");
-    });
-  if (timeout === true) return;
+    .setTimestamp();
+  const questionMessage = await message.channel.send(questionEmbed);
+  const questionResponse: Message = await awaitMessage(
+    message,
+    (m: Message) => m.author.id === message.author.id
+  );
+  const question: string = questionResponse.content;
+  questionMessage.delete();
+  questionResponse.delete();
+  if (abortKeywords.includes(questionResponse.content.toLowerCase())) {
+    return message.channel.send("Aborted the poll");
+  }
 
-  let threeOption;
-  let threeEmbed = new MessageEmbed()
+  // Input the amount of possible options
+  const amountEmbed = new MessageEmbed()
+    .setDescription(
+      `Question is \`${question}\`, how many options should the poll have? You can cancel the poll by saying \`${abortKeywords.join(
+        "`, `"
+      )}\``
+    )
     .setColor(swiss_blue)
     .setFooter(version)
-    .setTimestamp()
-    .setDescription(
-      `Ok, so option two is \`${twoOption}\`. What should the third one be? \n To finish, say \`finish\``
+    .setTimestamp();
+  const amountMessage = await message.channel.send(amountEmbed);
+  const amountResponse: Message = await awaitMessage(
+    message,
+    (m: Message) =>
+      (m.author.id === message.author.id && !isNaN(parseInt(m.content))) ||
+      abortKeywords.includes(m.content.toLowerCase())
+  );
+  const amount: number = parseInt(amountResponse.content);
+  if (amount > 10 || amount < 2)
+    return message.channel.send(
+      `The amount of options you have must be between 2 and 10`
     );
-  await message.channel.send(threeEmbed);
-  let thirdO = new Promise((resolve, reject) => {
-    let x = new MessageCollector(
-      message.channel,
-      m => m.author === message.author,
-      { time: 60000 }
-    );
-    x.on("collect", msg => {
-      resolve(msg);
-    });
-    x.on("end", msg => {
-      reject("");
-    });
-  });
-  await thirdO
-    .then(async function(msg: Message) {
-      if (msg.content === "finish" || msg.content === "end") {
-        poll.setTimestamp();
-        await mentionedChannel.send(poll).then(message => {
-          message.react("1️⃣");
-          message.react("2️⃣");
-          timeout = true;
-        });
-      }
-      threeOption = msg.content;
-      poll.addField("3️⃣", msg.content);
-    })
-    .catch(function(x) {
-      timeout = true;
-      message.channel.send("Oops, you ran out of time!");
-    });
-  if (timeout === true) return;
+  amountMessage.delete();
+  amountResponse.delete();
+  if (abortKeywords.includes(amountResponse.content.toLowerCase())) {
+    return message.channel.send("Aborted the poll");
+  }
 
-  let fourOption;
-  let fourEmbed = new MessageEmbed()
-    .setColor(swiss_blue)
-    .setFooter(version)
-    .setTimestamp()
-    .setDescription(
-      `Ok, so option three is \`${threeOption}\`. What should the fourth one be? \n To finish, say \`finish\``
+  // Input every option
+  const options = [];
+  inputOptionLoop(1);
+  async function inputOptionLoop(ctr) {
+    const optionEmbed = new MessageEmbed()
+      .setDescription(
+        `Option ${adjNumbers[ctr - 1]} is \`${
+          options[ctr - 2]
+        }\`. What should the ${
+          adjNumbers[ctr]
+        } be? You can cancel the poll by saying \`${abortKeywords.join(
+          "`, `"
+        )}\``
+      )
+      .setColor(swiss_blue)
+      .setFooter(version)
+      .setTimestamp();
+    if (ctr === 1) {
+      optionEmbed.setDescription(
+        `Number of options is ${amount}, what should the ${
+          adjNumbers[ctr]
+        } be? You can cancel the poll by saying \`${abortKeywords.join(
+          "`, `"
+        )}\``
+      );
+    }
+    const optionMessage = await message.channel.send(optionEmbed);
+    const optionResponse = await awaitMessage(
+      message,
+      (m: Message) => m.author.id === message.author.id
     );
-  await message.channel.send(fourEmbed);
-  let fourO = new Promise((resolve, reject) => {
-    let x = new MessageCollector(
-      message.channel,
-      m => m.author === message.author,
-      { time: 60000 }
-    );
-    x.on("collect", msg => {
-      resolve(msg);
+    const option: string = optionResponse.content;
+    options.push(option);
+    optionMessage.delete();
+    optionResponse.delete();
+    if (abortKeywords.includes(optionResponse.content.toLowerCase())) {
+      return message.channel.send("Aborted the poll");
+    }
+    if (ctr === amount) {
+      displayPoll();
+      return;
+    }
+    inputOptionLoop(ctr + 1);
+  }
+
+  async function displayPoll() {
+    const pollReactions = [];
+    const poll = new MessageEmbed()
+      .setAuthor(message.author.tag, client.user.displayAvatarURL())
+      .setColor(swiss_blue)
+      .setTitle(question)
+      .setTimestamp();
+    options.map((option, index) => {
+      // I'm using map here so that it won't trigger the send before the loop has finished
+      poll.addField(
+        `${reactions[index]}: ${options[index]}`,
+        `React with ${reactions[index]} to choose this one`
+      );
+      pollReactions.push(reactions[index]);
     });
-    x.on("end", msg => {
-      reject("");
-    });
-  });
-  await fourO
-    .then(async function(msg: Message) {
-      if (msg === undefined) return;
-      if (msg.content === "finish" || msg.content === "end") {
-        poll.setTimestamp();
-        await mentionedChannel.send(poll).then(message => {
-          message.react("1️⃣");
-          message.react("2️⃣");
-          message.react("3️⃣");
-          timeout = true;
-        });
-      }
-      fourOption = msg.content;
-      poll.addField("4️⃣", msg.content);
-    })
-    .catch(function(x) {
-      timeout = true;
-      return message.channel.send("Oops, you ran out of time!");
-    });
-  let fiveOption;
-  let fiveEmbed = new MessageEmbed()
-    .setColor(swiss_blue)
-    .setFooter(version)
-    .setTimestamp()
-    .setDescription(
-      `Ok, so option four is \`${fourOption}\`. What should the last one be? To finish say \`finish\``
-    );
-  await message.channel.send(fiveEmbed);
-  let fiveO = new Promise((resolve, reject) => {
-    let x = new MessageCollector(
-      message.channel,
-      m => m.author === message.author,
-      { time: 60000 }
-    );
-    x.on("collect", msg => {
-      resolve(msg);
-    });
-    x.on("end", msg => {
-      reject("");
-    });
-  });
-  await fiveO
-    .then(async function(msg: Message) {
-      if (msg === undefined) return;
-      if (msg.content === "finish" || msg.content === "end") {
-        poll.setTimestamp();
-        await mentionedChannel.send(poll).then(message => {
-          message.react("1️⃣");
-          message.react("2️⃣");
-          message.react("3️⃣");
-          message.react("4️⃣");
-          timeout = true;
-        });
-      }
-      if (timeout === true) return;
-      fiveOption = msg.content;
-      poll.addField("5️⃣", msg.content).setTimestamp();
-      await mentionedChannel.send(poll).then(message => {
-        message.react("1️⃣");
-        message.react("2️⃣");
-        message.react("3️⃣");
-        message.react("4️⃣");
-        return message.react("5️⃣");
-      });
-    })
-    .catch(function(x) {
-      return message.channel.send("Oops, you ran out of time!");
-    });
+    const pollMsg = await channel.send(poll);
+    await Promise.all(pollReactions.map(r => pollMsg.react(r)));
+  }
 }

@@ -8,7 +8,7 @@ import { version } from "../package.json";
 export let name = "help";
 export let description =
   "List all of my commands or info about a specific command.";
-export let aliases = ["commands", "Help", "Commands"];
+export let aliases = ["commands"];
 export let usage = "[command name]";
 export let cooldown = 5;
 

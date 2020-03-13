@@ -7,7 +7,6 @@ import { version } from "../package.json";
 
 export let name = "meme";
 export let description = "Gives a meme from reddit!";
-export let aliases = ["meme"];
 export let cooldown = 10;
 export let canBeOff = true;
 

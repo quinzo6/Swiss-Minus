@@ -6,19 +6,26 @@ import { readdirSync } from "fs";
 interface SwissOptions {
   db: PgClient;
   dev: boolean;
+  commandPath: string;
+  eventPath: string;
 }
 class SwissClient extends Client {
   public db: PgClient;
   public dev: boolean;
   public commands: Collection<string, any>;
+  public events: Collection<string, any>;
 
   public constructor(options: SwissOptions, discordOptions: ClientOptions) {
     super(discordOptions);
     this.db = options.db;
     this.dev = options.dev;
     this.commands = new Collection();
+    this.readCommands(options.commandPath);
+    this.events = new Collection();
+    this.readEvents(options.eventPath);
   }
 
+  // Command handling
   public readCommands(p: string) {
     const path = join(__dirname, p);
     const categories = readdirSync(path);
@@ -45,6 +52,26 @@ class SwissClient extends Client {
     }
     command.category = category;
     this.commands.set(command.name, command);
+  }
+
+  // Event handling
+  public readEvents(p: string) {
+    const path = join(__dirname, p);
+    const categories = readdirSync(path);
+    const events = categories.filter(file =>
+      file.endsWith(this.dev ? ".ts" : ".js")
+    );
+    events.forEach(m => this.addEventFromPath(join(__dirname, p, m)));
+  }
+
+  private addEventFromPath(path: string) {
+    const event = require(path);
+    if (this.dev) {
+      console.log(`Loading in event ${event.name}`);
+    }
+    const execute = (event.execute as Function).bind(null, this);
+    this.on(event.invoke, execute);
+    this.events.set(event.name, event);
   }
 }
 

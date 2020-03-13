@@ -5,7 +5,7 @@ import { version } from "../package.json";
 
 export let name = "permissions";
 export let description = "Check the permissions of a user";
-export let aliases = ["Permissions", "perms", "Perms", "p", "P"];
+export let aliases = ["perms", "p"];
 export let usage = "user";
 export let cooldown = 5;
 export let guildOnly = true;
@@ -31,7 +31,7 @@ export async function execute(
     .setAuthor(permMentioned.user.tag, permMentioned.user.avatarURL())
     .setColor(swiss_blue)
     .addField(
-      `Permissions of <@${permMentioned.user.id}>`,
+      `Permissions of ${permMentioned.user.tag}`,
       `\`${permMentioned.permissions.toArray().join("` , `")}\``
     )
     .setFooter(version)
