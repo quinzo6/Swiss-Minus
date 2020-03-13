@@ -38,9 +38,12 @@ class SwissClient extends Client {
     categories
       .filter(c => !c.includes("."))
       .forEach(category => {
-        const commands = readdirSync(join(__dirname, category));
+        const commands = readdirSync(join(__dirname, p, category));
         commands.forEach(command => {
-          this.addCommandFromPath(join(__dirname, category, command), category);
+          this.addCommandFromPath(
+            join(__dirname, p, category, command),
+            category
+          );
         });
       });
   }
