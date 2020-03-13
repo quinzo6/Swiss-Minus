@@ -5,7 +5,7 @@ import { swiss_blue } from "../config";
 export let name = "slot";
 export let description = "Play with a slot machine!";
 export let aliases = ["slotmachine", "luck"];
-export let cooldown = 2;
+export let cooldown = 5;
 
 const emojis = ["✈️", "🛩️", "🚀", "🦟", "🚁", "🏔️"]; // The more emojis the harder for one win
 const winner = [

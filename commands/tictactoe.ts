@@ -1,5 +1,6 @@
 import SwissClient from "../SwissClient";
 import { swiss_blue } from "../config";
+import { version } from "../package.json";
 import {
   Message,
   GuildMember,
@@ -13,7 +14,7 @@ export let name = "tictactoe";
 export let description = "Play tictactoe with a friend or with the bot!";
 export let aliases = ["ttt"];
 export let usage = "[user]";
-export let cooldown = 10;
+export let cooldown = 60;
 
 const reactions = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"];
 function getRandom(array: Array<any>) {
@@ -84,11 +85,14 @@ export async function execute(
   const gameMsg = await message.channel.send("Preparing the board...");
   const board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
   var playable = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+  const player1Sign = "❌";
+  const player2Sign = "⭕";
   await Promise.all(reactions.map(r => gameMsg.react(r)));
-  function parseSign(sign: string): string {
-    var finalSign = "◼️";
-    if (sign === player1.user.id) finalSign = "❌";
-    if (sign === player2.user.id) finalSign = "⭕";
+  function parseSignFromBoard(index): string {
+    const sign = board[index];
+    var finalSign = reactions[index];
+    if (sign === player1.user.id) finalSign = player1Sign;
+    if (sign === player2.user.id) finalSign = player2Sign;
     return finalSign;
   }
   async function delay(ms) {
@@ -103,13 +107,15 @@ export async function execute(
       .setTitle(`${currentPlayer.user.tag}'s turn`)
       .setDescription(
         [
-          `${parseSign(board[0])}|${parseSign(board[1])}|${parseSign(
-            board[2]
-          )}`,
-          `${parseSign(board[3])}|${parseSign(board[4])}|${parseSign(
-            board[5]
-          )}`,
-          `${parseSign(board[6])}|${parseSign(board[7])}|${parseSign(board[8])}`
+          `${parseSignFromBoard(0)}|${parseSignFromBoard(
+            1
+          )}|${parseSignFromBoard(2)}`,
+          `${parseSignFromBoard(3)}|${parseSignFromBoard(
+            4
+          )}|${parseSignFromBoard(5)}`,
+          `${parseSignFromBoard(6)}|${parseSignFromBoard(
+            7
+          )}|${parseSignFromBoard(8)}`
         ].join("\n")
       );
   }
@@ -139,12 +145,13 @@ export async function execute(
       stop = true;
       message.channel.stopTyping(true);
       updateGameEmbed();
-      embed.setTitle("Its a draw!");
+      embed
+        .setTitle("Its a draw!")
+        .setFooter(`GG | ${version}`)
+        .setTimestamp();
       gameMsg.reactions.cache.forEach(r => r.remove());
       gameMsg.edit(
-        `${player1.user.tag} = ${parseSign(player1.user.id)}\n${
-          player2.user.tag
-        } = ${parseSign(player2.user.id)}`,
+        `${player1.user.tag} = ${player1Sign}\n${player2.user.tag} = ${player2Sign}`,
         embed
       );
       return;
@@ -153,12 +160,13 @@ export async function execute(
       stop = true;
       message.channel.stopTyping(true);
       updateGameEmbed();
-      embed.setTitle(`${client.users.cache.get(winner).tag} won!`);
+      embed
+        .setTitle(`${client.users.cache.get(winner).tag} won!`)
+        .setFooter(`GG | ${version}`)
+        .setTimestamp();
       gameMsg.reactions.cache.forEach(r => r.remove());
       gameMsg.edit(
-        `${player1.user.tag} = ${parseSign(player1.user.id)}\n${
-          player2.user.tag
-        } = ${parseSign(player2.user.id)}`,
+        `${player1.user.tag} = ${player1Sign}\n${player2.user.tag} = ${player2Sign}`,
         embed
       );
       return;
@@ -173,9 +181,7 @@ export async function execute(
     else if (currentPlayer === player1) currentPlayer = player2;
     updateGameEmbed();
     await gameMsg.edit(
-      `${player1.user.tag} = ${parseSign(player1.user.id)}\n${
-        player2.user.tag
-      } = ${parseSign(player2.user.id)}`,
+      `${player1.user.tag} = ${player1Sign}\n${player2.user.tag} = ${player2Sign}`,
       embed
     );
 
