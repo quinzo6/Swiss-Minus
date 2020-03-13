@@ -39,7 +39,7 @@ export async function execute(
       );
     const setting = args[0];
     const value = args.slice(1).join(" ");
-
+    if(setting === 'bot' && (!message.member.hasPermission('ADMINISTRATOR') || !(message.author.id === '660238973943152707'))) return
     const result = await db.query(
       "UPDATE settings SET value = $2 WHERE name = $1",
       [setting, value]

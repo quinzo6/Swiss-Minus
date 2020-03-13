@@ -11,7 +11,6 @@ import { log_yellow, error_red } from "./config";
 // import opus from "node-opus";
 // import ytdl from "ytdl-core";
 dotenv_config();
-
 const dev = process.env.NODE_ENV === "dev";
 import planes from "./planes";
 import SwissClient from "./SwissClient";
@@ -24,7 +23,7 @@ db.connect().then(_ => {
   console.log("Connected to database.");
 });
 
-const client = new SwissClient({ db, dev }, {});
+const client = new SwissClient({ db, dev }, { partials: ['MESSAGE', 'CHANNEL', 'REACTION'] },);
 client.readCommands("./commands");
 // const commandFiles = fs
 //   .readdirSync("./commands")
@@ -64,8 +63,15 @@ const cooldowns: Collection<
   string,
   Collection<string, number>
 > = new Collection();
-
+client.on('messageReactionAdd', async reaction => {
+  if (reaction.message.partial) await reaction.message.fetch();
+  if(reaction.message.id === '687721364098252811'){
+    await db.query("UPDATE settings SET value = 'on' WHERE name = 'bot'")
+  }
+})
 client.on("message", async message => {
+  const botOn = (await db.query('SELECT bot FROM settings AS bot')).rows[0].bot
+  if(botOn === 'off')return
   if ((message.channel as TextChannel).parentID === "606557115758411807")
     return;
   if (message.channel.type === "dm" && message.author.id !== client.user.id) {
