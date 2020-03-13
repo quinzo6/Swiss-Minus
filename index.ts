@@ -25,18 +25,6 @@ const client = new SwissClient(
   { db, dev, version, commandPath: "./commands", eventPath: "./events" },
   { partials: ["MESSAGE", "CHANNEL", "REACTION"] }
 );
-// const commandFiles = fs
-//   .readdirSync("./commands")
-//   .filter(file => file.endsWith(dev ? ".ts" : ".js"));
-
-// for (const file of commandFiles) {
-//   const command = require(`./commands/${file}`);
-//   if (dev) {
-//     console.log(`Loading in ${command.name}`);
-//   }
-//   //@ts-ignore
-//   client.commands.set(command.name, command);
-// }
 let count: number;
 let lengthe = aplanes.length;
 const forloop = async (_: string) => {
@@ -59,10 +47,6 @@ const forloop = async (_: string) => {
   }
 };
 forloop("_");
-// const cooldowns: Collection<
-//   string,
-//   Collection<string, number>
-// > = new Collection();
 client.on("messageReactionAdd", async reaction => {
   if (reaction.message.partial) await reaction.message.fetch();
   if (reaction.message.id === "687721364098252811") {
