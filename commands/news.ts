@@ -24,13 +24,6 @@ export async function execute(
     parseInt(args[0]) < 20
   )
     maxArticles = parseInt(args[0]);
-  console.log(
-    maxArticles,
-    args[0],
-    !isNaN(parseInt(args[0])),
-    parseInt(args[0]) > 0,
-    parseInt(args[0]) < 21
-  );
   const newsMsg = await message.channel.send(
     `Loading in news content from <${url}>...`
   );
