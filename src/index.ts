@@ -82,8 +82,8 @@ client.login(process.env.token).then(async _token => {
     .then()
     .catch(console.error);
 });
-app.listen(dev ? 3000 : 5000, () => {
-  console.log(`Webserver running`);
+app.listen(dev ? 3000 : 80, () => {
+  console.log(`Webserver running on port ${dev ? 3000 : 80}`);
 });
 
 export async function getSetting(name: string) {
