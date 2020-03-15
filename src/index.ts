@@ -15,19 +15,26 @@ const youtube = new yt(process.env.ytkey);
 // import ffmpeg from "ffmpeg-static";
 // import opus from "node-opus";
 // import ytdl from "ytdl-core";
+var cachedVideos = null;
 const app = express();
 app.set("views", join(__dirname, "../webpage/views"));
 app.set("view engine", "ejs");
 app.use(express.static(join(__dirname, "../webpage/public")));
 app.get("/", (req, res) => {
-  youtube
-    .searchVideos("Swiss001", 30)
-    .then(results => {
-      res.render("home", { videos: JSON.stringify(results) });
-    })
-    .catch(error => {
-      res.render("404");
-    });
+  if (!cachedVideos) {
+    youtube
+      .searchVideos("Swiss001", 30)
+      .then(results => {
+        cachedVideos = results;
+        res.render("home", { videos: JSON.stringify(results) });
+      })
+      .catch(error => {
+        console.error(error);
+        res.redirect("error");
+      });
+  } else {
+    res.render("home", { videos: JSON.stringify(cachedVideos) });
+  }
 });
 app.use("*", (req, res, next) => {
   res.render("404");

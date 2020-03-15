@@ -12,7 +12,7 @@
 			<% JSON.parse(videos).forEach(video => { %>
 			<div class="card">
 				<figure><img src="<%- video.thumbnails.medium.url %>" alt="<%- video.title %>"
-						width="<%- video.thumbnails.medium.width %>" height="180">
+						width="<%- video.thumbnails.medium.width %>">
 					<figcaption><%- video.title %></figcaption>
 				</figure>
 				<div class="card-body">

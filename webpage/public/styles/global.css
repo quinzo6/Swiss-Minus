@@ -64,7 +64,6 @@ header {
 }
 
 .cta button {
-  margin-left: 20px;
   padding: 9px 25px;
   background-color: var(--primary-color);
   border: none;
@@ -83,6 +82,9 @@ footer {
   justify-content: space-around;
   align-items: center;
   padding: 3rem;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
   background-color: var(--panel-background);
 }
 
@@ -134,8 +136,9 @@ footer {
 
 .card:hover {
   /* box-shadow: var(--panel-background) 0px 0.35em 1.175em,
-    var(--panel-background) 0px 0.175em 0.5em; */
-  transform: translateY(-2px) scale(1.06);
+	var(--panel-background) 0px 0.175em 0.5em; */
+  filter: blur(0px);
+  transform: translateY(-2px) scale(1.048);
 }
 
 figure > figcaption {
