@@ -106,7 +106,7 @@ footer {
 
 .jumbotron>h1 {
 	font-size: 20px;
-	margin: 1rem 0;
+	margin-bottom: 1rem;
 	padding: 10px;
 	border-radius: 5px;
 	background-color: var(--panel-background);
