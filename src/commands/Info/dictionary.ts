@@ -7,7 +7,7 @@ import { swiss_blue, error_red } from "../../config";
 export let name = "dictionary";
 export let description = "Search for the meaning of words";
 export let aliases = ["urban", "whatdoesthismean"];
-export let cooldown = 5;
+export let cooldown = 0;
 
 export async function execute(
   client: SwissClient,
@@ -15,7 +15,21 @@ export async function execute(
   args: string[]
 ) {
   const word = args[0] || "swiss001";
-  if (badwords.includes(word))
+  const vowels = /[aeiou]/gi;
+  const filter = /[^a-z]/gi;
+  if (
+    badwords.includes(
+      word
+        .toLowerCase()
+        .replace(vowels, " ")
+        .replace(filter, " ")
+    ) ||
+    word
+      .toLowerCase()
+      .replace(vowels, " ")
+      .replace(filter, " ")
+      .trim() === ""
+  )
     return message.channel.send(`You can't fool me, try harder`);
   urban
     .term(word)
