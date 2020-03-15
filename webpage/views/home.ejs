@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../layouts/head.ejs', { title: "Home" }) %>
+
+<body>
+	<%- include('../layouts/navbar.ejs') %>
+
+	<div class="jumbotron">
+		<h1>Popular videos of Swiss001</h1>
+		<section class="grid">
+			<% JSON.parse(videos).forEach(video => { %>
+			<div class="card">
+				<figure><img src="<%- video.thumbnails.medium.url %>" alt="<%- video.title %>"
+						width="<%- video.thumbnails.medium.width %>" height="180">
+					<figcaption style="font-size: 15px; margin: 0.5rem 0;"><%- video.title %></figcaption>
+				</figure>
+				<div class="card-body">
+					<a href="https://youtu.be/<%- video.id %>" target="__blank" class="cta"><button>Watch this
+							video!</button></a>
+				</div>
+			</div>
+			<% }) %>
+		</section>
+	</div>
+
+	<%- include('../layouts/footer.ejs') %>
+</body>
+
+</html>

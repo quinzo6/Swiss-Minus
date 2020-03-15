@@ -2,16 +2,37 @@
 /* eslint-disable global-require */
 import { Client as PgClient } from "pg";
 import { config as dotenv_config } from "dotenv";
+dotenv_config();
 import { version } from "./package.json";
+import planes from "./planes";
+import SwissClient from "./SwissClient";
+import { join } from "path";
+import express from "express";
 // import { log_yellow, error_red } from "./config";
-// import yt from "simple-youtube-api";
+import yt from "simple-youtube-api";
+const youtube = new yt(process.env.ytkey);
 // import ffmpeg from "ffmpeg-static";
 // import opus from "node-opus";
 // import ytdl from "ytdl-core";
-dotenv_config();
+const app = express();
+app.set("views", join(__dirname, "/webpage/views"));
+app.set("view engine", "ejs");
+app.use(express.static(join(__dirname, "/webpage/public")));
+app.get("/", (req, res) => {
+  youtube
+    .searchVideos("Swiss001", 30)
+    .then(results => {
+      res.render("home", { videos: JSON.stringify(results) });
+    })
+    .catch(error => {
+      res.render("404");
+    });
+});
+app.use("*", (req, res, next) => {
+  res.render("404");
+});
+
 const dev = process.env.NODE_ENV === "dev";
-import planes from "./planes";
-import SwissClient from "./SwissClient";
 const aplanes = Object.values(planes);
 const db = new PgClient({
   connectionString: dev ? process.env.dev_db_url : process.env.DATABASE_URL,
@@ -59,6 +80,9 @@ client.login(process.env.token).then(async _token => {
     .setActivity(`the ${version} update`, { type: "WATCHING" })
     .then()
     .catch(console.error);
+});
+app.listen(dev ? 3000 : 80, () => {
+  console.log(`Webserver running`);
 });
 
 export async function getSetting(name: string) {
