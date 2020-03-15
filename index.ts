@@ -81,7 +81,7 @@ client.login(process.env.token).then(async _token => {
     .then()
     .catch(console.error);
 });
-app.listen(dev ? 3000 : 80, () => {
+app.listen(dev ? 3000 : 5000, () => {
   console.log(`Webserver running`);
 });
 
