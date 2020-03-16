@@ -15,6 +15,8 @@ class SwissClient extends Client {
   public dev: boolean;
   public version: string;
   public commands: Collection<string, any>;
+  public commandsExecuted: number;
+  public commandsFailed: number;
   public events: Collection<string, any>;
 
   public constructor(options: SwissOptions, discordOptions: ClientOptions) {
@@ -24,6 +26,8 @@ class SwissClient extends Client {
     this.version = `v${options.version}`;
     this.commands = new Collection();
     this.readCommands(options.commandPath);
+    this.commandsExecuted = 0;
+    this.commandsFailed = 0;
     this.events = new Collection();
     this.readEvents(options.eventPath);
   }

@@ -2,6 +2,7 @@ import { MessageEmbed, TextChannel, Message, Collection } from "discord.js";
 import { error_red, log_yellow } from "../config";
 import { getSetting } from "..";
 import SwissClient from "../SwissClient";
+import { convertMs } from "../utils";
 
 export let name = "commandHandler";
 export let invoke = "message";
@@ -58,6 +59,7 @@ export async function execute(client: SwissClient, message: Message) {
     );
 
   if (command.guildOnly && message.channel.type !== "text") {
+    client.commandsFailed = client.commandsFailed + 1;
     const embed = new MessageEmbed()
       .setTitle("Error")
       .setAuthor(message.author.tag, message.author.avatarURL())
@@ -69,6 +71,7 @@ export async function execute(client: SwissClient, message: Message) {
   const on =
     (command.canBeOff ? await getSetting(command.name) : "on") === "on";
   if (!on) {
+    client.commandsFailed = client.commandsFailed + 1;
     const notOn = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setColor(error_red)
@@ -82,6 +85,7 @@ export async function execute(client: SwissClient, message: Message) {
   }
 
   if (command.args && !args.length) {
+    client.commandsFailed = client.commandsFailed + 1;
     const embed = new MessageEmbed()
       .setAuthor(
         `${message.author.tag} | Not enough arguments`,
@@ -109,6 +113,7 @@ export async function execute(client: SwissClient, message: Message) {
 
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
+      client.commandsFailed = client.commandsFailed + 1;
       const timeOut = new MessageEmbed();
       timeOut
         .setAuthor(
@@ -139,6 +144,7 @@ export async function execute(client: SwissClient, message: Message) {
     const missingPerms = (command.permissions || []).filter(
       perm => !message.member.hasPermission(perm)
     );
+    client.commandsFailed = client.commandsFailed + 1;
     const embed = new MessageEmbed()
       .setAuthor(
         `${message.author.tag} | Missing Permissions`,
@@ -157,20 +163,27 @@ export async function execute(client: SwissClient, message: Message) {
   }
 
   try {
-    command.execute(client, message, args, client.db);
+    const startTime = Date.now();
+    await command.execute(client, message, args, client.db);
+    client.commandsExecuted = client.commandsExecuted + 1;
     let embed = new MessageEmbed()
       .setColor(log_yellow)
       .setDescription(
         `The command ${commandName} was used by <@${message.author.id}>. The whole message was ${message.content}`
       )
       .setTimestamp()
-      .setFooter(client.version);
+      .setFooter(
+        `${convertMs(new Date(startTime - Date.now()).toString())} | ${
+          client.version
+        }`
+      );
     let channel = client.channels.cache.get(
       "677356042723524608"
     ) as TextChannel;
     channel.send(embed);
   } catch (error) {
     const userMen = message.author.id;
+    client.commandsFailed = client.commandsFailed + 1;
     // eslint-disable-next-line no-console
     console.error(error);
     const err = new MessageEmbed()
