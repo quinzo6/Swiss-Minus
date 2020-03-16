@@ -1,7 +1,7 @@
 import SwissClient from "../../SwissClient";
 import { Message, MessageEmbed } from "discord.js";
 import axios from "axios";
-import cheerio from "cheerio";
+import cheerio from "cheerio"
 import { swiss_blue } from "../../config";
 
 export let name = "news";
