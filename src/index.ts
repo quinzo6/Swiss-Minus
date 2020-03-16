@@ -89,9 +89,9 @@ client.login(process.env.token).then(async _token => {
     .then()
     .catch(console.error);
 });
-app.listen(process.env.PORT, () => {
-  console.log(`Webserver running on port ${process.env.PORT}`);
-});
+// app.listen(process.env.PORT, () => {
+//   console.log(`Webserver running on port ${process.env.PORT}`);
+// });
 
 export async function getSetting(name: string) {
   const res = await db.query("SELECT value FROM settings WHERE name = $1", [
