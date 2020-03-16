@@ -173,7 +173,7 @@ export async function execute(client: SwissClient, message: Message) {
       )
       .setTimestamp()
       .setFooter(
-        `${convertMs(new Date(startTime - Date.now()).toString())} | ${
+        `${convertMs(new Date(startTime - Date.now()).getMilliseconds())} | ${
           client.version
         }`
       );
