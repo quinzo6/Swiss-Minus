@@ -14,7 +14,7 @@ export async function execute(
   message: Message,
   args: string[]
 ) {
-  const word = args.join(" ") || "swiss001";
+  var word = args.join(" ") || "swiss001";
   const vowels = /[aeiou]/gi;
   const filter = /[^a-z]/gi;
   if (
@@ -31,7 +31,7 @@ export async function execute(
       .trim()
       .replace(vowels, " ") === ""
   )
-    return message.channel.send(`You can't fool me, try harder`);
+    word = "hell nah";
   urban
     .term(word)
     .then(result => {
