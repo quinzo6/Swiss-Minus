@@ -174,8 +174,10 @@ export async function execute(
     const collector = new ReactionCollector(
       gameMsg,
       (r, u) =>
-        gameMsg.reactions.cache.array().includes(r) &&
-        u.id === currentPlayer.id,
+        playable
+          .map((e, index) => (e ? reactions[index - 1] : null))
+          .filter(e => e !== null)
+          .includes(r) && u.id === currentPlayer.id,
       {
         time: 60000
       }

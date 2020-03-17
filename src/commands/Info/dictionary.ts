@@ -14,21 +14,22 @@ export async function execute(
   message: Message,
   args: string[]
 ) {
-  const word = args[0] || "swiss001";
+  const word = args.join(" ") || "swiss001";
   const vowels = /[aeiou]/gi;
   const filter = /[^a-z]/gi;
   if (
     badwords.includes(
       word
         .toLowerCase()
-        .replace(vowels, " ")
         .replace(filter, " ")
+        .trim()
+        .replace(vowels, " ")
     ) ||
     word
       .toLowerCase()
-      .replace(vowels, " ")
       .replace(filter, " ")
-      .trim() === ""
+      .trim()
+      .replace(vowels, " ") === ""
   )
     return message.channel.send(`You can't fool me, try harder`);
   urban
