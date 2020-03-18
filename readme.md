@@ -43,4 +43,4 @@ Example: `This branch is 4 commits behind carterdacat:master.`
 
 
 ## Starting Your Bot
-Type `npm run dev` in your Git Bash window to start the discord bot.
+Type `npm run dev:bot` in your Git Bash window to start the discord bot.
