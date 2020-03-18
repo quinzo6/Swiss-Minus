@@ -1,6 +1,6 @@
 {
   "name": "swiss-plus",
-  "version": "3.3.22",
+  "version": "3.3.23",
   "main": "src/index.ts",
   "engines": {
     "node": "12.11.1",
@@ -10,8 +10,8 @@
     "start:bot": "node ./dist/index.js",
     "start:webserver": "node ./dist/webserver.js",
     "build": "rm -rf dist/ && tsc",
-    "dev:bot": "cross-env NODE_ENV=dev && ts-node-dev ./src/index.ts",
-    "dev:webserver": "cross-env NODE_ENV=dev && ts-node-dev ./src/webserver.ts"
+    "dev:bot": "ts-node-dev ./src/index.ts",
+    "dev:webserver": "ts-node-dev ./src/webserver.ts"
   },
   "heroku-run-build-script": true,
   "repository": {
