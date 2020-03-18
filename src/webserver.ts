@@ -16,7 +16,7 @@ app.use(express.static(join(__dirname, "../webpage/public")));
 app.get("/", (req, res) => {
   if (!cachedVideos) {
     youtube
-      .searchVideos("Swiss001", 30)
+      .searchVideos("Swiss001", 10)
       .then(results => {
         cachedVideos = results;
         res.render("home", { videos: JSON.stringify(results) });
@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 app.get("/pubsubhubbub", (req, res) => {
   const { channel_id } = req.query;
   youtube
-    .searchVideos("Swiss001", 30)
+    .searchVideos("Swiss001", 10)
     .then(results => {
       cachedVideos = results;
       client.channels.fetch(channel_id).then((channel: TextChannel) => {
