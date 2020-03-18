@@ -1,0 +1,70 @@
+{
+  "name": "swiss-plus",
+  "version": "3.3.22",
+  "main": "src/index.ts",
+  "engines": {
+    "node": "12.11.1",
+    "npm": "6.13.6"
+  },
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "build": "rm -rf dist/ && tsc",
+    "dev": "cross-env NODE_ENV=dev ts-node-dev .",
+    "debug": "cross-env NODE_ENV=dev ts-node-dev ."
+  },
+  "heroku-run-build-script": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carterdacat/Swiss-Plus.git"
+  },
+  "keywords": [
+    "heroku",
+    "discord.js"
+  ],
+  "author": "carterdacat",
+  "bugs": {
+    "url": "https://github.com/carterdacat/Swiss-Plus"
+  },
+  "homepage": "https://github.com/carterdacat/Swiss-Plus",
+  "dependencies": {
+    "@discordjs/opus": "^0.1.0",
+    "axios": "^0.19.2",
+    "better-sqlite3": "^5.4.3",
+    "canvas": "^2.6.1",
+    "cheerio": "^1.0.0-rc.3",
+    "discord.js": "^12.0.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "ffmpeg-static": "^4.0.1",
+    "github-api": "^3.3.0",
+    "google-auth-library": "^5.10.1",
+    "googleapis": "^47.0.0",
+    "node-opus": "^0.3.3",
+    "pg": "^7.18.2",
+    "random-puppy": "^1.1.0",
+    "recursive-readdir": "^2.2.2",
+    "simple-youtube-api": "^5.2.1",
+    "translate": "^1.1.1",
+    "urban-dictionary": "^2.2.1",
+    "youtube-node": "^1.3.3",
+    "ytdl-core": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.7",
+    "@types/pg": "^7.14.1",
+    "cross-env": "^6.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "ts-node": "^8.6.2",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.3"
+  },
+  "type": "module",
+  "private": true,
+  "license": "UNLICENSED",
+  "description": "A bot for the swiss server",
+  "rejectUnauthorized": false
+}
