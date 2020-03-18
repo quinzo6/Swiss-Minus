@@ -56,7 +56,7 @@ app.use("*", (req, res, next) => {
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`Webserver running on port ${process.env.PORT}`);
+  console.log(`Webserver running on port ${process.env.PORT}, http://localhost:${process.env.PORT}`);
 });
 
 export default app;
