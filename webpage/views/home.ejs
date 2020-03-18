@@ -11,8 +11,7 @@
 		<section class="grid">
 			<% JSON.parse(videos).forEach(video => { %>
 			<div class="card">
-				<figure><img src="<%- video.thumbnails.medium.url %>" alt="<%- video.title %>"
-						width="<%- video.thumbnails.medium.width %>">
+				<figure><img src="<%- video.thumbnails.medium.url %>" alt="<%- video.title %>" width="100%">
 					<figcaption><%- video.title %></figcaption>
 				</figure>
 				<div class="card-body">
