@@ -11,10 +11,13 @@ import SwissClient from "./SwissClient";
 import express from "express";
 // import { log_yellow, error_red } from "./config";
 import yt from "simple-youtube-api";
+import axios from "axios";
+import ip from "ip";
 const youtube = new yt(process.env.ytkey);
 // import ffmpeg from "ffmpeg-static";
 // import opus from "node-opus";
 // import ytdl from "ytdl-core";
+import { MessageEmbed } from "discord.js";
 var cachedVideos = null;
 const app = express();
 app.set("views", join(__dirname, "../webpage/views"));
@@ -35,6 +38,27 @@ app.get("/", (req, res) => {
   } else {
     res.render("home", { videos: JSON.stringify(cachedVideos) });
   }
+});
+app.get("/pubsubhubbub", (req, res) => {
+  const { channel_id } = req.query;
+  youtube
+    .searchVideos("Swiss001", 30)
+    .then(results => {
+      cachedVideos = results;
+      client.channels.fetch(channel_id).then(channel => {
+        const embed = new MessageEmbed()
+          .setAuthor(`Swiss001 | New Video!`)
+          .setTitle(results[0].title)
+          .setURL(`https://youtube.com/watch?v=${results[0].id}`)
+          .setFooter(client.version)
+          .setTimestamp();
+      });
+      res.render("home", { videos: JSON.stringify(results) });
+    })
+    .catch(error => {
+      console.error(error);
+      res.redirect("error");
+    });
 });
 app.use("*", (req, res, next) => {
   res.render("404");
@@ -89,9 +113,9 @@ client.login(process.env.token).then(async _token => {
     .then()
     .catch(console.error);
 });
-// app.listen(process.env.PORT, () => {
-//   console.log(`Webserver running on port ${process.env.PORT}`);
-// });
+app.listen(process.env.PORT, () => {
+  console.log(`Webserver running on port ${process.env.PORT}`);
+});
 
 export async function getSetting(name: string) {
   const res = await db.query("SELECT value FROM settings WHERE name = $1", [
