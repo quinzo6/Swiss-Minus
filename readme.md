@@ -38,8 +38,8 @@ Example: `This branch is 4 commits behind carterdacat:master.`
 1. Type `npm install` in your Git Bash window
 
 ### Bot Token
-1. Make a `.env` file for the bot token.
-2. You will find the bot token in the discord server that carterdacat invited you to.
+1. Make a `.env` file for the tokens.
+2. You will find the tokens in the discord server that carterdacat invited you to.
 
 
 ## Starting Your Bot
