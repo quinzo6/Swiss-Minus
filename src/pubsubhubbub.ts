@@ -7,7 +7,7 @@ dotenv.config();
   const args = process.argv.slice(2);
   if (!args[0]) return console.log("You need to pass in an ip address!");
   const swiss001channel = "UCYiaHzwtsww6phfxwUtZv8w";
-  const dev = process.env.NODE_ENV === "dev";
+  const dev = process.env.dev ? true : false;
   console.log(
     request.post("http://pubsubhubbub.appspot.com/subscribe", {
       form: {

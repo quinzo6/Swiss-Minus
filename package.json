@@ -7,10 +7,11 @@
     "npm": "6.13.6"
   },
   "scripts": {
-    "start": "node ./dist/index.js",
+    "start:bot": "node ./dist/index.js",
+    "start:webserver": "node ./dist/webserver.js",
     "build": "rm -rf dist/ && tsc",
-    "dev": "cross-env NODE_ENV=dev ts-node-dev .",
-    "debug": "cross-env NODE_ENV=dev ts-node-dev ."
+    "dev:bot": "cross-env NODE_ENV=dev && ts-node-dev ./src/index.ts",
+    "dev:webserver": "cross-env NODE_ENV=dev && ts-node-dev ./src/webserver.ts"
   },
   "heroku-run-build-script": true,
   "repository": {

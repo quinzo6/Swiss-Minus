@@ -13,7 +13,7 @@ import SwissClient from "./SwissClient";
 // import opus from "node-opus";
 // import ytdl from "ytdl-core";
 
-const dev = process.env.NODE_ENV === "dev";
+const dev = process.env.dev ? true : false;
 const aplanes = Object.values(planes);
 const db = new PgClient({
   connectionString: dev ? process.env.dev_db_url : process.env.DATABASE_URL,

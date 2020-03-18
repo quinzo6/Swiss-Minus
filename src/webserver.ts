@@ -1,10 +1,13 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
-import { MessageEmbed, TextChannel } from "discord.js";
+import { MessageEmbed, TextChannel, Client } from "discord.js";
 import { join } from "path";
 import yt from "simple-youtube-api";
-import client from "./index";
+const client = new Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"] });
 var cachedVideos = null;
-const dev = process.env.NODE_ENV === "dev";
+const version = "v" + require("../package.json").version;
+const dev = process.env.dev ? true : false;
 const app = express();
 const youtube = new yt(process.env.ytkey);
 app.set("views", join(__dirname, "../webpage/views"));
@@ -37,7 +40,7 @@ app.get("/pubsubhubbub", (req, res) => {
           .setAuthor(`Swiss001 | New Video!`)
           .setTitle(results[0].title)
           .setURL(`https://youtube.com/watch?v=${results[0].id}`)
-          .setFooter(client.version)
+          .setFooter(version)
           .setTimestamp();
         channel.send(embed);
       });
@@ -55,3 +58,5 @@ app.use("*", (req, res, next) => {
 app.listen(process.env.PORT, () => {
   console.log(`Webserver running on port ${process.env.PORT}`);
 });
+
+export default app;
