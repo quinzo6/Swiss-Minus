@@ -45,7 +45,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
     }).toString()}&sp=EgIQAQ%253D%253D`,
     { timeout: 60000 }
   );
-  await sleep(0.3);
+  await sleep(0.5);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -54,7 +54,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.3);
+  await sleep(0.5);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -63,7 +63,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.3);
+  await sleep(0.5);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -72,7 +72,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.3);
+  await sleep(0.5);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -81,7 +81,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.3);
+  await sleep(0.5);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -90,7 +90,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.3);
+  await sleep(0.5);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -99,7 +99,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.3);
+  await sleep(0.5);
   const results = await page.evaluate(() => {
     //@ts-ignore
     return window.ytInitialData.contents.twoColumnSearchResultsRenderer
@@ -112,14 +112,9 @@ async function searchYoutubeVideos(searchTerm, amount) {
     .map(v => new Video(v));
   await browser.close();
   console.log(videos);
-  return videos.slice(amount);
+  cachedVideos = videos.slice(amount);
 }
-
-searchYoutubeVideos("Swiss001", 30)
-  .then((results: Video[]) => {
-    cachedVideos = results;
-  })
-  .catch(console.error);
+searchYoutubeVideos("Swiss001", 30).catch(console.error);
 
 // Express stuff
 const app = express();
@@ -127,24 +122,24 @@ app.set("views", join(__dirname, "../webpage/views"));
 app.set("view engine", "ejs");
 app.use(express.static(join(__dirname, "../webpage/public")));
 app.get("/", (req, res) => {
+  console.log(cachedVideos);
   res.render("home", { videos: cachedVideos });
 });
 app.get("/pubsubhubbub", (req, res) => {
   const { channel_id } = req.query;
   searchYoutubeVideos("Swiss001", 30)
-    .then(results => {
-      cachedVideos = results;
+    .then(() => {
       client.channels.fetch(channel_id).then((channel: TextChannel) => {
         const embed = new MessageEmbed()
           .setAuthor(`Swiss001 | New Video!`)
-          .setTitle(results[0].title)
-          .setURL(`https://youtube.com/watch?v=${results[0].id}`)
+          .setTitle(cachedVideos[0].title)
+          .setURL(`https://youtube.com/watch?v=${cachedVideos[0].id}`)
           .setFooter(version)
           .setTimestamp();
         channel.send(embed);
       });
       res.render("home", {
-        videos: JSON.stringify(results)
+        videos: JSON.stringify(cachedVideos)
       });
     })
     .catch(error => {
