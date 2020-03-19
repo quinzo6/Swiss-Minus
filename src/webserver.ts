@@ -29,7 +29,6 @@ class Video {
     this.releaseDate = _.publishedTimeText.simpleText;
   }
 }
-var cachedVideos: Video[] = [];
 const sleep = (seconds: number = 1) =>
   new Promise(resolve => setTimeout(resolve, seconds * 1000));
 async function searchYoutubeVideos(searchTerm, amount) {
@@ -111,10 +110,9 @@ async function searchYoutubeVideos(searchTerm, amount) {
     .filter(video => video.ownerText.runs[0].text === "Swiss001")
     .map(v => new Video(v));
   await browser.close();
-  console.log(videos);
-  cachedVideos = videos.slice(amount);
+  return videos.slice(amount);
 }
-searchYoutubeVideos("Swiss001", 30).catch(console.error);
+const cachedVideos = [];
 
 // Express stuff
 const app = express();
@@ -122,7 +120,6 @@ app.set("views", join(__dirname, "../webpage/views"));
 app.set("view engine", "ejs");
 app.use(express.static(join(__dirname, "../webpage/public")));
 app.get("/", (req, res) => {
-  console.log(cachedVideos);
   res.render("home", { videos: cachedVideos });
 });
 app.get("/pubsubhubbub", (req, res) => {
@@ -155,10 +152,15 @@ app.use("*", (req, res, next) => {
   res.render("404");
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(
-    `Webserver running on port ${process.env.PORT}, http://localhost:${process.env.PORT}`
-  );
-});
+searchYoutubeVideos("Swiss001", 30)
+  .then(results => {
+    results.forEach(r => cachedVideos.push(r));
+    app.listen(process.env.PORT, () => {
+      console.log(
+        `Webserver running on port ${process.env.PORT}, http://localhost:${process.env.PORT}`
+      );
+    });
+  })
+  .catch(console.error);
 
 export default app;
