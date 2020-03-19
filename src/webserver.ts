@@ -33,7 +33,10 @@ var cachedVideos: Video[] = [];
 const sleep = (seconds: number = 1) =>
   new Promise(resolve => setTimeout(resolve, seconds * 1000));
 async function searchYoutubeVideos(searchTerm, amount) {
-  const browser = await puppeteer.launch({ headless: !dev, devtools: dev });
+  const browser = await puppeteer.launch({
+    headless: !dev,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"]
+  });
   const page = await browser.newPage();
   await page.setViewport({ width: 1280, height: 800 });
   await page.goto(
