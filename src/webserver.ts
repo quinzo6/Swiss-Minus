@@ -126,14 +126,18 @@ app.get("/", (req, res) => {
     searchYoutubeVideos("Swiss001", 30)
       .then(results => {
         cachedVideos = results;
-        res.render("home", { videos: JSON.stringify(results) });
+        res.render("home", {
+          videos: JSON.stringify(results)
+        });
       })
       .catch(error => {
         console.error(error);
         res.redirect("error");
       });
   } else {
-    res.render("home", { videos: JSON.stringify(cachedVideos) });
+    res.render("home", {
+      videos: JSON.stringify(cachedVideos)
+    });
   }
 });
 app.get("/pubsubhubbub", (req, res) => {
@@ -150,13 +154,19 @@ app.get("/pubsubhubbub", (req, res) => {
           .setTimestamp();
         channel.send(embed);
       });
-      res.render("home", { videos: JSON.stringify(results) });
+      res.render("home", {
+        videos: JSON.stringify(results)
+      });
     })
     .catch(error => {
       console.error(error);
       res.redirect("error");
+      res.render('')
     });
 });
+app.get("/about", (req, res) => {
+    res.render('about', {})
+})
 app.use("*", (req, res, next) => {
   res.render("404");
 });
