@@ -1,4 +1,4 @@
-.aboutjumbotron {
+.about {
 	background-color: var(--background-color);
 	border-color: var(--background-color);
 	border-radius: 5px;
@@ -6,7 +6,7 @@
 	padding: 10px;
 }
 
-.aboutjumbotron>h1 {
+.about>h1 {
 	font-size: 25px;
 	margin-bottom: 1rem;
 	padding: 10px;
