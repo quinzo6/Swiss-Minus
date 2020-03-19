@@ -8,7 +8,7 @@
 	<div class="jumbotron">
 		<h1>Popular videos of Swiss001</h1>
 		<section class="grid">
-			<% JSON.parse(videos).forEach(video => { %>
+			<% videos.forEach(video => { %>
 			<div class="card">
 				<figure><img src="<%- video.thumbnail %>" alt="<%- video.title %>" width="100%">
 					<figcaption><%- video.title %> - <i><%- video.releaseDate %>:<%- video.numViews %></i></figcaption>
