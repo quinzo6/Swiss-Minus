@@ -135,14 +135,11 @@ app.get("/pubsubhubbub", (req, res) => {
           .setTimestamp();
         channel.send(embed);
       });
-      res.render("home", {
-        videos: JSON.stringify(cachedVideos)
-      });
+      res.redirect("/");
     })
     .catch(error => {
       console.error(error);
       res.redirect("error");
-      res.render("");
     });
 });
 app.get("/about", (req, res) => {
