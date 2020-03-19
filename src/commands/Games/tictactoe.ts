@@ -1,5 +1,7 @@
 import SwissClient from "../../SwissClient";
-import { swiss_blue } from "../../config";
+import {
+  swiss_blue
+} from "../../config";
 import {
   Message,
   GuildMember,
@@ -7,7 +9,10 @@ import {
   ReactionCollector,
   MessageReaction
 } from "discord.js";
-import { awaitMessage, getRandom } from "../../utils";
+import {
+  awaitMessage,
+  getRandom
+} from "../../utils";
 
 export let name = "tictactoe";
 export let description = "Play tictactoe with a friend or with the bot!";
@@ -23,16 +28,17 @@ export async function execute(
   args: string[]
 ) {
   const player1 = message.member;
-  const player2 =
-    message.mentions.members.first() || // First mention
-    (message.guild.members.cache.get(args[0]) as GuildMember) || // User ID
-    (message.guild.members.cache.find(
-      m => m.user.username === args[0]
-    ) as GuildMember) || // Username
-    (message.guild.members.cache.find(
-      m => m.nickname === args[0]
-    ) as GuildMember) || // Nickname
-    message.guild.me; // Bot
+  let player2
+  if(!args[0]){
+    player2 = message.guild.me //Bot
+    console.log('1')
+  }
+  else{
+    console.log('2')
+    player2 = message.mentions.members.first() || //Mention
+    message.guild.members.cache.get(args[0]) || //Id
+    message.guild.me //Bot
+  }
   if (player2.user.bot && player2.user.id !== client.user.id)
     return message.channel.send(`You can't play with a bot other than me!`);
   if (player1 === player2)
@@ -45,10 +51,10 @@ export async function execute(
     const response = await awaitMessage(
       message,
       m =>
-        m.author.id === player2.user.id &&
-        ["yes", "no"].includes(m.content.toLowerCase())
+      m.author.id === player2.user.id && ["yes", "no"].includes(m.content.toLowerCase())
     );
     message.channel.stopTyping(true);
+    if(!response) return message.channel.send('Oops, your time ran out')
     if (response.content.toLowerCase() === "no")
       return message.channel.send(
         `<@${player1.user.id}> won because <@${player2.user.id}> gave up before the game even started!`
@@ -65,6 +71,7 @@ export async function execute(
   const player1Sign = "❌";
   const player2Sign = "⭕";
   await Promise.all(reactions.map(r => gameMsg.react(r)));
+
   function parseSignFromBoard(index): string {
     const sign = board[index];
     var finalSign = reactions[index];
@@ -75,10 +82,12 @@ export async function execute(
   async function delay(ms) {
     return new Promise((resolve, reject) => setTimeout(resolve, ms));
   }
+
   function allAreSame(...args) {
     if (args.every(v => v === args[0])) return args[0];
     return false;
   }
+
   function updateGameEmbed() {
     embed
       .setTitle(`${currentPlayer.user.tag}'s turn`)
@@ -96,6 +105,7 @@ export async function execute(
         ].join("\n")
       );
   }
+
   function findWinner(): string {
     const possibleWins = [
       // Horizontal
@@ -112,6 +122,7 @@ export async function execute(
     ];
     return possibleWins.find(w => w !== false && w !== " ") || "";
   }
+
   function handleUserInput(emoji) {
     board[reactions.indexOf(emoji)] = currentPlayer.id;
     gameMsg.reactions.cache.find(r => r.emoji.name === emoji).remove();
@@ -166,7 +177,7 @@ export async function execute(
       delay(
         (Math.floor(Math.random() * randomDelay[1] - randomDelay[0]) +
           randomDelay[0]) *
-          1000
+        1000
       ).then(() => {
         handleUserInput(reactions[getRandom(playable.filter(p => p !== null))]);
       });
@@ -174,11 +185,10 @@ export async function execute(
     const collector = new ReactionCollector(
       gameMsg,
       (r: MessageReaction, u) =>
-        playable
-          .map((e, index) => (e ? reactions[index - 1] : null))
-          .filter(e => e !== null)
-          .includes(r.emoji.name) && u.id === currentPlayer.id,
-      {
+      playable
+      .map((e, index) => (e ? reactions[index - 1] : null))
+      .filter(e => e !== null)
+      .includes(r.emoji.name) && u.id === currentPlayer.id, {
         time: 60000
       }
     );

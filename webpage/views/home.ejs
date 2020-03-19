@@ -5,14 +5,13 @@
 
 <body>
 	<%- include('../layouts/navbar.ejs') %>
-
 	<div class="jumbotron">
 		<h1>Popular videos of Swiss001</h1>
 		<section class="grid">
 			<% JSON.parse(videos).forEach(video => { %>
 			<div class="card">
 				<figure><img src="<%- video.thumbnail %>" alt="<%- video.title %>" width="100%">
-					<figcaption><%- video.title %> <i><%- video.timestamp %></i></figcaption>
+					<figcaption><%- video.title %> - <i><%- video.releaseDate %>:<%- video.numViews %></i></figcaption>
 				</figure>
 				<div class="card-body">
 					<a href="<%- video.url %>" target="__blank" class="cta" style="margin: 0 auto;"><button>Watch
