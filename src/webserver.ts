@@ -110,7 +110,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
     .filter(video => video.ownerText.runs[0].text === "Swiss001")
     .map(v => new Video(v));
   await browser.close();
-  return videos.slice(amount);
+  return videos.slice(0, amount);
 }
 const cachedVideos = [];
 
