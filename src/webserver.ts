@@ -33,18 +33,6 @@ var cachedVideos: Video[] = null;
 const sleep = (seconds: number = 1) =>
   new Promise(resolve => setTimeout(resolve, seconds * 1000));
 async function searchYoutubeVideos(searchTerm, amount) {
-  var videos = [];
-  const thumbnailSelector =
-    "$('div#contents>ytd-video-renderer:nth-child(index)>div:nth-child(1)>ytd-thumbnail>a>yt-img-shadow>img').attr('src')";
-  const titleSelector =
-    "$('div#contents>ytd-video-renderer:nth-child(index)>div:nth-child(1)>div>div:nth-child(1)>div>h3>a>yt-formatted-string').html()";
-  const urlSelector =
-    "$('div#contents>ytd-video-renderer:nth-child(index)>div:nth-child(1)>div>div:nth-child(1)>div>h3>a').attr('href')";
-  const amountOfViewsSelector =
-    "$('div#contents>ytd-video-renderer:nth-child(index)>div:nth-child(1)>div>div:nth-child(1)>ytd-video-meta-block>div:nth-child(1)>div:nth-child(2)>span:nth-child(1)').text()";
-  const timestampSelector =
-    "$('div#contents>ytd-video-renderer:nth-child(index)>div:nth-child(1)>div>div:nth-child(1)>ytd-video-meta-block>div:nth-child(1)>div:nth-child(2)>span:nth-child(2)').html()";
-
   const browser = await puppeteer.launch({ headless: !dev, devtools: dev });
   const page = await browser.newPage();
   await page.setViewport({ width: 1280, height: 800 });
@@ -54,10 +42,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
     }).toString()}&sp=EgIQAQ%253D%253D`,
     { timeout: 60000 }
   );
-
-  // await page.waitForSelector("ytd-video-renderer,ytd-grid-video-renderer", {
-  //   timeout: 10000
-  // });
+  await sleep(0.5);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -66,6 +51,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
+  await sleep(0.5);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -74,6 +60,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
+  await sleep(0.5);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -82,6 +69,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
+  await sleep(0.5);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -90,6 +78,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
+  await sleep(0.5);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -98,6 +87,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
+  await sleep(0.5);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -106,16 +96,16 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
+  await sleep(0.5);
   const results = await page.evaluate(() => {
     //@ts-ignore
     return window.ytInitialData;
   });
-  videos = results.contents.twoColumnSearchResultsRenderer.primaryContents.sectionListRenderer.contents[0].itemSectionRenderer.contents
+  const videos: Video[] = results.contents.twoColumnSearchResultsRenderer.primaryContents.sectionListRenderer.contents[0].itemSectionRenderer.contents
     .map(v => v.videoRenderer)
     .filter(video => video.ownerText.runs[0].text === "Swiss001")
     .map(v => new Video(v));
   await browser.close();
-  console.log(videos);
   return videos.slice(amount);
 }
 

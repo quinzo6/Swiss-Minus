@@ -11,7 +11,8 @@
 			<% videos.forEach(video => { %>
 			<div class="card">
 				<figure><img src="<%- video.thumbnail %>" alt="<%- video.title %>" width="100%">
-					<figcaption><%- video.title %> - <i><%- video.releaseDate %>:<%- video.numViews %></i></figcaption>
+					<figcaption><%- video.title %></figcaption>
+					<figcaption><%- video.releaseDate %> &lowast; <%- video.numViews %></figcaption>
 				</figure>
 				<div class="card-body">
 					<a href="<%- video.url %>" target="__blank" class="cta" style="margin: 0 auto;"><button>Watch
