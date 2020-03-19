@@ -120,6 +120,7 @@ app.set("views", join(__dirname, "../webpage/views"));
 app.set("view engine", "ejs");
 app.use(express.static(join(__dirname, "../webpage/public")));
 app.get("/", (req, res) => {
+  console.log(cachedVideos);
   res.render("home", { videos: cachedVideos });
 });
 app.get("/pubsubhubbub", (req, res) => {
