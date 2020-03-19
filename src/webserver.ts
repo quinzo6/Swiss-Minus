@@ -29,7 +29,7 @@ class Video {
     this.releaseDate = _.publishedTimeText.simpleText;
   }
 }
-var cachedVideos: Video[] = null;
+var cachedVideos: Video[] = [];
 const sleep = (seconds: number = 1) =>
   new Promise(resolve => setTimeout(resolve, seconds * 1000));
 async function searchYoutubeVideos(searchTerm, amount) {
@@ -42,7 +42,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
     }).toString()}&sp=EgIQAQ%253D%253D`,
     { timeout: 60000 }
   );
-  await sleep(0.5);
+  await sleep(0.3);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -51,7 +51,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.5);
+  await sleep(0.3);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -60,7 +60,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.5);
+  await sleep(0.3);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -69,7 +69,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.5);
+  await sleep(0.3);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -78,7 +78,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.5);
+  await sleep(0.3);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -87,7 +87,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.5);
+  await sleep(0.3);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -96,22 +96,27 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.5);
+  await sleep(0.3);
   const results = await page.evaluate(() => {
     //@ts-ignore
-    return window.ytInitialData;
+    return window.ytInitialData.contents.twoColumnSearchResultsRenderer
+      .primaryContents.sectionListRenderer.contents[0].itemSectionRenderer
+      .contents;
   });
-  const videos: Video[] = results.contents.twoColumnSearchResultsRenderer.primaryContents.sectionListRenderer.contents[0].itemSectionRenderer.contents
+  const videos: Video[] = results
     .map(v => v.videoRenderer)
     .filter(video => video.ownerText.runs[0].text === "Swiss001")
     .map(v => new Video(v));
   await browser.close();
+  console.log(videos);
   return videos.slice(amount);
 }
 
-searchYoutubeVideos("Swiss001", 30).then((results: Video[]) => {
-  cachedVideos = results;
-});
+searchYoutubeVideos("Swiss001", 30)
+  .then((results: Video[]) => {
+    cachedVideos = results;
+  })
+  .catch(console.error);
 
 // Express stuff
 const app = express();
@@ -142,12 +147,12 @@ app.get("/pubsubhubbub", (req, res) => {
     .catch(error => {
       console.error(error);
       res.redirect("error");
-      res.render('')
+      res.render("");
     });
 });
 app.get("/about", (req, res) => {
-    res.render('about', {})
-})
+  res.render("about", {});
+});
 app.use("*", (req, res, next) => {
   res.render("404");
 });
