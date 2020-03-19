@@ -44,7 +44,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
     }).toString()}&sp=EgIQAQ%253D%253D`,
     { timeout: 60000 }
   );
-  await sleep(0.5);
+  await sleep(1);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -53,7 +53,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.5);
+  await sleep(1);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -62,7 +62,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.5);
+  await sleep(1);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -71,7 +71,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.5);
+  await sleep(1);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -80,7 +80,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.5);
+  await sleep(1);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -89,7 +89,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.5);
+  await sleep(1);
   await page.evaluate(() => {
     //@ts-ignore
     window.scrollTo(
@@ -98,7 +98,7 @@ async function searchYoutubeVideos(searchTerm, amount) {
       document.body.scrollHeight || document.documentElement.scrollHeight
     );
   });
-  await sleep(0.5);
+  await sleep(1);
   const results = await page.evaluate(() => {
     //@ts-ignore
     return window.ytInitialData.contents.twoColumnSearchResultsRenderer
@@ -120,7 +120,6 @@ app.set("views", join(__dirname, "../webpage/views"));
 app.set("view engine", "ejs");
 app.use(express.static(join(__dirname, "../webpage/public")));
 app.get("/", (req, res) => {
-  console.log(cachedVideos);
   res.render("home", { videos: cachedVideos });
 });
 app.get("/pubsubhubbub", (req, res) => {
