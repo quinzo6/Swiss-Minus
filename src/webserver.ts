@@ -4,6 +4,7 @@ import express from "express";
 import { MessageEmbed, TextChannel, Client } from "discord.js";
 import { join } from "path";
 const client = new Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"] });
+client.login(process.env.token);
 const version = "v" + require("../package.json").version;
 const dev = process.env.dev ? true : false;
 
