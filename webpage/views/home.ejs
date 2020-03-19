@@ -8,14 +8,14 @@
 	<div class="jumbotron">
 		<h1>Popular videos of Swiss001</h1>
 		<section class="grid">
-			<% JSON.parse(videos).forEach(video => { %>
+			<% videos.forEach(video => { %>
 			<div class="card">
-				<figure><img src="<%- video.thumbnails.medium.url %>" alt="<%- video.title %>" width="100%">
+				<figure><img src="<%- video.thumbnail %>" alt="<%- video.title %>" width="100%">
 					<figcaption><%- video.title %></figcaption>
+					<figcaption><%- video.releaseDate %> &lowast; <%- video.numViews %></figcaption>
 				</figure>
 				<div class="card-body">
-					<a href="https://www.youtube.com/watch?v=<%- video.id %>" target="__blank" class="cta"
-						style="margin: 0 auto;"><button>Watch
+					<a href="<%- video.url %>" target="__blank" class="cta" style="margin: 0 auto;"><button>Watch
 							this
 							video!</button></a>
 				</div>

@@ -3,36 +3,127 @@ dotenv.config();
 import express from "express";
 import { MessageEmbed, TextChannel, Client } from "discord.js";
 import { join } from "path";
-import yt from "simple-youtube-api";
 const client = new Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"] });
-var cachedVideos = null;
 const version = "v" + require("../package.json").version;
 const dev = process.env.dev ? true : false;
+
+// YouTube search without API
+import cheerio from "cheerio";
+import axios from "axios";
+import puppeteer from "puppeteer";
+import { URLSearchParams } from "url";
+class Video {
+  id: string;
+  url: string;
+  title: string;
+  numViews: string;
+  thumbnail: string;
+  releaseDate: string;
+
+  constructor(_) {
+    this.id = _.videoId;
+    this.url = `https://youtube.com/watch?v=${_.videoId}`;
+    this.title = _.title.runs[0].text;
+    this.numViews = _.viewCountText.simpleText;
+    this.thumbnail = _.thumbnail.thumbnails[0].url;
+    this.releaseDate = _.publishedTimeText.simpleText;
+  }
+}
+var cachedVideos: Video[] = null;
+const sleep = (seconds: number = 1) =>
+  new Promise(resolve => setTimeout(resolve, seconds * 1000));
+async function searchYoutubeVideos(searchTerm, amount) {
+  const browser = await puppeteer.launch({ headless: !dev, devtools: dev });
+  const page = await browser.newPage();
+  await page.setViewport({ width: 1280, height: 800 });
+  await page.goto(
+    `https://www.youtube.com/results?${new URLSearchParams({
+      search_query: searchTerm
+    }).toString()}&sp=EgIQAQ%253D%253D`,
+    { timeout: 60000 }
+  );
+  await sleep(0.5);
+  await page.evaluate(() => {
+    //@ts-ignore
+    window.scrollTo(
+      0,
+      //@ts-ignore
+      document.body.scrollHeight || document.documentElement.scrollHeight
+    );
+  });
+  await sleep(0.5);
+  await page.evaluate(() => {
+    //@ts-ignore
+    window.scrollTo(
+      0,
+      //@ts-ignore
+      document.body.scrollHeight || document.documentElement.scrollHeight
+    );
+  });
+  await sleep(0.5);
+  await page.evaluate(() => {
+    //@ts-ignore
+    window.scrollTo(
+      0,
+      //@ts-ignore
+      document.body.scrollHeight || document.documentElement.scrollHeight
+    );
+  });
+  await sleep(0.5);
+  await page.evaluate(() => {
+    //@ts-ignore
+    window.scrollTo(
+      0,
+      //@ts-ignore
+      document.body.scrollHeight || document.documentElement.scrollHeight
+    );
+  });
+  await sleep(0.5);
+  await page.evaluate(() => {
+    //@ts-ignore
+    window.scrollTo(
+      0,
+      //@ts-ignore
+      document.body.scrollHeight || document.documentElement.scrollHeight
+    );
+  });
+  await sleep(0.5);
+  await page.evaluate(() => {
+    //@ts-ignore
+    window.scrollTo(
+      0,
+      //@ts-ignore
+      document.body.scrollHeight || document.documentElement.scrollHeight
+    );
+  });
+  await sleep(0.5);
+  const results = await page.evaluate(() => {
+    //@ts-ignore
+    return window.ytInitialData;
+  });
+  const videos: Video[] = results.contents.twoColumnSearchResultsRenderer.primaryContents.sectionListRenderer.contents[0].itemSectionRenderer.contents
+    .map(v => v.videoRenderer)
+    .filter(video => video.ownerText.runs[0].text === "Swiss001")
+    .map(v => new Video(v));
+  await browser.close();
+  return videos.slice(amount);
+}
+
+searchYoutubeVideos("Swiss001", 30).then((results: Video[]) => {
+  cachedVideos = results;
+});
+
+// Express stuff
 const app = express();
-const youtube = new yt(process.env.ytkey);
 app.set("views", join(__dirname, "../webpage/views"));
 app.set("view engine", "ejs");
 app.use(express.static(join(__dirname, "../webpage/public")));
 app.get("/", (req, res) => {
-  if (!cachedVideos) {
-    youtube
-      .searchVideos("Swiss001", 10)
-      .then(results => {
-        cachedVideos = results;
-        res.render("home", { videos: JSON.stringify(results) });
-      })
-      .catch(error => {
-        console.error(error);
-        res.redirect("error");
-      });
-  } else {
-    res.render("home", { videos: JSON.stringify(cachedVideos) });
-  }
+  res.render("home", { videos: cachedVideos });
 });
 app.get("/pubsubhubbub", (req, res) => {
   const { channel_id } = req.query;
-  youtube
-    .searchVideos("Swiss001", 10)
+  searchYoutubeVideos("Swiss001", 30)
     .then(results => {
       cachedVideos = results;
       client.channels.fetch(channel_id).then((channel: TextChannel) => {
@@ -56,7 +147,9 @@ app.use("*", (req, res, next) => {
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`Webserver running on port ${process.env.PORT}, http://localhost:${process.env.PORT}`);
+  console.log(
+    `Webserver running on port ${process.env.PORT}, http://localhost:${process.env.PORT}`
+  );
 });
 
 export default app;
