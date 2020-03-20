@@ -7,11 +7,9 @@
     "npm": "6.13.6"
   },
   "scripts": {
-    "start:bot": "node ./dist/index.js",
-    "start:webserver": "node ./dist/webserver.js",
+    "start": "node ./dist/index.js",
     "build": "rm -rf dist/ && tsc",
-    "dev:bot": "ts-node-dev ./src/index.ts",
-    "dev:webserver": "ts-node-dev ./src/webserver.ts"
+    "dev": "ts-node-dev ./src/index.ts"
   },
   "heroku-run-build-script": true,
   "repository": {
