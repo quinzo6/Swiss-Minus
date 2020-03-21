@@ -1,7 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable global-require */
 import dotenv from "dotenv";
-dotenv.config({ path: join(__dirname, "../.env") });
 import express from "express";
 import { MessageEmbed, TextChannel } from "discord.js";
 import { join } from "path";
@@ -15,6 +14,7 @@ import SwissClient from "./SwissClient";
 // import opus from "node-opus";
 // import ytdl from "ytdl-core";
 
+dotenv.config({ path: join(__dirname, "../.env") });
 const dev = process.env.dev ? true : false;
 const aplanes = Object.values(planes);
 const db = new PgClient({
