@@ -29,15 +29,12 @@ export async function execute(
 ) {
   const player1 = message.member;
   let player2
-  if(!args[0]){
+  if (!args[0]) {
     player2 = message.guild.me //Bot
-    console.log('1')
-  }
-  else{
-    console.log('2')
+  } else {
     player2 = message.mentions.members.first() || //Mention
-    message.guild.members.cache.get(args[0]) || //Id
-    message.guild.me //Bot
+      message.guild.members.cache.get(args[0]) || //Id
+      message.guild.me //Bot
   }
   if (player2.user.bot && player2.user.id !== client.user.id)
     return message.channel.send(`You can't play with a bot other than me!`);
@@ -54,7 +51,7 @@ export async function execute(
       m.author.id === player2.user.id && ["yes", "no"].includes(m.content.toLowerCase())
     );
     message.channel.stopTyping(true);
-    if(!response) return message.channel.send('Oops, your time ran out')
+    if (!response) return message.channel.send('Oops, your time ran out')
     if (response.content.toLowerCase() === "no")
       return message.channel.send(
         `<@${player1.user.id}> won because <@${player2.user.id}> gave up before the game even started!`
@@ -93,15 +90,9 @@ export async function execute(
       .setTitle(`${currentPlayer.user.tag}'s turn`)
       .setDescription(
         [
-          `${parseSignFromBoard(0)}|${parseSignFromBoard(
-            1
-          )}|${parseSignFromBoard(2)}`,
-          `${parseSignFromBoard(3)}|${parseSignFromBoard(
-            4
-          )}|${parseSignFromBoard(5)}`,
-          `${parseSignFromBoard(6)}|${parseSignFromBoard(
-            7
-          )}|${parseSignFromBoard(8)}`
+          `${parseSignFromBoard(0)}|${parseSignFromBoard(1)}|${parseSignFromBoard(2)}`,
+          `${parseSignFromBoard(3)}|${parseSignFromBoard(4)}|${parseSignFromBoard(5)}`,
+          `${parseSignFromBoard(6)}|${parseSignFromBoard(7)}|${parseSignFromBoard(8)}`
         ].join("\n")
       );
   }
