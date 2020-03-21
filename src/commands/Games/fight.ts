@@ -43,7 +43,7 @@ let fightMessage
 const pt1 = user1.tag
 const pt2 = user2.user.tag
     message.channel.send(
-      `<@${user2.user.id}>, do you want to play tictactoe with <@${user1.id}>? Respond with \`yes\` if you want to continue, otherwise respond with \`no\` to this message.`
+      `<@${user2.user.id}>, do you want to fight <@${user1.id}>? Respond with \`yes\` if you want to continue, otherwise respond with \`no\` to this message.`
     );
     message.channel.startTyping(60000);
     const response = await awaitMessage(
