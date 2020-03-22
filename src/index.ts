@@ -59,7 +59,7 @@ client.on("messageReactionAdd", async reaction => {
 });
 client.login(process.env.token).then(async _token => {
   console.log(
-    client.channels.cache
+    client.channels
   )
   console.log(`Ready as ${client.user.tag}`);
   client.user
