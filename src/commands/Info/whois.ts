@@ -20,33 +20,12 @@ export async function execute(
     (message.guild.members.cache.find(
       m => m.user.username === args[0]
     ) as GuildMember) || // Username
-    (message.guild.members.cache.find(
-      m => m.nickname === args[0]
-    ) as GuildMember) || // Nickname
     message.member; // Member who sent the message
-  if (!whoisUser) {
-    const roles = message.member.roles.cache.map(r => r).join(",");
-    let highestRole = message.member.roles.highest;
-    const whois = new MessageEmbed();
-    whois
-      .setThumbnail(message.author.avatarURL())
-      .setTitle(message.author.tag)
-      .setAuthor(message.author.tag, message.author.avatarURL())
-      .setColor(swiss_blue)
-      .addField("ID:", message.author.id)
-      .addField("Username:", message.author.tag)
-      .addField("Roles:", roles)
-      .addField("Highest Role:", highestRole)
-      .addField("Account Created on:", message.author.createdAt)
-      .addField("Joined on:", message.member.joinedAt)
-      .addField("Presence:", message.author.presence.status)
-      .setFooter(client.version)
-      .setTimestamp();
-    await message.channel.send(whois);
-  } else {
+    console.log(whoisUser)
     const roles1 = whoisUser.roles.cache.map(r => r).join(",");
     const highestRole1 = whoisUser.roles.highest;
     const whois1 = new MessageEmbed();
+    console.log(whoisUser)
     whois1
       .setThumbnail(whoisUser.user.avatarURL())
       .setTitle(whoisUser.user.tag)
@@ -63,4 +42,3 @@ export async function execute(
       .setTimestamp();
     await message.channel.send(whois1);
   }
-}
