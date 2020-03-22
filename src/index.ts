@@ -58,6 +58,9 @@ client.on("messageReactionAdd", async reaction => {
   }
 });
 client.login(process.env.token).then(async _token => {
+  console.log(
+    client.channels.cache
+  )
   console.log(`Ready as ${client.user.tag}`);
   client.user
     .setActivity(`the ${version} update`, { type: "WATCHING" })
