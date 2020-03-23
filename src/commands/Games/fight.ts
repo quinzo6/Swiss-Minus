@@ -150,13 +150,14 @@ export async function execute(
         ]
         return change.chag = stolen, rmessage.msg = steals[sT]
     }
-    await new Promise(res => {
-        setInterval(() => {
+    let promise = new Promise(res => {
+        let a = setInterval(() => {
             if (p1h.health <= 0 || p2h.health <= 0) {
-                clearInterval()
+                clearInterval(a)
                 res()
             }
             let action = Math.floor(Math.random() * 10)
+            console.log(action)
             if (action > 5) {
                 damage()
                 if (activeP.pson === pt1) {
@@ -176,7 +177,7 @@ export async function execute(
                     embed
                 )
             }
-            if (action <= 5 && action > 8) {
+            else if (action >= 5 && action < 8) {
                 heal()
                 if (activeP.pson === pt2) {
                     p2h.heth = (p2h.health + change.change)
@@ -195,7 +196,7 @@ export async function execute(
                     embed
                 )
             }
-            if (action === 8 || action === 9) {
+            else if(action === 8 || action === 9) {
                 steal()
                 if (activeP.pson === pt1) {
                     p2h.heth = (p2h.health - change.change)
@@ -218,8 +219,17 @@ export async function execute(
                     embed
                 )
             }
-        }, 2000)
+        }, 2500)
     })
-    fightMessage.delete().then(message.channel.send(`${offP.pson} was sent to the hospitol. ${activeP.pson} won!`))
-
+    let deadP
+    if(p1h.health < 1) deadP = pt1
+    else deadP = pt2
+    await promise
+    .then(a => {
+        fightMessage.delete().then(
+            a => {
+                 message.channel.send(`${deadP} was send the the hospital. GG`)
+            }
+        )
+    })
 }
