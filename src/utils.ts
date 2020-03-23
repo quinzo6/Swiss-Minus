@@ -100,7 +100,6 @@ export async function gameJoin(
       time: 10000
     })
     reactCollector.on('collect', (reaction: MessageReaction, user: User) => {
-      console.log('j')
       let c = msg.content
       let d = c.replace('Empty', user.tag)
       players.set(order, user)
