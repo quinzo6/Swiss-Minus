@@ -34,7 +34,7 @@ export async function execute(
   let players 
   await gameJoin(2, 'tictactoe', message)
   .then(a => players = a)
-  if(!players.has(2))
+  if(!players.has(2)) return
   player2 = players.get(2)
   player2 = message.guild.members.fetch(player2.id)
   var currentPlayer = player2;
