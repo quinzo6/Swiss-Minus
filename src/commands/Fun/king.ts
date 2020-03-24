@@ -2,7 +2,6 @@ import SwissClient from "../../SwissClient";
 import { MessageAttachment, Message } from "discord.js";
 
 export let name = "king";
-export let canBeOff = true;
 
 export async function execute(
   client: SwissClient,
