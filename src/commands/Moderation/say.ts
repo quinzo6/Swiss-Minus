@@ -7,7 +7,6 @@ export let description = "Says a message!";
 export let usage = "[channel] [message]";
 export let guildOnly = true;
 export let canBeOff = true;
-export let permissions = ["MANAGE_ROLES"];
 
 export async function execute(
   client: SwissClient,
