@@ -27,6 +27,7 @@ export async function execute(
       .addField("This incident will be reported.")
       .setFooter(client.version)
       .setTimestamp();
+    return message.channel.send(embed);
   }
   if (!mentionedChannel) {
     const embed = new MessageEmbed()
