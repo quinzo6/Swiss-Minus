@@ -18,7 +18,16 @@ export async function execute(
     (client.channels.cache.get(args[0]) as TextChannel) || // Find channel by id
     message.channel; // Current Channel
   const mod =
-    message.member.hasPermission("MANAGE_MESSAGES")
+    message.member.hasPermission("ADMINISTRATOR")
+  if(!mod || message.author.id !== '660238973943152707') {
+       const embed = new MessageEmbed()
+      .setAuthor(message.author.tag, message.author.avatarURL())
+      .setTitle("No permission!")
+      .setColor("F90B0B")
+      .addField("This incident will be reported.")
+      .setFooter(client.version)
+      .setTimestamp();
+  }
   if (!mentionedChannel) {
     const embed = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL())
