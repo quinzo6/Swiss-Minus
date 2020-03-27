@@ -19,16 +19,7 @@ export async function execute(
     message.channel; // Current Channel
   const mod =
     message.member.hasPermission("ADMINISTRATOR")
-  if(!mod || message.author.id !== '660238973943152707') {
-       const embed = new MessageEmbed()
-      .setAuthor(message.author.tag, message.author.avatarURL())
-      .setTitle("No permission!")
-      .setColor("F90B0B")
-      .setDescription("This incident will be reported.")
-      .setFooter(client.version)
-      .setTimestamp();
-    return message.channel.send(embed);
-  }
+  if(!mod || message.author.id !== '660238973943152707') return
   if (!mentionedChannel) {
     const embed = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL())
