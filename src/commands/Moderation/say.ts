@@ -24,7 +24,7 @@ export async function execute(
       .setAuthor(message.author.tag, message.author.avatarURL())
       .setTitle("No permission!")
       .setColor("F90B0B")
-      .addField("This incident will be reported.")
+      .setDescription("This incident will be reported.")
       .setFooter(client.version)
       .setTimestamp();
     return message.channel.send(embed);
