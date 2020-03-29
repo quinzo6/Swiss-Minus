@@ -18,9 +18,8 @@ export async function execute(
     (client.channels.cache.get(args[0]) as TextChannel) || // Find channel by id
     message.channel; // Current Channel
   const mod =
-    message.member.hasPermission("ADMINISTRATOR")
-  const mork = "660238973943152707";
-  if(!mod || message.sender !== mork) return
+    message.member.hasPermission("ADMINISTRATOR");
+  if(!mod || message.author.id !== '660238973943152707') return;
   if (!mentionedChannel) {
     const embed = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.avatarURL())
