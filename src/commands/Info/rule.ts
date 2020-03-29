@@ -58,7 +58,7 @@ export async function execute(
   if (rules[wordmap[args[0]] - 1] !== undefined)
     message.channel.send(rules[wordmap[args[0].toLowerCase()] - 1]);
   if (parseInt(args[0]) > 36)
-    `Swiss Plus is the best bot, no questions. If you do for some absurd reason have a question, dm **Non-Ping(${
+    `Swiss Minus is the best bot, no questions. If you do for some absurd reason have a question, dm **Non-Ping(${
       (await pete).tag
     })**`;
 }

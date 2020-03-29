@@ -191,7 +191,7 @@ export async function execute(client: SwissClient, message: Message) {
       .setTitle("An Error Occurred")
       .setColor(error_red)
       .setDescription(
-        `An error occurred. Please report this error to a Swiss Plus developer with the following message \`\`\`${error}\`\`\``
+        `An error occurred. Please report this error to a Swiss Minus developer with the following message \`\`\`${error}\`\`\``
       );
     return await message.channel.send(err);
   }

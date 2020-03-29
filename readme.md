@@ -1,4 +1,4 @@
-# Swiss-Plus discord bot
+# Swiss-Minus discord bot
 
 ## Information
 
@@ -21,12 +21,12 @@ Once you have downloaded the above you can `fork` this repository. A new window 
 After that you want to `clone` the repository to your computer.
 1. Create a new folder wherever you like
 2. Right-click in the created folder and click on `Git Bash Here`
-3. Type `git clone https://github.com/[YOUR_USERNAME_HERE]/Swiss-Plus.git`
-4. Navigate in the folder by typing `cd Swiss-Plus`
-5. Copy paste the following into your Git Bash window `git remote add upstream https://github.com/carterdacat/Swiss-Plus.git`
+3. Type `git clone https://github.com/[YOUR_USERNAME_HERE]/Swiss-Minus.git`
+4. Navigate in the folder by typing `cd Swiss-Minus`
+5. Copy paste the following into your Git Bash window `git remote add upstream https://github.com/carterdacat/Swiss-Minus.git`
 
 ### How to catch up to your git fork to master
-1. Right-click on the `Swiss-Plus` folder and click on `Git Bash here`
+1. Right-click on the `Swiss-Minus` folder and click on `Git Bash here`
 2. Type `git fetch upstream`
 3. Type `git checkout master`
 4. Then type `git merge upstream/master`

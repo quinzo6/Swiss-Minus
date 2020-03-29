@@ -1,5 +1,5 @@
 {
-  "name": "swiss-plus",
+  "name": "swiss-minus",
   "version": "3.7.1",
   "main": "src/index.ts",
   "engines": {
@@ -14,7 +14,7 @@
   "heroku-run-build-script": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/carterdacat/Swiss-Plus.git"
+    "url": "git+https://github.com/carterdacat/Swiss-Minus.git"
   },
   "keywords": [
     "heroku",
@@ -22,9 +22,9 @@
   ],
   "author": "carterdacat",
   "bugs": {
-    "url": "https://github.com/carterdacat/Swiss-Plus"
+    "url": "https://github.com/carterdacat/Swiss-Minus"
   },
-  "homepage": "https://github.com/carterdacat/Swiss-Plus",
+  "homepage": "https://github.com/carterdacat/Swiss-Minus",
   "dependencies": {
     "@discordjs/opus": "^0.1.0",
     "axios": "^0.19.2",
