@@ -30,17 +30,17 @@ export async function execute(
   args: string[]
 ) {
   const player1 = message.member;
-  let player2
-  let players 
+  let player2;
+  let players;
   await gameJoin(2, 'tictactoe', message)
-  .then(a => players = a)
-  if(!players.has(2)) return
-  player2 = players.get(2)
-  player2 = message.guild.members.fetch(player2.id)
+      .then(a => players = a);
+  if (!players.has(2)) return;
+  player2 = players.get(2);
+  player2 = message.guild.members.fetch(player2.id);
   var currentPlayer = player2;
   var embed = new MessageEmbed()
-    .setAuthor("Tic Tac Toe", client.user.displayAvatarURL())
-    .setColor(swiss_blue);
+      .setAuthor("Tic Tac Toe", client.user.displayAvatarURL())
+      .setColor(swiss_blue);
   var stop = false;
   const gameMsg = await message.channel.send("Preparing the board...");
   const board = [" ", " ", " ", " ", " ", " ", " ", " ", " "];

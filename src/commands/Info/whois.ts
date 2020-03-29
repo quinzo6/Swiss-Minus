@@ -15,18 +15,18 @@ export async function execute(
   args: string[]
 ) {
   const whoisUser =
-    message.mentions.members.first() || // First mention
-    (message.guild.members.cache.get(args[0]) as GuildMember) || // User ID
-    (message.guild.members.cache.find(
-      m => m.user.username === args[0]
-    ) as GuildMember) || // Username
-    message.member; // Member who sent the message
-    console.log(whoisUser)
-    const roles1 = whoisUser.roles.cache.map(r => r).join(",");
-    const highestRole1 = whoisUser.roles.highest;
-    const whois1 = new MessageEmbed();
-    console.log(whoisUser)
-    whois1
+      message.mentions.members.first() || // First mention
+      (message.guild.members.cache.get(args[0]) as GuildMember) || // User ID
+      (message.guild.members.cache.find(
+          m => m.user.username === args[0]
+      ) as GuildMember) || // Username
+      message.member; // Member who sent the message
+  console.log(whoisUser);
+  const roles1 = whoisUser.roles.cache.map(r => r).join(",");
+  const highestRole1 = whoisUser.roles.highest;
+  const whois1 = new MessageEmbed();
+  console.log(whoisUser);
+  whois1
       .setThumbnail(whoisUser.user.avatarURL())
       .setTitle(whoisUser.user.tag)
       .setAuthor(message.author.tag, message.author.avatarURL())

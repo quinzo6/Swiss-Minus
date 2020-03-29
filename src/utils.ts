@@ -74,49 +74,49 @@ export async function gameJoin(
   game: String,
   message: Message
 ) {
-  let neededPlayers = playerCount - 1
-  let firstText = `React to this message to play ${game}!`
-  let secondMsg = `\n \n \n ${message.author.tag}`
-  let thirdMsg = ''
-  let order = 1
-  let msg: Message
+  let neededPlayers = playerCount - 1;
+  let firstText = `React to this message to play ${game}!`;
+  let secondMsg = `\n \n \n ${message.author.tag}`;
+  let thirdMsg = '';
+  let order = 1;
+  let msg: Message;
   for (let a = 0; neededPlayers > a; a++) {
     thirdMsg = thirdMsg + '\n Empty'
   }
   await message.channel.send(firstText + secondMsg + thirdMsg)
-    .then(
-      (mesg) => {
-        msg = mesg
-      }
-    )
+      .then(
+          (mesg) => {
+            msg = mesg
+          }
+      );
   let players = new Map([
     [order, message.author]
-  ])
-  order++
-  msg.react('🚪')
+  ]);
+  order++;
+  msg.react('🚪');
   let rcollector = new Promise((resolve, reject) => {
     let reactCollector = new ReactionCollector(msg, (a: MessageReaction, b: User) => 1 === 1 && !b.bot && b !== message.author, {
       maxUsers: neededPlayers,
       time: 10000
-    })
+    });
     reactCollector.on('collect', (reaction: MessageReaction, user: User) => {
-      let c = msg.content
-      let d = c.replace('Empty', user.tag)
-      players.set(order, user)
-      order++
+      let c = msg.content;
+      let d = c.replace('Empty', user.tag);
+      players.set(order, user);
+      order++;
       msg.edit(d)
-    })
+    });
     reactCollector.on('end', a => {
-      msg.delete()
+      msg.delete();
       resolve()
     })
-  })
+  });
   await rcollector
-    .then(a => {
-      return players
-    })
-    .catch(a => {
-      return players
-    })
+      .then(a => {
+        return players
+      })
+      .catch(a => {
+        return players
+      });
   return players
 }
