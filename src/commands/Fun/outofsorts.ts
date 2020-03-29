@@ -9,14 +9,15 @@ export async function execute(
   message: Message,
   args: string[]
 ) {
-    let msg: any = args.join(' ')
-    msg = msg.toLowerCase()
-    msg = msg.split('')
+    let msg: any = args.join(' ');
+    await message.delete();
+    msg = msg.toLowerCase();
+    msg = msg.split('');
     for (let a = 0; msg.length > a; a++){
-     let b = Math.random()
-     if(b < 0.5) msg[a] = msg[a].toLowerCase()
-     else msg[a] = msg[a].toUpperCase()
+     let b = Math.random();
+     if(b < 0.5) msg[a] = msg[a].toLowerCase();
+     else msg[a] = msg[a].toUpperCase();
     }
-    msg = msg.join('')
-    message.channel.send(msg)
+    msg = msg.join('');
+    await message.channel.send(msg)
 }
