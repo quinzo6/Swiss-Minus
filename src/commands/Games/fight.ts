@@ -21,6 +21,7 @@ export let description = "Fight another user!";
 export let aliases = ["f"];
 export let usage = "<user>";
 export let cooldown = 5;
+export let canBeOff = true;
 
 export async function execute(
     client: SwissClient,

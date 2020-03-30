@@ -45,6 +45,7 @@ const wordmap = {
 export let name = "rule";
 export let description = "Gets a rule";
 export let cooldown = 0;
+export let canBeOff = true;
 
 export async function execute(
     client: Client,

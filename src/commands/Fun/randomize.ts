@@ -1,8 +1,9 @@
 import SwissClient from "../../SwissClient";
-import { MessageAttachment, Message } from "discord.js";
+import {Message} from "discord.js";
 
 export let name = "randomize";
 export let aliases = ["r"];
+export let canBeOff = true;
 
 export async function execute(
   client: SwissClient,
@@ -14,10 +15,10 @@ export async function execute(
     await message.delete();
     msg = msg.toLowerCase();
     msg = msg.split('');
-    for (let a = 0; msg.length > a; a++){
-     let b = Math.random();
-     if(b < 0.5) msg[a] = msg[a].toLowerCase();
-     else msg[a] = msg[a].toUpperCase();
+    for (let a = 0; msg.length > a; a++) {
+        let b = Math.random();
+        if (b < 0.5) msg[a] = msg[a].toLowerCase();
+        else msg[a] = msg[a].toUpperCase();
     }
     msg = msg.join('');
     await message.channel.send(msg)
