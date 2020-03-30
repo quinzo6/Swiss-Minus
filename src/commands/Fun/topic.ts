@@ -20,7 +20,11 @@ const quotes = [
   "What have you been up to recently?",
   "Whats your favourite plane?",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "SwissBot or SwissPlus?",
+=======
+  "SwissBot or SwissMinus?",
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
   "SwissBot or SwissMinus?",
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4

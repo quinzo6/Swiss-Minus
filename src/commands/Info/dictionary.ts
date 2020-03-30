@@ -9,6 +9,10 @@ export let description = "Search for the meaning of words";
 export let aliases = ["urban", "whatdoesthismean"];
 export let cooldown = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+export let canBeOff = true;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 export let canBeOff = true;
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -19,7 +23,11 @@ export async function execute(
   args: string[]
 ) {
 <<<<<<< HEAD
+<<<<<<< HEAD
   const word = args[0] || "swiss001";
+=======
+  var word = args.join(" ") || "swiss001";
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
   var word = args.join(" ") || "swiss001";
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -29,6 +37,7 @@ export async function execute(
     badwords.includes(
       word
         .toLowerCase()
+<<<<<<< HEAD
 <<<<<<< HEAD
         .replace(vowels, " ")
         .replace(filter, " ")
@@ -41,6 +50,8 @@ export async function execute(
   )
     return message.channel.send(`You can't fool me, try harder`);
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
         .replace(filter, " ")
         .trim()
         .replace(vowels, " ")
@@ -52,6 +63,9 @@ export async function execute(
       .replace(vowels, " ") === ""
   )
     word = "hell nah";
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
   urban
     .term(word)

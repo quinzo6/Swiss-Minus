@@ -1,19 +1,26 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { MessageEmbed, TextChannel, Message, Collection } from "discord.js";
 import { error_red, log_yellow } from "../config";
 import { getSetting } from "..";
 import SwissClient from "../SwissClient";
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 import {MessageEmbed, TextChannel, Message, Collection} from "discord.js";
 import {error_red, log_yellow} from "../config";
 import {getSetting} from "..";
 import SwissClient from "../SwissClient";
 import {convertMs} from "../utils";
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 
 export let name = "commandHandler";
 export let invoke = "message";
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 const cooldowns: Collection<
   string,
@@ -192,6 +199,8 @@ export async function execute(client: SwissClient, message: Message) {
     return await message.channel.send(err);
   }
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 const cooldowns: Collection<string,
     Collection<string, number>> = new Collection();
 
@@ -378,5 +387,8 @@ export async function execute(client: SwissClient, message: Message) {
             );
         return await message.channel.send(err);
     }
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 }

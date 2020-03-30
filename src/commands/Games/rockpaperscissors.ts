@@ -8,6 +8,10 @@ export let description = "Play rock paper scissors with this bot";
 export let aliases = ["rps"];
 export let cooldown = 2;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+export let canBeOff = true;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 export let canBeOff = true;
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4

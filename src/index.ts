@@ -1,20 +1,27 @@
 /* eslint-disable consistent-return */
 /* eslint-disable global-require */
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { join } from "path";
 import { config as dotenv_config } from "dotenv";
 dotenv_config({ path: join(__dirname, "../.env") });
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 import dotenv from "dotenv";
 import express from "express";
 import { MessageEmbed, TextChannel } from "discord.js";
 import { join } from "path";
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 import { Client as PgClient } from "pg";
 // import { version } from "../package.json"; importing it like this includes the package.json in the build which includes the src folder
 const { version } = require("../package.json");
 import planes from "./planes";
 import SwissClient from "./SwissClient";
+<<<<<<< HEAD
 <<<<<<< HEAD
 import express from "express";
 // import { log_yellow, error_red } from "./config";
@@ -50,6 +57,8 @@ app.use("*", (req, res, next) => {
 
 const dev = process.env.NODE_ENV === "dev";
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 // import { log_yellow, error_red } from "./config";
 // import ffmpeg from "ffmpeg-static";
 // import opus from "node-opus";
@@ -57,6 +66,9 @@ const dev = process.env.NODE_ENV === "dev";
 
 dotenv.config({ path: join(__dirname, "../.env") });
 const dev = process.env.dev ? true : false;
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 const aplanes = Object.values(planes);
 const db = new PgClient({
@@ -107,9 +119,12 @@ client.login(process.env.token).then(async _token => {
     .catch(console.error);
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 app.listen(dev ? 3000 : 80, () => {
   console.log(`Webserver running on port ${dev ? 3000 : 80}`);
 });
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 
@@ -120,7 +135,10 @@ export async function getSetting(name: string) {
   return res.rows[0].value;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 
 // YouTube search without API
 import puppeteer from "puppeteer";
@@ -272,4 +290,7 @@ searchYoutubeVideos("Swiss001", 30)
     });
   })
   .catch(console.error);
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4

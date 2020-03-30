@@ -2,7 +2,11 @@ import SwissClient from "../../SwissClient";
 import { Message, MessageEmbed } from "discord.js";
 import axios from "axios";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import cheerio from "cheerio";
+=======
+import cheerio from "cheerio"
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 import cheerio from "cheerio"
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -13,6 +17,10 @@ export let description = "Get the latest news headlines from flightglobal.com";
 export let aliases = ["whatsup"];
 export let cooldown = 15;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+export let canBeOff = true;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 export let canBeOff = true;
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4

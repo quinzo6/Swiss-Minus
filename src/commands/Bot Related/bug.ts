@@ -34,7 +34,11 @@ export async function execute(
     body: body
   };
 <<<<<<< HEAD
+<<<<<<< HEAD
   let issue = gh.getIssues("carterdacat", "Swiss-Plus");
+=======
+  let issue = gh.getIssues("carterdacat", "Swiss-Minus");
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
   let issue = gh.getIssues("carterdacat", "Swiss-Minus");
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4

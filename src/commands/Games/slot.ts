@@ -8,6 +8,10 @@ export let description = "Play with a slot machine!";
 export let aliases = ["slotmachine", "luck"];
 export let cooldown = 5;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+export let canBeOff = true;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 export let canBeOff = true;
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4

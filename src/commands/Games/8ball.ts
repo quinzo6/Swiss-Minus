@@ -8,6 +8,10 @@ export let description = "Fortune Teller.";
 export let cooldown = 5;
 export let aliases = ["8ball", "eightball", "future"];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+export let canBeOff = true;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 export let canBeOff = true;
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4

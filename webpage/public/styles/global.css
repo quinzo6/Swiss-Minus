@@ -40,7 +40,11 @@ header {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .logo > p {
+=======
+.logo>p {
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 .logo>p {
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -55,7 +59,11 @@ header {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .nav-links > li {
+=======
+.nav-links>li {
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 .nav-links>li {
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -64,17 +72,23 @@ header {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .nav-links > li > a {
   transition: all 0.2s ease 0s;
 }
 
 .nav-links > li a:hover {
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 .nav-links>li>a {
   transition: all 0.2s ease 0s;
 }
 
 .nav-links>li a:hover {
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
   color: var(--primary-color);
 }
@@ -93,7 +107,10 @@ header {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 @media only screen and (max-width: 700px) {
   header {
     display: block;
@@ -101,6 +118,9 @@ header {
   }
 }
 
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 /* Footer */
 footer {
@@ -133,7 +153,11 @@ footer {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .jumbotron > h1 {
+=======
+.jumbotron>h1 {
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 .jumbotron>h1 {
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -146,7 +170,11 @@ footer {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .jumbotron > span {
+=======
+.jumbotron>span {
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 .jumbotron>span {
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -176,7 +204,11 @@ footer {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 figure > figcaption {
+=======
+figure>figcaption {
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 figure>figcaption {
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -198,7 +230,11 @@ figure>figcaption {
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 }
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4

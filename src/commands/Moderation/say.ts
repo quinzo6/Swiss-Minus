@@ -8,7 +8,10 @@ export let usage = "[channel] [message]";
 export let guildOnly = true;
 export let canBeOff = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 export let permissions = ["MANAGE_ROLES"];
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 
@@ -23,8 +26,13 @@ export async function execute(
     message.channel; // Current Channel
   const mod =
 <<<<<<< HEAD
+<<<<<<< HEAD
     message.member.hasPermission("MANAGE_ROLES") ||
     message.author.id === "660238973943152707";
+=======
+    message.member.hasPermission("ADMINISTRATOR");
+  if(!mod || message.author.id !== '660238973943152707') return;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
     message.member.hasPermission("ADMINISTRATOR");
   if(!mod || message.author.id !== '660238973943152707') return;

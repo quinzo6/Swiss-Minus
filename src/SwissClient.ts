@@ -16,6 +16,11 @@ class SwissClient extends Client {
   public version: string;
   public commands: Collection<string, any>;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  public commandsExecuted: number;
+  public commandsFailed: number;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
   public commandsExecuted: number;
   public commandsFailed: number;
@@ -30,6 +35,11 @@ class SwissClient extends Client {
     this.commands = new Collection();
     this.readCommands(options.commandPath);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    this.commandsExecuted = 0;
+    this.commandsFailed = 0;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
     this.commandsExecuted = 0;
     this.commandsFailed = 0;
@@ -67,6 +77,10 @@ class SwissClient extends Client {
       console.log(`Loading in command ${command.name} of category ${category}`);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    if ((command.devOnly || false) && !this.dev) return;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
     if ((command.devOnly || false) && !this.dev) return;
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4

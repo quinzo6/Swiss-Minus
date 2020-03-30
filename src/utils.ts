@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Message, CollectorFilter, MessageCollector } from "discord.js";
 
 export function getRandom(array: Array<any>) {
@@ -8,6 +9,8 @@ export async function awaitMessage(message: Message, filter: CollectorFilter) {
   let promise = new Promise((resolve, reject) => {
     let x = new MessageCollector(message.channel, filter, { time: 60000 });
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 import {
   Message,
   CollectorFilter,
@@ -51,6 +54,9 @@ export async function awaitMessage(
     let x = new MessageCollector(message.channel, filter, {
       time: 60000
     });
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
     x.on("collect", msg => {
       resolve(msg);
@@ -61,15 +67,21 @@ export async function awaitMessage(
   });
   return await promise
 <<<<<<< HEAD
+<<<<<<< HEAD
     .then(function(msg: Message) {
       return msg;
     })
     .catch(function(b) {
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
     .then(function (msg: Message) {
       return msg;
     })
     .catch(function (b) {
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
       message.channel.send("Oops, your time ran out!");
       return null;
@@ -77,7 +89,11 @@ export async function awaitMessage(
 }
 export function arrayJoin(
 <<<<<<< HEAD
+<<<<<<< HEAD
   array: Array<any>,
+=======
+  array: Array < any > ,
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
   array: Array < any > ,
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -92,7 +108,10 @@ export function arrayJoin(
   }`;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 export async function gameJoin(
   playerCount: number,
   game: String,
@@ -143,5 +162,9 @@ export async function gameJoin(
         return players
       });
   return players
+<<<<<<< HEAD
+}
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 }
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4

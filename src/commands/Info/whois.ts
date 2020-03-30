@@ -16,6 +16,7 @@ export async function execute(
 ) {
   const whoisUser =
 <<<<<<< HEAD
+<<<<<<< HEAD
     message.mentions.members.first() || // First mention
     (message.guild.members.cache.get(args[0]) as GuildMember) || // User ID
     (message.guild.members.cache.find(
@@ -50,6 +51,8 @@ export async function execute(
     const whois1 = new MessageEmbed();
     whois1
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
       message.mentions.members.first() || // First mention
       (message.guild.members.cache.get(args[0]) as GuildMember) || // User ID
       (message.guild.members.cache.find(
@@ -62,6 +65,9 @@ export async function execute(
   const whois1 = new MessageEmbed();
   console.log(whoisUser);
   whois1
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
       .setThumbnail(whoisUser.user.avatarURL())
       .setTitle(whoisUser.user.tag)
@@ -79,6 +85,9 @@ export async function execute(
     await message.channel.send(whois1);
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4

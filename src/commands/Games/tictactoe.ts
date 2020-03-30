@@ -1,6 +1,12 @@
 import SwissClient from "../../SwissClient";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { swiss_blue } from "../../config";
+=======
+import {
+  swiss_blue
+} from "../../config";
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 import {
   swiss_blue
@@ -11,10 +17,13 @@ import {
   GuildMember,
   MessageEmbed,
 <<<<<<< HEAD
+<<<<<<< HEAD
   ReactionCollector
 } from "discord.js";
 import { awaitMessage, getRandom } from "../../utils";
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
   ReactionCollector,
   MessageReaction,
   User
@@ -24,6 +33,9 @@ import {
   getRandom,
   gameJoin
 } from "../../utils";
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 
 export let name = "tictactoe";
@@ -31,7 +43,12 @@ export let description = "Play tictactoe with a friend or with the bot!";
 export let aliases = ["ttt"];
 export let usage = "[user]";
 <<<<<<< HEAD
+<<<<<<< HEAD
 export let cooldown = 60;
+=======
+export let cooldown = 6;
+export let canBeOff = true;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 export let cooldown = 6;
 export let canBeOff = true;
@@ -45,6 +62,7 @@ export async function execute(
   args: string[]
 ) {
   const player1 = message.member;
+<<<<<<< HEAD
 <<<<<<< HEAD
   const player2 =
     message.mentions.members.first() || // First mention
@@ -82,6 +100,8 @@ export async function execute(
     .setAuthor("Tic Tac Toe", client.user.displayAvatarURL())
     .setColor(swiss_blue);
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
   let player2;
   let players;
   await gameJoin(2, 'tictactoe', message)
@@ -93,6 +113,9 @@ export async function execute(
   var embed = new MessageEmbed()
       .setAuthor("Tic Tac Toe", client.user.displayAvatarURL())
       .setColor(swiss_blue);
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
   var stop = false;
   const gameMsg = await message.channel.send("Preparing the board...");
@@ -102,6 +125,10 @@ export async function execute(
   const player2Sign = "⭕";
   await Promise.all(reactions.map(r => gameMsg.react(r)));
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
   
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -116,6 +143,10 @@ export async function execute(
     return new Promise((resolve, reject) => setTimeout(resolve, ms));
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -124,6 +155,10 @@ export async function execute(
     return false;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -132,6 +167,7 @@ export async function execute(
       .setTitle(`${currentPlayer.user.tag}'s turn`)
       .setDescription(
         [
+<<<<<<< HEAD
 <<<<<<< HEAD
           `${parseSignFromBoard(0)}|${parseSignFromBoard(
             1
@@ -146,6 +182,8 @@ export async function execute(
       );
   }
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
           `${parseSignFromBoard(0)}|${parseSignFromBoard(1)}|${parseSignFromBoard(2)}`,
           `${parseSignFromBoard(3)}|${parseSignFromBoard(4)}|${parseSignFromBoard(5)}`,
           `${parseSignFromBoard(6)}|${parseSignFromBoard(7)}|${parseSignFromBoard(8)}`
@@ -153,6 +191,9 @@ export async function execute(
       );
   }
 
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
   function findWinner(): string {
     const possibleWins = [
@@ -171,6 +212,10 @@ export async function execute(
     return possibleWins.find(w => w !== false && w !== " ") || "";
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -180,7 +225,10 @@ export async function execute(
     playable[reactions.indexOf(emoji)] = null;
     const winner = findWinner();
 <<<<<<< HEAD
+<<<<<<< HEAD
     console.log(winner);
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
     if (playable.every(p => p === null)) {
@@ -233,7 +281,11 @@ export async function execute(
         (Math.floor(Math.random() * randomDelay[1] - randomDelay[0]) +
           randomDelay[0]) *
 <<<<<<< HEAD
+<<<<<<< HEAD
           1000
+=======
+        1000
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
         1000
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
@@ -244,16 +296,22 @@ export async function execute(
     const collector = new ReactionCollector(
       gameMsg,
 <<<<<<< HEAD
+<<<<<<< HEAD
       (r, u) =>
         gameMsg.reactions.cache.array().includes(r) &&
         u.id === currentPlayer.id,
       {
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
       (r: MessageReaction, u) =>
       playable
       .map((e, index) => (e ? reactions[index - 1] : null))
       .filter(e => e !== null)
       .includes(r.emoji.name) && u.id === currentPlayer.id, {
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
         time: 60000
       }
@@ -290,7 +348,11 @@ export async function execute(
     });
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 =======
 }
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4

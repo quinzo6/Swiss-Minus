@@ -1,15 +1,21 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Client, Message } from "discord.js";
 
 const rules = [
   "You must be over the age of 13. If we suspect a user being under the age of 13, we may enforce appropriate action to make sure all users are above the age of 13. You may continue to stay in this server with parental permission.",
   "Inappropriate discord usernames or profile pictures are not allowed, you will be given a formal warning to change this and may lead to further action being taken upon you.",
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 import {Client, Message} from "discord.js";
 
 const rules = [
   "You must be over the age of 13. If we suspect a user being under the age of 13, we may enforce appropriate action to make sure all users are above the age of 13. You may continue to stay in this server with parental permission.",
   "Inappropriate discord username or profile pictures are not allowed, you will be given a formal warning to change this and may lead to further action being taken upon you.",
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
   "Moderators reserve the right to change your server nickname if it is found to be violating the rules. This will be followed by a formal warning as stated above.",
   "Please withhold only a single account within the server. Prior permission will be required from the staff team if you wish to bring in another account for any legit reason.",
@@ -54,6 +60,7 @@ export let name = "rule";
 export let description = "Gets a rule";
 export let cooldown = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 export async function execute(
   client: Client,
@@ -70,6 +77,8 @@ export async function execute(
     `Swiss Plus is the best bot, no questions. If you do for some absurd reason have a question, dm **Non-Ping(${
       (await pete).tag
 =======
+=======
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 export let canBeOff = true;
 
 export async function execute(
@@ -87,6 +96,9 @@ export async function execute(
   if (parseInt(args[0]) > 36)
     `Swiss Minus is the best bot, no questions. If you do for some absurd reason have a question, dm **Non-Ping(${
         (await pete).tag
+<<<<<<< HEAD
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
+=======
 >>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
     })**`;
 }

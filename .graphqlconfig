@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "Untitled GraphQL Schema",
   "schemaPath": "schema.graphql",
@@ -12,4 +13,20 @@
       }
     }
   }
+=======
+{
+  "name": "Untitled GraphQL Schema",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://localhost:8080/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 }
