@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<<<<<<< HEAD
 <%- include('../layouts/head.ejs', { title: "Home" }) %>
 
 <body>
@@ -17,6 +18,23 @@
 				</figure>
 				<div class="card-body">
 					<a href="https://www.youtube.com/watch?v=<%- video.id %>" target="__blank" class="cta"><button>Watch
+=======
+<%- include('../layouts/head.ejs', { title: "Home", css: ["global"] }) %>
+
+<body>
+	<%- include('../layouts/navbar.ejs') %>
+	<div class="jumbotron">
+		<h1>Popular videos of Swiss001</h1>
+		<section class="grid">
+			<% videos.forEach(video => { %>
+			<div class="card">
+				<figure><img src="<%- video.thumbnail %>" alt="<%- video.title %>" width="100%">
+					<figcaption><%- video.title %></figcaption>
+					<figcaption><%- video.releaseDate %> &lowast; <%- video.numViews %></figcaption>
+				</figure>
+				<div class="card-body">
+					<a href="<%- video.url %>" target="__blank" class="cta" style="margin: 0 auto;"><button>Watch
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 							this
 							video!</button></a>
 				</div>

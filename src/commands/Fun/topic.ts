@@ -19,7 +19,11 @@ const quotes = [
   "Democrat or Republican",
   "What have you been up to recently?",
   "Whats your favourite plane?",
+<<<<<<< HEAD
   "SwissBot or SwissPlus?",
+=======
+  "SwissBot or SwissMinus?",
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
   "Windows or Apple?"
 ];
 

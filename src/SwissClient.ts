@@ -15,6 +15,11 @@ class SwissClient extends Client {
   public dev: boolean;
   public version: string;
   public commands: Collection<string, any>;
+<<<<<<< HEAD
+=======
+  public commandsExecuted: number;
+  public commandsFailed: number;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
   public events: Collection<string, any>;
 
   public constructor(options: SwissOptions, discordOptions: ClientOptions) {
@@ -24,6 +29,11 @@ class SwissClient extends Client {
     this.version = `v${options.version}`;
     this.commands = new Collection();
     this.readCommands(options.commandPath);
+<<<<<<< HEAD
+=======
+    this.commandsExecuted = 0;
+    this.commandsFailed = 0;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
     this.events = new Collection();
     this.readEvents(options.eventPath);
   }
@@ -56,6 +66,10 @@ class SwissClient extends Client {
     if (this.dev) {
       console.log(`Loading in command ${command.name} of category ${category}`);
     }
+<<<<<<< HEAD
+=======
+    if ((command.devOnly || false) && !this.dev) return;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
     command.category = category;
     this.commands.set(command.name, command);
   }

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Swiss-Plus discord bot
+=======
+# Swiss-Minus discord bot
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 
 ## Information
 
@@ -21,12 +25,21 @@ Once you have downloaded the above you can `fork` this repository. A new window 
 After that you want to `clone` the repository to your computer.
 1. Create a new folder wherever you like
 2. Right-click in the created folder and click on `Git Bash Here`
+<<<<<<< HEAD
 3. Type `git clone https://github.com/[YOUR_USERNAME_HERE]/Swiss-Plus.git`
 4. Navigate in the folder by typing `cd Swiss-Plus`
 5. Copy paste the following into your Git Bash window `git remote add upstream https://github.com/carterdacat/Swiss-Plus.git`
 
 ### How to catch up to your git fork to master
 1. Right-click on the `Swiss-Plus` folder and click on `Git Bash here`
+=======
+3. Type `git clone https://github.com/[YOUR_USERNAME_HERE]/Swiss-Minus.git`
+4. Navigate in the folder by typing `cd Swiss-Minus`
+5. Copy paste the following into your Git Bash window `git remote add upstream https://github.com/carterdacat/Swiss-Minus.git`
+
+### How to catch up to your git fork to master
+1. Right-click on the `Swiss-Minus` folder and click on `Git Bash here`
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 2. Type `git fetch upstream`
 3. Type `git checkout master`
 4. Then type `git merge upstream/master`
@@ -38,8 +51,13 @@ Example: `This branch is 4 commits behind carterdacat:master.`
 1. Type `npm install` in your Git Bash window
 
 ### Bot Token
+<<<<<<< HEAD
 1. Make a `.env` file for the bot token.
 2. You will find the bot token in the discord server that carterdacat invited you to.
+=======
+1. Make a `.env` file for the tokens.
+2. You will find the tokens in the discord server that carterdacat invited you to.
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 
 
 ## Starting Your Bot

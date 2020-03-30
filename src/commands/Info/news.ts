@@ -1,13 +1,21 @@
 import SwissClient from "../../SwissClient";
 import { Message, MessageEmbed } from "discord.js";
 import axios from "axios";
+<<<<<<< HEAD
 import cheerio from "cheerio";
+=======
+import cheerio from "cheerio"
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 import { swiss_blue } from "../../config";
 
 export let name = "news";
 export let description = "Get the latest news headlines from flightglobal.com";
 export let aliases = ["whatsup"];
 export let cooldown = 15;
+<<<<<<< HEAD
+=======
+export let canBeOff = true;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 
 const url = "https://flightglobal.com"; // This must not be changed
 

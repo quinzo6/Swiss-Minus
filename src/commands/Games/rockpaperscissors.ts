@@ -7,6 +7,10 @@ export let name = "rockpaperscissors";
 export let description = "Play rock paper scissors with this bot";
 export let aliases = ["rps"];
 export let cooldown = 2;
+<<<<<<< HEAD
+=======
+export let canBeOff = true;
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
 
 const choices = ["Rock", "Paper", "Scissors"];
 const rock = ["rock", "r"];

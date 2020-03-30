@@ -33,7 +33,11 @@ export async function execute(
     title: args[0],
     body: body
   };
+<<<<<<< HEAD
   let issue = gh.getIssues("carterdacat", "Swiss-Plus");
+=======
+  let issue = gh.getIssues("carterdacat", "Swiss-Minus");
+>>>>>>> ef04a72d6539885062fca003e196c289cbd4bcb4
   issue
     .createIssue(iText)
     .then(b => {
