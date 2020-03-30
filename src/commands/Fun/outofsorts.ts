@@ -9,6 +9,7 @@ export async function execute(
   message: Message,
   args: string[]
 ) {
+    if (!args[0]) return;
     let msg: any = args.join(' ');
     await message.delete();
     msg = msg.toLowerCase();
